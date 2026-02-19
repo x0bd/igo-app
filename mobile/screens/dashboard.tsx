@@ -87,15 +87,42 @@ function DailyProgress() {
   const goal = 2200;
   const pct = Math.round((consumed / goal) * 100);
 
+  // SVG ring math
+  const RING_SIZE = 80;
+  const STROKE_W = 6;
+  const R = (RING_SIZE - STROKE_W) / 2;
+  const CIRC = 2 * Math.PI * R;
+  const FILL_LEN = (pct / 100) * CIRC;
+
   return (
     <Animated.View entering={FadeInDown.duration(500).delay(200)} style={s.progressCard}>
       <View style={s.progressLeft}>
-        <View style={s.progressRingOuter}>
-          <View style={s.progressRingTrack} />
-          <View style={s.progressRingFill} />
-          <View style={s.progressRingInner}>
-            <Text style={s.progressPct}>{pct}%</Text>
-          </View>
+        <View style={{ width: RING_SIZE, height: RING_SIZE, alignItems: 'center', justifyContent: 'center' }}>
+          <Svg width={RING_SIZE} height={RING_SIZE} style={{ position: 'absolute' }}>
+            {/* Track */}
+            <SvgCircle
+              cx={RING_SIZE / 2}
+              cy={RING_SIZE / 2}
+              r={R}
+              stroke={IGO.gray200}
+              strokeWidth={STROKE_W}
+              fill="none"
+            />
+            {/* Fill */}
+            <SvgCircle
+              cx={RING_SIZE / 2}
+              cy={RING_SIZE / 2}
+              r={R}
+              stroke={IGO.black}
+              strokeWidth={STROKE_W}
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray={`${CIRC}`}
+              strokeDashoffset={CIRC - FILL_LEN}
+              transform={`rotate(-90 ${RING_SIZE / 2} ${RING_SIZE / 2})`}
+            />
+          </Svg>
+          <Text style={s.progressPct}>{pct}%</Text>
         </View>
       </View>
       <View style={s.progressRight}>
