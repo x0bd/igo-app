@@ -68,11 +68,9 @@ function HeroCard() {
   return (
     <Animated.View entering={FadeInDown.duration(600).delay(100)}>
       <View style={s.heroCard}>
-        {/* Blurred gradient blobs */}
+        {/* Colorful blobs + orb stack like smooth inspo */}
         <View style={s.heroBlobTopRight} />
         <View style={s.heroBlobBottomLeft} />
-
-        {/* Orb + plate */}
         <View style={s.heroOrbStack}>
           <View style={s.heroOrb} />
           <View style={s.heroPlate} />
@@ -119,8 +117,6 @@ function HydrationCard() {
 
   return (
     <Animated.View entering={FadeInDown.duration(500).delay(200)} style={s.hydrationCard}>
-      <View style={s.hydrationBgBlob} />
-
       <View style={s.hydrationHeader}>
         <View style={s.hydrationIconPill}>
           <Ionicons name="water" size={18} color="#FFFFFF" />
@@ -131,10 +127,13 @@ function HydrationCard() {
         </View>
       </View>
 
-      <View style={s.hydrationTank}>
-        <View style={[s.hydrationFill, { height: `${percentage}%` }]} />
-        <View style={s.hydrationLabelWrap}>
-          <Text style={s.hydrationLabelPct}>{percentage}%</Text>
+      <View style={s.hydrationGaugeOuter}>
+        <View style={s.hydrationGaugeTrack}>
+          <View style={[s.hydrationGaugeFill, { width: `${percentage}%` }]} />
+        </View>
+        <View style={s.hydrationGaugeMeta}>
+          <Text style={s.hydrationGaugePct}>{percentage}%</Text>
+          <Text style={s.hydrationGaugeHint}>2 more glasses to hit your goal</Text>
         </View>
       </View>
     </Animated.View>
@@ -145,8 +144,6 @@ function HydrationCard() {
 function SleepCard() {
   return (
     <Animated.View entering={FadeInDown.duration(500).delay(260)} style={s.sleepCard}>
-      <View style={s.sleepBgBlob} />
-
       <View>
         <Text style={s.sleepChip}>STABLE</Text>
         <Text style={s.sleepTitle}>
@@ -191,6 +188,154 @@ function FeaturedSessionCard() {
           </View>
         </View>
       </View>
+    </Animated.View>
+  );
+}
+
+// ═══ QUICK GLANCE STRIP ══════════════════════════════════════════════
+function QuickGlanceStrip() {
+  return (
+    <Animated.View entering={FadeInDown.duration(500).delay(220)} style={s.glanceRow}>
+      <View style={[s.glancePill, s.glancePillToday]}>
+        <Text style={s.glanceLabel}>Today</Text>
+        <Text style={s.glanceValue}>1 680</Text>
+        <Text style={s.glanceUnit}>kcal so far</Text>
+      </View>
+      <View style={[s.glancePill, s.glancePillStreak]}>
+        <View style={s.glanceStreakHeader}>
+          <View style={s.glanceStreakIcon}>
+            <Ionicons name="flame" size={14} color="#FB923C" />
+          </View>
+          <Text style={[s.glanceLabel, s.glanceLabelOnDark]}>Streak</Text>
+        </View>
+        <Text style={[s.glanceValue, s.glanceValueOnDark]}>7</Text>
+        <Text style={[s.glanceUnit, s.glanceUnitOnDark]}>days on track</Text>
+      </View>
+      <View style={[s.glancePill, s.glancePillScans]}>
+        <Text style={s.glanceLabelScans}>Scans</Text>
+        <Text style={s.glanceValueScans}>3</Text>
+        <Text style={s.glanceUnitScans}>meals logged</Text>
+      </View>
+    </Animated.View>
+  );
+}
+
+// ═══ EXTRA INSIGHT CARDS BELOW FEATURED ══════════════════════════════
+function ExtraInsightCards() {
+  return (
+    <Animated.View entering={FadeInDown.duration(560).delay(360)} style={s.insightColumn}>
+      <View style={[s.insightCard, s.insightCardBreakfast]}>
+        <View style={s.insightIconBubble}>
+          <Text style={s.insightIconEmoji}>🍳</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={s.insightTitle}>Breakfast recap</Text>
+          <Text style={s.insightSubtitle}>High protein, balanced carbs. Great way to start the day.</Text>
+        </View>
+      </View>
+
+      <View style={[s.insightCard, s.insightCardTomorrow]}>
+        <View style={[s.insightIconBubble, s.insightIconBubbleAlt]}>
+          <Text style={s.insightIconEmoji}>📝</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={s.insightTitle}>Prep for tomorrow</Text>
+          <Text style={s.insightSubtitle}>Plan one green‑heavy meal to push your health score past 80.</Text>
+        </View>
+      </View>
+    </Animated.View>
+  );
+}
+
+// ═══ AI SUGGESTED MEAL PLANS ═════════════════════════════════════════
+function SuggestedMeals() {
+  const suggestions = [
+    {
+      id: 'lunch-bowl',
+      title: 'iGo Lunch Bowl',
+      subtitle: 'Grilled chicken • quinoa • greens',
+      kcal: 640,
+      tag: 'Balanced',
+      accent: '#22C55E',
+    },
+    {
+      id: 'veg-boost',
+      title: 'Veggie Boost Plate',
+      subtitle: 'Roasted veg • chickpeas • tahini',
+      kcal: 520,
+      tag: 'Plant‑forward',
+      accent: '#A855F7',
+    },
+    {
+      id: 'light-dinner',
+      title: 'Light Evening Dish',
+      subtitle: 'Fish • salad • citrus',
+      kcal: 480,
+      tag: 'Evening friendly',
+      accent: '#3B82F6',
+    },
+  ];
+
+  return (
+    <Animated.View entering={FadeInDown.duration(580).delay(400)}>
+      <View style={s.suggestHeaderRow}>
+        <Text style={s.suggestTitle}>AI suggestions</Text>
+        <Text style={s.suggestHint}>Smart meal plans from iGo</Text>
+      </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={s.suggestScroll}
+      >
+        {suggestions.map((meal) => (
+          <View
+            key={meal.id}
+            style={[
+              s.suggestCard,
+              {
+                backgroundColor: 'rgba(15,23,42,0.96)',
+                borderColor: 'rgba(148,163,184,0.35)',
+              },
+            ]}
+          >
+            <View style={[s.suggestAccentDot, { backgroundColor: meal.accent }]} />
+            <Text style={s.suggestMealTitle}>{meal.title}</Text>
+            <Text style={s.suggestMealSubtitle}>{meal.subtitle}</Text>
+            <View style={s.suggestMetaRow}>
+              <Text style={s.suggestKcal}>{meal.kcal} kcal</Text>
+              <View style={s.suggestTag}>
+                <Text style={s.suggestTagText}>{meal.tag}</Text>
+              </View>
+            </View>
+          </View>
+        ))}
+      </ScrollView>
+    </Animated.View>
+  );
+}
+
+// ═══ GOALS CHIPS ROW ═════════════════════════════════════════════════
+function GoalsChips() {
+  const chips = [
+    'Hit 2 200 kcal target',
+    'At least 96g protein',
+    '2 colourful veggies',
+    'Hydration 80%+',
+  ];
+
+  return (
+    <Animated.View entering={FadeInDown.duration(520).delay(260)}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={s.goalsScroll}
+      >
+        {chips.map((chip) => (
+          <View key={chip} style={s.goalChip}>
+            <Text style={s.goalChipText}>{chip}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </Animated.View>
   );
 }
@@ -245,6 +390,8 @@ export default function DashboardScreen() {
       </Animated.View>
 
       <HeroCard />
+      <QuickGlanceStrip />
+      <GoalsChips />
 
       {/* Routine section */}
       <Animated.View entering={FadeInDown.duration(500).delay(180)} style={s.sectionHeaderRow}>
@@ -257,6 +404,8 @@ export default function DashboardScreen() {
       </View>
 
       <FeaturedSessionCard />
+      <ExtraInsightCards />
+      <SuggestedMeals />
 
       <View style={{ height: 48 }} />
     </ScrollView>
@@ -323,6 +472,7 @@ const s = StyleSheet.create({
     fontWeight: '800',
     color: IGO.black,
     letterSpacing: -0.8,
+    fontFamily: 'PlusJakartaSans',
   },
   headerBell: {
     width: 44,
@@ -498,6 +648,7 @@ const s = StyleSheet.create({
     letterSpacing: -1.4,
     lineHeight: 32,
     marginBottom: 8,
+    fontFamily: 'PlusJakartaSans',
   },
   heroSubtitle: {
     fontSize: 13,
@@ -589,16 +740,6 @@ const s = StyleSheet.create({
     overflow: 'hidden',
     ...LIGHT_CARD_SHADOW,
   },
-  hydrationBgBlob: {
-    position: 'absolute',
-    top: -30,
-    right: -30,
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#60A5FA',
-    opacity: 0.5,
-  },
   hydrationHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -618,6 +759,7 @@ const s = StyleSheet.create({
     fontWeight: '800',
     color: '#FFFFFF',
     letterSpacing: -0.6,
+    fontFamily: 'PlusJakartaSans',
   },
   hydrationSub: {
     fontSize: 11,
@@ -625,27 +767,34 @@ const s = StyleSheet.create({
     color: '#DBEAFE',
     marginTop: 2,
   },
-  hydrationTank: {
+  hydrationGaugeOuter: {
     marginTop: 12,
-    height: 120,
-    borderRadius: 28,
-    backgroundColor: 'rgba(15,23,42,0.25)',
+  },
+  hydrationGaugeTrack: {
+    height: 18,
+    borderRadius: 999,
+    backgroundColor: 'rgba(15,23,42,0.35)',
     overflow: 'hidden',
-    justifyContent: 'flex-end',
   },
-  hydrationFill: {
-    width: '100%',
-    backgroundColor: 'rgba(191,219,254,0.75)',
+  hydrationGaugeFill: {
+    height: '100%',
+    borderRadius: 999,
+    backgroundColor: '#BFDBFE',
   },
-  hydrationLabelWrap: {
-    position: 'absolute',
-    bottom: 10,
-    left: 16,
+  hydrationGaugeMeta: {
+    marginTop: 8,
   },
-  hydrationLabelPct: {
-    fontSize: 18,
+  hydrationGaugePct: {
+    fontSize: 16,
     fontWeight: '800',
-    color: '#FFFFFF',
+    color: '#EFF6FF',
+    letterSpacing: -0.4,
+  },
+  hydrationGaugeHint: {
+    fontSize: 11,
+    fontWeight: '500',
+    color: '#DBEAFE',
+    marginTop: 2,
   },
 
   // ── Sleep card
@@ -656,16 +805,6 @@ const s = StyleSheet.create({
     padding: 18,
     overflow: 'hidden',
     ...LIGHT_CARD_SHADOW,
-  },
-  sleepBgBlob: {
-    position: 'absolute',
-    bottom: -40,
-    left: -20,
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: '#FDBA74',
-    opacity: 0.6,
   },
   sleepChip: {
     alignSelf: 'flex-start',
@@ -685,6 +824,7 @@ const s = StyleSheet.create({
     color: '#FFFFFF',
     letterSpacing: -0.6,
     lineHeight: 22,
+    fontFamily: 'PlusJakartaSans',
   },
   sleepMetaRow: {
     marginTop: 16,
@@ -757,6 +897,7 @@ const s = StyleSheet.create({
     fontWeight: '800',
     color: '#111827',
     letterSpacing: -0.5,
+    fontFamily: 'PlusJakartaSans',
   },
   featuredTrainer: {
     fontSize: 12,
@@ -785,5 +926,235 @@ const s = StyleSheet.create({
   },
   featuredTagTextAccent: {
     color: '#DC2626',
+  },
+
+  // ── Quick glance strip
+  glanceRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: 10,
+    marginTop: 4,
+  },
+  glancePill: {
+    flex: 1,
+    borderRadius: 18,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  glancePillToday: {
+    backgroundColor: '#111827',
+  },
+  glancePillStreak: {
+    backgroundColor: '#111827',
+  },
+  glancePillScans: {
+    backgroundColor: '#ECFDF5',
+  },
+  glanceLabel: {
+    fontSize: 10,
+    fontWeight: '600',
+    color: '#9CA3AF',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 2,
+  },
+  glanceValue: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#F9FAFB',
+    letterSpacing: -0.4,
+    fontFamily: 'PlusJakartaSans',
+  },
+  glanceValueOnDark: {
+    color: '#F9FAFB',
+  },
+  glanceLabelOnDark: {
+    color: '#CBD5F5',
+  },
+  glanceUnitOnDark: {
+    color: '#9CA3AF',
+  },
+  glanceUnit: {
+    fontSize: 11,
+    fontWeight: '500',
+    color: '#D1D5DB',
+    marginTop: 1,
+  },
+  glanceStreakHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 2,
+  },
+  glanceStreakIcon: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    backgroundColor: 'rgba(248,113,113,0.12)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  glanceLabelScans: {
+    fontSize: 10,
+    fontWeight: '600',
+    color: '#16A34A',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 2,
+  },
+  glanceValueScans: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#166534',
+    letterSpacing: -0.4,
+    fontFamily: 'PlusJakartaSans',
+  },
+  glanceUnitScans: {
+    fontSize: 11,
+    fontWeight: '500',
+    color: '#16A34A',
+    marginTop: 1,
+  },
+
+  // ── Extra insight cards
+  insightColumn: {
+    gap: 10,
+    marginBottom: 20,
+  },
+  insightCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 14,
+    borderRadius: 22,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: BORDER,
+    ...LIGHT_CARD_SHADOW,
+  },
+  insightCardBreakfast: {
+    // subtle left accent via icon only
+  },
+  insightCardTomorrow: {
+    // subtle left accent via icon only
+  },
+  insightIconBubble: {
+    width: 40,
+    height: 40,
+    borderRadius: 16,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  insightIconBubbleAlt: {
+    backgroundColor: '#FEF3C7',
+  },
+  insightIconEmoji: {
+    fontSize: 20,
+  },
+  insightTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#111827',
+    letterSpacing: -0.2,
+    marginBottom: 2,
+  },
+  insightSubtitle: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#6B7280',
+  },
+
+  // ── Suggested meals
+  suggestHeaderRow: {
+    marginBottom: 8,
+    marginTop: 4,
+  },
+  suggestTitle: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#111827',
+    letterSpacing: -0.4,
+  },
+  suggestHint: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#6B7280',
+    marginTop: 2,
+  },
+  suggestScroll: {
+    paddingVertical: 6,
+    paddingRight: 4,
+    gap: 10,
+  },
+  suggestCard: {
+    width: 220,
+    borderRadius: 26,
+    padding: 14,
+    marginRight: 10,
+    borderWidth: 1,
+    ...LIGHT_CARD_SHADOW,
+  },
+  suggestAccentDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  suggestMealTitle: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: '#F9FAFB',
+    letterSpacing: -0.3,
+    marginBottom: 4,
+  },
+  suggestMealSubtitle: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#E5E7EB',
+    marginBottom: 10,
+  },
+  suggestMetaRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  suggestKcal: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#F9FAFB',
+  },
+  suggestTag: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 999,
+    backgroundColor: 'rgba(15,23,42,0.75)',
+  },
+  suggestTagText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#E5E7EB',
+  },
+
+  // ── Goals chips
+  goalsScroll: {
+    paddingVertical: 6,
+    paddingRight: 4,
+    gap: 8,
+  },
+  goalChip: {
+    borderRadius: 999,
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    backgroundColor: '#F3F4FF',
+    borderWidth: 1,
+    borderColor: '#E5E7FF',
+    marginRight: 8,
+  },
+  goalChipText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#111827',
+    letterSpacing: 0.2,
   },
 });

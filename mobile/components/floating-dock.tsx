@@ -47,16 +47,13 @@ function TabItem({
       onPressOut={() => {
         scale.value = withSpring(1, { damping: 12, stiffness: 300 });
       }}
-      style={[styles.tabItem, animStyle]}
+      style={[styles.tabItem, isActive && styles.tabItemActive, animStyle]}
     >
       <Ionicons
         name={(isActive ? tab.iconActive : tab.icon) as any}
-        size={20}
+        size={22}
         color={isActive ? '#FFFFFF' : 'rgba(255,255,255,0.4)'}
       />
-      <Text style={[styles.tabLabel, isActive && styles.tabLabelActive]}>
-        {tab.label}
-      </Text>
     </AnimatedPressable>
   );
 }
@@ -86,7 +83,6 @@ function ScanButton({ isActive, onPress }: { isActive: boolean; onPress: () => v
           color="#000000"
         />
       </View>
-      <Text style={styles.scanLabel}>Scan</Text>
     </AnimatedPressable>
   );
 }
@@ -136,9 +132,9 @@ const styles = StyleSheet.create({
   },
   dock: {
     backgroundColor: '#050607',
-    borderRadius: 36,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    borderRadius: 40,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -154,30 +150,22 @@ const styles = StyleSheet.create({
   tabItem: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    gap: 2,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
-  tabLabel: {
-    fontSize: 9,
-    fontWeight: '600',
-    color: 'rgba(255,255,255,0.32)',
-    letterSpacing: 0.6,
-    textTransform: 'uppercase',
-  },
-  tabLabelActive: {
-    color: '#FFFFFF',
-    fontWeight: '700',
+  tabItemActive: {
+    borderRadius: 999,
+    backgroundColor: 'rgba(249,250,251,0.06)',
   },
   scanButton: {
-    marginTop: -30,
+    marginTop: -34,
     marginHorizontal: 10,
     alignItems: 'center',
   },
   scanButtonInner: {
-    width: 62,
-    height: 62,
-    borderRadius: 24,
+    width: 70,
+    height: 70,
+    borderRadius: 28,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
