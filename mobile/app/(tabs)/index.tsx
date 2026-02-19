@@ -5,6 +5,7 @@ import { FloatingDock } from '@/components/floating-dock';
 import DashboardScreen from '@/screens/dashboard';
 import StatsScreen from '@/screens/stats';
 import ProfileScreen from '@/screens/profile';
+import ScanScreen from '@/screens/scan';
 
 type TabKey = 'home' | 'stats' | 'scan' | 'profile';
 
@@ -18,8 +19,7 @@ export default function AppIndex() {
       case 'profile':
         return <ProfileScreen />;
       case 'scan':
-        // Scan opens a modal/camera — for now show dashboard
-        return <DashboardScreen />;
+        return <ScanScreen />;
       case 'home':
       default:
         return <DashboardScreen />;
