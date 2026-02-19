@@ -98,9 +98,6 @@ export default function ProfileScreen() {
     >
       <Animated.View entering={FadeInDown.duration(400)} style={styles.header}>
         <Text style={styles.headerLabel}>ACCOUNT</Text>
-      </Animated.View>
-
-      <Animated.View entering={FadeInDown.duration(450).delay(50)}>
         <Text style={styles.pageTitle}>Profile</Text>
       </Animated.View>
 
@@ -179,7 +176,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#F8F9FC',
   },
   content: {
     paddingHorizontal: 20,
@@ -187,20 +184,23 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingTop: Platform.OS === 'ios' ? 64 : 52,
-    paddingBottom: 8,
+    paddingBottom: 16,
   },
   headerLabel: {
-    fontSize: 13,
-    fontWeight: '600',
+    fontSize: 12,
+    fontWeight: '700',
     color: IGO.gray600,
-    letterSpacing: 1,
+    letterSpacing: 1.4,
+    textTransform: 'uppercase',
+    marginBottom: 4,
   },
   pageTitle: {
-    fontSize: 34,
-    fontWeight: '700',
+    fontSize: 30,
+    fontWeight: '900',
     color: IGO.black,
-    letterSpacing: -0.5,
-    marginBottom: 24,
+    letterSpacing: -0.7,
+    fontFamily: 'PlusJakartaSans',
+    marginBottom: 20,
   },
 
   // Profile Header
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   },
   profileName: {
     fontSize: 22,
-    fontWeight: '600',
+    fontWeight: '800',
     color: IGO.black,
     letterSpacing: -0.3,
     marginBottom: 4,
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   },
   quickStatValue: {
     fontSize: 22,
-    fontWeight: '700',
+    fontWeight: '800',
     color: IGO.black,
     marginBottom: 4,
   },
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   },
   settingsGroupTitle: {
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
     color: IGO.gray600,
     letterSpacing: 1,
     marginBottom: 12,
@@ -304,6 +304,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderWidth: 1,
     borderColor: 'rgba(0,0,0,0.03)',
+    ...IGO.shadowSm,
   },
   settingIconWrap: {
     width: 36,
@@ -319,7 +320,7 @@ const styles = StyleSheet.create({
   },
   settingLabel: {
     fontSize: 15,
-    fontWeight: '500',
+    fontWeight: '600',
     color: IGO.black,
   },
   settingSubtitle: {
