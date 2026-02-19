@@ -1,5 +1,5 @@
 import { config } from '@tamagui/config/v3'
-import { createTamagui } from '@tamagui/core'
+import { createTamagui } from 'tamagui'
 
 // Cimas iGo Design Tokens
 const cimasColors = {
@@ -95,7 +95,7 @@ const appConfig = createTamagui({
 
 export type AppConfig = typeof appConfig
 
-declare module '@tamagui/core' {
+declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
 }
 

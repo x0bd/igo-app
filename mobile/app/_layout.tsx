@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router'
-import { TamaguiProvider } from '@tamagui/core'
+import { TamaguiProvider } from 'tamagui'
 import config from '../tamagui.config'
 import { StatusBar } from 'expo-status-bar'
 

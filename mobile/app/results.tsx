@@ -1,4 +1,4 @@
-import { YStack, XStack, Card, H2, H3, Text, Progress, Button, Spacer } from '@tamagui/core'
+import { YStack, XStack, Card, H2, H3, Text, Progress, Button, Spacer } from 'tamagui'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { ArrowLeft, Home } from 'lucide-react-native'
 import { Image } from 'expo-image'

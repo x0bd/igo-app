@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { YStack, XStack, Button, H2, Spinner, Text } from '@tamagui/core'
+import { YStack, XStack, Button, H2, Spinner, Text } from 'tamagui'
 import { useRouter } from 'expo-router'
 import * as ImagePicker from 'expo-image-picker'
 import { ArrowLeft } from 'lucide-react-native'

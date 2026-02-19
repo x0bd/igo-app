@@ -1,7 +1,6 @@
-import { YStack, XStack, Card, H1, H3, Button, Spacer } from '@tamagui/core'
+import { YStack, XStack, Card, H1, H3, Button, Spacer } from 'tamagui'
 import { Camera } from 'lucide-react-native'
 import { useRouter } from 'expo-router'
-import { StyleSheet } from 'react-native'
 
 export default function Dashboard() {
   const router = useRouter()
