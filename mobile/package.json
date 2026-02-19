@@ -26,5 +26,9 @@
     "react-native-svg": "^15.15.3",
     "tamagui": "2.0.0-rc.16"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/react": "~19.1.17",
+    "typescript": "~5.9.3"
+  }
 }
