@@ -6,13 +6,11 @@ import {
   StyleSheet,
   Pressable,
 } from 'react-native';
-import { Camera, Lightbulb, TrendingUp } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Animated, {
   FadeInDown,
 } from 'react-native-reanimated';
 import { IGO } from '@/constants/theme';
-
-
 
 // ─── Hero Card ───────────────────────────────────────────────────────
 function HeroCard() {
@@ -31,7 +29,7 @@ function HeroCard() {
         <View style={styles.heroContent}>
           <View style={styles.heroTopRow}>
             <View style={styles.heroIconWrap}>
-              <TrendingUp size={18} color={IGO.black} strokeWidth={2.5} />
+              <Ionicons name="trending-up" size={18} color={IGO.black} />
             </View>
             <View style={styles.heroBadge}>
               <View style={styles.heroBadgeDot} />
@@ -105,7 +103,7 @@ function ScanCard() {
   return (
     <Animated.View entering={FadeInDown.duration(500).delay(500)}>
       <Pressable style={styles.scanCard}>
-        <Camera size={26} color={IGO.white} strokeWidth={2} />
+        <Ionicons name="camera" size={26} color={IGO.white} />
         <Text style={styles.scanText}>Scan Meal</Text>
       </Pressable>
     </Animated.View>
@@ -164,7 +162,7 @@ function WellnessTip() {
       style={styles.wellnessCard}
     >
       <View style={styles.wellnessIconWrap}>
-        <Lightbulb size={18} color={IGO.fat} strokeWidth={2} />
+        <Ionicons name="bulb-outline" size={18} color={IGO.fat} />
       </View>
       <View style={styles.wellnessContent}>
         <Text style={styles.wellnessSource}>CIMAS HEALTH GROUP</Text>

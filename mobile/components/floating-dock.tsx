@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Pressable, StyleSheet, Platform } from 'react-native';
-import { BarChart3, ScanLine, User } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
-  interpolate,
 } from 'react-native-reanimated';
 import { IGO } from '@/constants/theme';
 
@@ -67,10 +66,10 @@ export function FloatingDock({ activeTab, onTabPress }: FloatingDockProps) {
           isActive={activeTab === 'stats'}
           onPress={() => onTabPress('stats')}
           icon={
-            <BarChart3
+            <Ionicons
+              name="bar-chart-outline"
               size={20}
               color="#FFFFFF"
-              strokeWidth={2}
               style={{ opacity: activeTab === 'stats' ? 1 : 0.5 }}
             />
           }
@@ -80,17 +79,17 @@ export function FloatingDock({ activeTab, onTabPress }: FloatingDockProps) {
           isActive={activeTab === 'scan'}
           isScan
           onPress={() => onTabPress('scan')}
-          icon={<ScanLine size={22} color={IGO.black} strokeWidth={2.2} />}
+          icon={<Ionicons name="scan" size={22} color={IGO.black} />}
         />
         <DockItem
           tabKey="profile"
           isActive={activeTab === 'profile'}
           onPress={() => onTabPress('profile')}
           icon={
-            <User
+            <Ionicons
+              name="person-outline"
               size={20}
               color="#FFFFFF"
-              strokeWidth={2}
               style={{ opacity: activeTab === 'profile' ? 1 : 0.5 }}
             />
           }

@@ -6,18 +6,7 @@ import {
   StyleSheet,
   Pressable,
 } from 'react-native';
-import {
-  User,
-  ChevronRight,
-  Target,
-  Bell,
-  Moon,
-  Shield,
-  HelpCircle,
-  LogOut,
-  Heart,
-  Award,
-} from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { IGO } from '@/constants/theme';
 
@@ -32,7 +21,7 @@ function ProfileHeader() {
       <Text style={styles.profileEmail}>munyaradzi@cimas.co.zw</Text>
 
       <View style={styles.profileBadge}>
-        <Award size={14} color={IGO.carbs} strokeWidth={2.5} />
+        <Ionicons name="ribbon-outline" size={14} color={IGO.carbs} />
         <Text style={styles.profileBadgeText}>iGo Premium Member</Text>
       </View>
     </Animated.View>
@@ -61,14 +50,15 @@ function QuickStats() {
 
 // ─── Settings Row ────────────────────────────────────────────────────
 interface SettingRowProps {
-  icon: React.ReactNode;
+  iconName: keyof typeof Ionicons.glyphMap;
+  iconColor: string;
   label: string;
   subtitle?: string;
   delay: number;
   destructive?: boolean;
 }
 
-function SettingRow({ icon, label, subtitle, delay, destructive }: SettingRowProps) {
+function SettingRow({ iconName, iconColor, label, subtitle, delay, destructive }: SettingRowProps) {
   return (
     <Animated.View entering={FadeInDown.duration(400).delay(delay)}>
       <Pressable style={styles.settingRow}>
@@ -78,7 +68,7 @@ function SettingRow({ icon, label, subtitle, delay, destructive }: SettingRowPro
             destructive && { backgroundColor: 'rgba(255,59,48,0.1)' },
           ]}
         >
-          {icon}
+          <Ionicons name={iconName} size={18} color={iconColor} />
         </View>
         <View style={styles.settingInfo}>
           <Text
@@ -91,7 +81,7 @@ function SettingRow({ icon, label, subtitle, delay, destructive }: SettingRowPro
           </Text>
           {subtitle && <Text style={styles.settingSubtitle}>{subtitle}</Text>}
         </View>
-        <ChevronRight size={18} color={IGO.gray400} strokeWidth={2} />
+        <Ionicons name="chevron-forward" size={18} color={IGO.gray400} />
       </Pressable>
     </Animated.View>
   );
@@ -120,19 +110,22 @@ export default function ProfileScreen() {
       <View style={styles.settingsGroup}>
         <Text style={styles.settingsGroupTitle}>PREFERENCES</Text>
         <SettingRow
-          icon={<Target size={18} color={IGO.protein} strokeWidth={2} />}
+          iconName="fitness-outline"
+          iconColor={IGO.protein}
           label="Daily Goals"
           subtitle="2,200 kcal target"
           delay={300}
         />
         <SettingRow
-          icon={<Bell size={18} color={IGO.carbs} strokeWidth={2} />}
+          iconName="notifications-outline"
+          iconColor={IGO.carbs}
           label="Notifications"
           subtitle="Meal reminders ON"
           delay={350}
         />
         <SettingRow
-          icon={<Moon size={18} color={IGO.healthScore} strokeWidth={2} />}
+          iconName="moon-outline"
+          iconColor={IGO.healthScore}
           label="Appearance"
           subtitle="System default"
           delay={400}
@@ -142,18 +135,21 @@ export default function ProfileScreen() {
       <View style={styles.settingsGroup}>
         <Text style={styles.settingsGroupTitle}>OTHER</Text>
         <SettingRow
-          icon={<Heart size={18} color="#FF2D55" strokeWidth={2} />}
+          iconName="heart-outline"
+          iconColor="#FF2D55"
           label="Cimas Health Connect"
           subtitle="Sync with Cimas iGo"
           delay={450}
         />
         <SettingRow
-          icon={<Shield size={18} color={IGO.fat} strokeWidth={2} />}
+          iconName="shield-checkmark-outline"
+          iconColor={IGO.fat}
           label="Privacy & Data"
           delay={500}
         />
         <SettingRow
-          icon={<HelpCircle size={18} color={IGO.gray600} strokeWidth={2} />}
+          iconName="help-circle-outline"
+          iconColor={IGO.gray600}
           label="Help & Support"
           delay={550}
         />
@@ -161,7 +157,8 @@ export default function ProfileScreen() {
 
       <View style={styles.settingsGroup}>
         <SettingRow
-          icon={<LogOut size={18} color="#FF3B30" strokeWidth={2} />}
+          iconName="log-out-outline"
+          iconColor="#FF3B30"
           label="Sign Out"
           delay={600}
           destructive

@@ -5,10 +5,9 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import { Flame, Droplets, Wheat, Activity } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { IGO } from '@/constants/theme';
-
 
 // ─── Stat Row ────────────────────────────────────────────────────────
 interface StatRowProps {
@@ -128,7 +127,7 @@ export default function StatsScreen() {
       {/* Summary stats */}
       <View style={styles.statsSection}>
         <StatRow
-          icon={<Flame size={18} color={IGO.carbs} strokeWidth={2} />}
+          icon={<Ionicons name="flame-outline" size={18} color={IGO.carbs} />}
           label="Calories"
           value="1,680"
           unit="kcal"
@@ -137,7 +136,7 @@ export default function StatsScreen() {
           delay={150}
         />
         <StatRow
-          icon={<Droplets size={18} color={IGO.protein} strokeWidth={2} />}
+          icon={<Ionicons name="water-outline" size={18} color={IGO.protein} />}
           label="Protein"
           value="96"
           unit="g"
@@ -146,7 +145,7 @@ export default function StatsScreen() {
           delay={200}
         />
         <StatRow
-          icon={<Wheat size={18} color={IGO.carbs} strokeWidth={2} />}
+          icon={<Ionicons name="nutrition-outline" size={18} color={IGO.carbs} />}
           label="Carbs"
           value="184"
           unit="g"
@@ -155,7 +154,7 @@ export default function StatsScreen() {
           delay={250}
         />
         <StatRow
-          icon={<Activity size={18} color={IGO.fat} strokeWidth={2} />}
+          icon={<Ionicons name="pulse-outline" size={18} color={IGO.fat} />}
           label="Health Score"
           value="78"
           unit="/100"
