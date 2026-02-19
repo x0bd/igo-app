@@ -6,10 +6,10 @@ import DashboardScreen from '@/screens/dashboard';
 import StatsScreen from '@/screens/stats';
 import ProfileScreen from '@/screens/profile';
 
-type TabKey = 'stats' | 'scan' | 'profile';
+type TabKey = 'home' | 'stats' | 'scan' | 'profile';
 
 export default function AppIndex() {
-  const [activeTab, setActiveTab] = useState<TabKey>('scan');
+  const [activeTab, setActiveTab] = useState<TabKey>('home');
 
   const renderScreen = () => {
     switch (activeTab) {
@@ -18,6 +18,9 @@ export default function AppIndex() {
       case 'profile':
         return <ProfileScreen />;
       case 'scan':
+        // Scan opens a modal/camera — for now show dashboard
+        return <DashboardScreen />;
+      case 'home':
       default:
         return <DashboardScreen />;
     }

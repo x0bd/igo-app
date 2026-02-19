@@ -6,99 +6,118 @@ import {
   StyleSheet,
   Pressable,
   Platform,
+  Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import Svg, { Defs, LinearGradient as SvgGradient, Stop, Rect } from 'react-native-svg';
+import Animated, { FadeInDown, FadeInUp, FadeIn } from 'react-native-reanimated';
 import { IGO } from '@/constants/theme';
+import { AreaChart } from '@/components/area-chart';
 
-// ─── Daily Progress Ring ─────────────────────────────────────────────
-function DailyRing() {
-  const consumed = 1680;
-  const goal = 2200;
-  const remaining = goal - consumed;
+const { width: SCREEN_W } = Dimensions.get('window');
+const CHART_W = SCREEN_W - 80; // padding + card padding
+const CR = 22; // card radius
+const BORDER = 'rgba(0,0,0,0.04)';
+const SHADOW = {
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.035,
+  shadowRadius: 14,
+  elevation: 2,
+};
 
+// ═══ GRADIENT BG FOR HERO ═══════════════════════════════════════════
+function HeroGradientBg() {
   return (
-    <Animated.View entering={FadeInDown.duration(500).delay(100)} style={styles.ringCard}>
-      <View style={styles.ringLeft}>
-        {/* Ring visual */}
-        <View style={styles.ringContainer}>
-          <View style={styles.ringTrack}>
-            <View style={styles.ringFill} />
-          </View>
-          <View style={styles.ringCenter}>
-            <Text style={styles.ringValue}>{consumed}</Text>
-            <Text style={styles.ringUnit}>kcal</Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.ringRight}>
-        <View style={styles.ringMetaRow}>
-          <View style={[styles.ringDot, { backgroundColor: IGO.black }]} />
-          <Text style={styles.ringMetaLabel}>Consumed</Text>
-          <Text style={styles.ringMetaValue}>{consumed.toLocaleString()}</Text>
-        </View>
-        <View style={styles.ringMetaRow}>
-          <View style={[styles.ringDot, { backgroundColor: IGO.gray300 }]} />
-          <Text style={styles.ringMetaLabel}>Remaining</Text>
-          <Text style={styles.ringMetaValue}>{remaining}</Text>
-        </View>
-        <View style={styles.ringMetaRow}>
-          <View style={[styles.ringDot, { backgroundColor: IGO.protein }]} />
-          <Text style={styles.ringMetaLabel}>Goal</Text>
-          <Text style={styles.ringMetaValue}>{goal.toLocaleString()}</Text>
-        </View>
-      </View>
-    </Animated.View>
+    <View style={StyleSheet.absoluteFill}>
+      <Svg width="100%" height="100%" style={StyleSheet.absoluteFill}>
+        <Defs>
+          <SvgGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0" stopColor="#E8DFF5" stopOpacity="0.7" />
+            <Stop offset="0.35" stopColor="#FFE8DD" stopOpacity="0.5" />
+            <Stop offset="0.65" stopColor="#FFF9C4" stopOpacity="0.4" />
+            <Stop offset="1" stopColor="#D4EDFC" stopOpacity="0.5" />
+          </SvgGradient>
+        </Defs>
+        <Rect x="0" y="0" width="100%" height="100%" fill="url(#heroBg)" />
+      </Svg>
+    </View>
   );
 }
 
-// ─── Hero Card ───────────────────────────────────────────────────────
+// ═══ HERO CARD ══════════════════════════════════════════════════════
 function HeroCard() {
   return (
-    <Animated.View entering={FadeInDown.duration(600).delay(200)}>
-      <View style={styles.heroCard}>
-        {/* Pastel gradient circles — matching inspo exactly */}
-        <View style={styles.heroGradientBg}>
-          <View style={[styles.gc, { width: 300, height: 300, top: -80, left: -80, backgroundColor: 'rgba(224,195,252,0.7)' }]} />
-          <View style={[styles.gc, { width: 260, height: 260, top: -50, right: -50, backgroundColor: 'rgba(255,223,211,0.7)' }]} />
-          <View style={[styles.gc, { width: 220, height: 220, bottom: -50, right: -30, backgroundColor: 'rgba(255,249,196,0.7)' }]} />
-          <View style={[styles.gc, { width: 240, height: 240, bottom: -70, left: -50, backgroundColor: 'rgba(142,197,252,0.35)' }]} />
-          {/* Shimmer overlay */}
-          <View style={styles.heroShimmer} />
+    <Animated.View entering={FadeInDown.duration(600).delay(100)}>
+      <View style={s.heroCard}>
+        <HeroGradientBg />
+        <View style={s.heroContent}>
+          <View style={s.heroTop}>
+            <View style={s.heroPill}>
+              <View style={s.heroDot} />
+              <Text style={s.heroPillText}>Latest Scan</Text>
+            </View>
+          </View>
+          <View>
+            <Text style={s.heroTime}>Lunch • 12:45 PM</Text>
+            <Text style={s.heroCal}>682</Text>
+            <Text style={s.heroUnit}>kilocalories</Text>
+            <Text style={s.heroMeal}>Roasted Chicken Salad</Text>
+          </View>
         </View>
+        {/* Sparkline */}
+        <View style={s.heroChartWrap}>
+          <AreaChart
+            data={[280, 420, 380, 520, 460, 682]}
+            width={120}
+            height={60}
+            gradientFrom="#000000"
+            gradientTo="#000000"
+            lineColor="rgba(0,0,0,0.25)"
+          />
+        </View>
+      </View>
+    </Animated.View>
+  );
+}
 
-        {/* Content */}
-        <View style={styles.heroContent}>
-          <View style={styles.heroTopRow}>
-            <View style={styles.heroIconCircle}>
-              <Ionicons name="restaurant-outline" size={16} color={IGO.black} />
-            </View>
-            <View style={styles.heroBadge}>
-              <View style={styles.heroBadgeDot} />
-              <Text style={styles.heroBadgeText}>Latest Scan</Text>
-            </View>
+// ═══ DAILY PROGRESS ═════════════════════════════════════════════════
+function DailyProgress() {
+  const consumed = 1680;
+  const goal = 2200;
+  const pct = Math.round((consumed / goal) * 100);
+
+  return (
+    <Animated.View entering={FadeInDown.duration(500).delay(200)} style={s.progressCard}>
+      <View style={s.progressLeft}>
+        <View style={s.progressRingOuter}>
+          <View style={s.progressRingTrack} />
+          <View style={s.progressRingFill} />
+          <View style={s.progressRingInner}>
+            <Text style={s.progressPct}>{pct}%</Text>
           </View>
-
-          <View style={styles.heroBottomArea}>
-            <Text style={styles.heroTimeLabel}>Lunch • 12:45 PM</Text>
-            <Text style={styles.heroCalories}>682 kcal</Text>
-            <Text style={styles.heroMealName}>Roasted Chicken Salad</Text>
+        </View>
+      </View>
+      <View style={s.progressRight}>
+        <Text style={s.progressTitle}>Daily Goal</Text>
+        <Text style={s.progressSub}>
+          <Text style={s.progressBold}>{consumed.toLocaleString()}</Text> of {goal.toLocaleString()} kcal
+        </Text>
+        <View style={s.progressBar}>
+          <View style={[s.progressBarFill, { width: `${pct}%` }]} />
+        </View>
+        <View style={s.progressMeta}>
+          <View style={s.progressMetaItem}>
+            <View style={[s.progressDot, { backgroundColor: IGO.protein }]} />
+            <Text style={s.progressMetaText}>P: 96g</Text>
           </View>
-
-          {/* Mini sparkline */}
-          <View style={styles.heroSparkline}>
-            {[12, 18, 30, 14, 8, 22, 16].map((h, i) => (
-              <View
-                key={i}
-                style={[
-                  styles.sparkBar,
-                  {
-                    height: h,
-                    backgroundColor: i === 2 ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.08)',
-                  },
-                ]}
-              />
-            ))}
+          <View style={s.progressMetaItem}>
+            <View style={[s.progressDot, { backgroundColor: IGO.carbs }]} />
+            <Text style={s.progressMetaText}>C: 184g</Text>
+          </View>
+          <View style={s.progressMetaItem}>
+            <View style={[s.progressDot, { backgroundColor: IGO.fat }]} />
+            <Text style={s.progressMetaText}>F: 52g</Text>
           </View>
         </View>
       </View>
@@ -106,80 +125,108 @@ function HeroCard() {
   );
 }
 
-// ─── Macro Card ──────────────────────────────────────────────────────
-interface MacroProps {
-  label: string;
-  value: string;
-  pct: string;
-  progress: number;
-  color: string;
-  delay: number;
+// ═══ MACROS — 3 CARDS ═══════════════════════════════════════════════
+function MacroCards() {
+  const macros = [
+    { label: 'Protein', value: '96g', target: '120g', pct: 80, color: IGO.protein, icon: 'water' as const },
+    { label: 'Carbs', value: '184g', target: '250g', pct: 74, color: IGO.carbs, icon: 'nutrition' as const },
+    { label: 'Fat', value: '52g', target: '70g', pct: 74, color: IGO.fat, icon: 'leaf' as const },
+  ];
+
+  return (
+    <View style={s.macroRow}>
+      {macros.map((m, i) => (
+        <Animated.View
+          key={m.label}
+          entering={FadeInDown.duration(450).delay(300 + i * 80)}
+          style={s.macroCard}
+        >
+          <View style={[s.macroIconWrap, { backgroundColor: `${m.color}10` }]}>
+            <Ionicons name={m.icon} size={16} color={m.color} />
+          </View>
+          <Text style={s.macroValue}>{m.value}</Text>
+          <Text style={s.macroLabel}>{m.label}</Text>
+          <View style={s.macroTrack}>
+            <View style={[s.macroFill, { width: `${m.pct}%`, backgroundColor: m.color }]} />
+          </View>
+        </Animated.View>
+      ))}
+    </View>
+  );
 }
 
-function MacroCard({ label, value, pct, progress, color, delay }: MacroProps) {
+// ═══ WEEKLY CHART ═══════════════════════════════════════════════════
+const WEEKLY_DATA = [1840, 2100, 1950, 2250, 1780, 2050, 1680];
+const WEEK_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+function WeeklyChart() {
   return (
-    <Animated.View entering={FadeInDown.duration(450).delay(delay)} style={styles.macroCard}>
-      <Text style={styles.macroLabel}>{label}</Text>
-      <Text style={styles.macroValue}>{value}</Text>
-      <Text style={styles.macroPct}>{pct}</Text>
-      <View style={styles.macroTrack}>
-        <View style={[styles.macroFill, { width: `${progress}%`, backgroundColor: color }]} />
+    <Animated.View entering={FadeInDown.duration(500).delay(550)} style={s.chartCard}>
+      <View style={s.chartHeader}>
+        <View>
+          <Text style={s.chartTitle}>This Week</Text>
+          <Text style={s.chartSub}>Calorie intake trend</Text>
+        </View>
+        <View style={s.chartBadge}>
+          <Ionicons name="trending-up" size={12} color={IGO.fat} />
+          <Text style={s.chartBadgeText}>On track</Text>
+        </View>
+      </View>
+      <View style={{ marginHorizontal: -4 }}>
+        <AreaChart
+          data={WEEKLY_DATA}
+          width={CHART_W}
+          height={120}
+          gradientFrom={IGO.protein}
+          gradientTo={IGO.protein}
+          lineColor={IGO.protein}
+        />
+      </View>
+      <View style={s.chartLabels}>
+        {WEEK_LABELS.map((l, i) => (
+          <Text
+            key={l}
+            style={[s.chartLabel, i === 6 && s.chartLabelActive]}
+          >
+            {l}
+          </Text>
+        ))}
       </View>
     </Animated.View>
   );
 }
 
-// ─── Scan CTA ────────────────────────────────────────────────────────
-function ScanCTA() {
-  return (
-    <Animated.View entering={FadeInDown.duration(450).delay(550)}>
-      <Pressable style={styles.scanCta}>
-        <View style={styles.scanCtaInner}>
-          <View style={styles.scanIconRing}>
-            <Ionicons name="scan" size={22} color={IGO.white} />
-          </View>
-          <Text style={styles.scanCtaLabel}>Scan Meal</Text>
-          <Text style={styles.scanCtaSub}>Take a photo</Text>
-        </View>
-      </Pressable>
-    </Animated.View>
-  );
-}
-
-// ─── Recent Meals ────────────────────────────────────────────────────
+// ═══ RECENT MEALS ═══════════════════════════════════════════════════
 const MEALS = [
-  { name: 'Avocado Toast', time: '8:20 AM', cal: 320, icon: '🥑', type: 'Breakfast' },
-  { name: 'Grilled Salmon Bowl', time: '12:45 PM', cal: 682, icon: '🐟', type: 'Lunch' },
-  { name: 'Greek Yogurt Parfait', time: '3:30 PM', cal: 180, icon: '🫐', type: 'Snack' },
-  { name: 'Quinoa Salad', time: 'Yesterday', cal: 410, icon: '🥗', type: 'Dinner' },
+  { name: 'Avocado Toast', time: '8:20 AM', cal: 320, emoji: '🥑', kind: 'Breakfast' },
+  { name: 'Grilled Salmon Bowl', time: '12:45 PM', cal: 682, emoji: '🐟', kind: 'Lunch' },
+  { name: 'Greek Yogurt Parfait', time: '3:30 PM', cal: 180, emoji: '🫐', kind: 'Snack' },
 ];
 
 function RecentMeals() {
   return (
-    <Animated.View entering={FadeInDown.duration(500).delay(600)}>
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Recent Meals</Text>
-        <Pressable>
-          <Text style={styles.sectionAction}>See All</Text>
-        </Pressable>
+    <Animated.View entering={FadeInDown.duration(500).delay(650)}>
+      <View style={s.sectionRow}>
+        <Text style={s.sectionTitle}>Recent Meals</Text>
+        <Text style={s.sectionLink}>See All</Text>
       </View>
-      <View style={styles.mealsCard}>
-        {MEALS.map((meal, i) => (
+      <View style={s.mealsCard}>
+        {MEALS.map((m, i) => (
           <View key={i}>
-            <View style={styles.mealRow}>
-              <View style={styles.mealEmoji}>
-                <Text style={styles.mealEmojiText}>{meal.icon}</Text>
+            <View style={s.mealRow}>
+              <View style={s.mealEmoji}>
+                <Text style={s.mealEmojiText}>{m.emoji}</Text>
               </View>
-              <View style={styles.mealInfo}>
-                <Text style={styles.mealName}>{meal.name}</Text>
-                <Text style={styles.mealMeta}>{meal.type} • {meal.time}</Text>
+              <View style={s.mealInfo}>
+                <Text style={s.mealName}>{m.name}</Text>
+                <Text style={s.mealSub}>{m.kind} • {m.time}</Text>
               </View>
-              <View style={styles.mealCalBadge}>
-                <Text style={styles.mealCalText}>{meal.cal}</Text>
-                <Text style={styles.mealCalUnit}>kcal</Text>
+              <View style={s.mealCalCol}>
+                <Text style={s.mealCal}>{m.cal}</Text>
+                <Text style={s.mealCalUnit}>kcal</Text>
               </View>
             </View>
-            {i < MEALS.length - 1 && <View style={styles.mealDivider} />}
+            {i < MEALS.length - 1 && <View style={s.divider} />}
           </View>
         ))}
       </View>
@@ -187,328 +234,141 @@ function RecentMeals() {
   );
 }
 
-// ─── Weekly Activity ─────────────────────────────────────────────────
-const DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-const DAY_DATA = [
-  { pct: 40, color: IGO.protein },
-  { pct: 65, color: IGO.carbs },
-  { pct: 45, color: IGO.fat },
-  { pct: 80, color: IGO.protein },
-  { pct: 50, color: IGO.carbs },
-  { pct: 70, color: IGO.fat },
-  { pct: 30, color: IGO.gray400 },
-];
+// ═══ ACHIEVEMENTS ═══════════════════════════════════════════════════
+function Achievements() {
+  const badges = [
+    { icon: '🔥', label: '7 Day Streak', color: 'rgba(255,149,0,0.08)' },
+    { icon: '🎯', label: 'On Target', color: 'rgba(52,199,89,0.08)' },
+    { icon: '💧', label: 'Hydrated', color: 'rgba(0,122,255,0.08)' },
+    { icon: '🏆', label: 'Top 10%', color: 'rgba(175,82,222,0.08)' },
+  ];
 
-function WeeklyActivity() {
   return (
-    <Animated.View entering={FadeInDown.duration(500).delay(700)} style={styles.weeklyCard}>
-      <View style={styles.weeklyHeader}>
-        <View>
-          <Text style={styles.weeklyTitle}>Weekly Activity</Text>
-          <Text style={styles.weeklySubtitle}>Avg 2,100 kcal / day</Text>
-        </View>
-        <View style={styles.weeklyBadge}>
-          <Ionicons name="flame" size={12} color={IGO.carbs} />
-          <Text style={styles.weeklyBadgeText}>7 day streak</Text>
-        </View>
+    <Animated.View entering={FadeInDown.duration(500).delay(750)}>
+      <View style={s.sectionRow}>
+        <Text style={s.sectionTitle}>Achievements</Text>
       </View>
-      <View style={styles.weeklyBars}>
-        {DAY_DATA.map((day, i) => (
-          <View key={i} style={styles.weeklyCol}>
-            <View style={styles.weeklyBarTrack}>
-              <Animated.View
-                entering={FadeInUp.duration(600).delay(750 + i * 60)}
-                style={[
-                  styles.weeklyBarFill,
-                  {
-                    height: `${day.pct}%`,
-                    backgroundColor: day.color,
-                  },
-                ]}
-              />
-            </View>
-            <Text style={[styles.weeklyDay, i === 3 && styles.weeklyDayActive]}>{DAYS[i]}</Text>
-          </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={s.achieveScroll}
+      >
+        {badges.map((b, i) => (
+          <Animated.View
+            key={b.label}
+            entering={FadeInDown.duration(400).delay(780 + i * 60)}
+            style={[s.achieveCard, { backgroundColor: b.color }]}
+          >
+            <Text style={s.achieveEmoji}>{b.icon}</Text>
+            <Text style={s.achieveLabel}>{b.label}</Text>
+          </Animated.View>
         ))}
-      </View>
+      </ScrollView>
     </Animated.View>
   );
 }
 
-// ─── Wellness Tip ────────────────────────────────────────────────────
+// ═══ WELLNESS TIP ═══════════════════════════════════════════════════
 function WellnessTip() {
   return (
-    <Animated.View entering={FadeInDown.duration(500).delay(800)} style={styles.wellnessCard}>
-      <View style={styles.wellnessLeft}>
-        <View style={styles.wellnessIcon}>
-          <Ionicons name="leaf" size={16} color={IGO.fat} />
-        </View>
+    <Animated.View entering={FadeInDown.duration(500).delay(850)} style={s.tipCard}>
+      <View style={s.tipIcon}>
+        <Ionicons name="leaf" size={14} color={IGO.fat} />
       </View>
-      <View style={styles.wellnessRight}>
-        <Text style={styles.wellnessSource}>CIMAS HEALTH GROUP</Text>
-        <Text style={styles.wellnessTip}>
+      <View style={s.tipContent}>
+        <Text style={s.tipSource}>CIMAS HEALTH GROUP</Text>
+        <Text style={s.tipText}>
           Adding leafy greens to your lunch can improve iron absorption by
-          <Text style={styles.wellnessBold}> 15%</Text>. Try spinach or kale with your next meal.
+          <Text style={s.tipBold}> 15%</Text>.
         </Text>
       </View>
     </Animated.View>
   );
 }
 
-// ─── Quick Actions ───────────────────────────────────────────────────
-function QuickActions() {
-  return (
-    <Animated.View entering={FadeInDown.duration(500).delay(850)}>
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Quick Actions</Text>
-      </View>
-      <View style={styles.actionsRow}>
-        <Pressable style={styles.actionCard}>
-          <View style={[styles.actionIcon, { backgroundColor: 'rgba(175,82,222,0.08)' }]}>
-            <Ionicons name="water" size={20} color={IGO.protein} />
-          </View>
-          <Text style={styles.actionLabel}>Log Water</Text>
-          <Text style={styles.actionSub}>4 / 8 glasses</Text>
-        </Pressable>
-        <Pressable style={styles.actionCard}>
-          <View style={[styles.actionIcon, { backgroundColor: 'rgba(255,149,0,0.08)' }]}>
-            <Ionicons name="fitness" size={20} color={IGO.carbs} />
-          </View>
-          <Text style={styles.actionLabel}>Activity</Text>
-          <Text style={styles.actionSub}>340 kcal burned</Text>
-        </Pressable>
-        <Pressable style={styles.actionCard}>
-          <View style={[styles.actionIcon, { backgroundColor: 'rgba(52,199,89,0.08)' }]}>
-            <Ionicons name="heart" size={20} color={IGO.fat} />
-          </View>
-          <Text style={styles.actionLabel}>Health</Text>
-          <Text style={styles.actionSub}>Score: 78</Text>
-        </Pressable>
-      </View>
-    </Animated.View>
-  );
-}
-
 // ═══════════════════════════════════════════════════════════════════════
-// Dashboard Screen
+// DASHBOARD
 // ═══════════════════════════════════════════════════════════════════════
 export default function DashboardScreen() {
   return (
     <ScrollView
-      style={styles.screen}
-      contentContainerStyle={styles.content}
+      style={s.screen}
+      contentContainerStyle={s.content}
       showsVerticalScrollIndicator={false}
     >
-      {/* Header — breathe, ma (間) */}
-      <Animated.View entering={FadeInDown.duration(400)} style={styles.header}>
+      {/* Header */}
+      <Animated.View entering={FadeInDown.duration(400)} style={s.header}>
         <View>
-          <Text style={styles.headerGreeting}>Good afternoon,</Text>
-          <Text style={styles.headerName}>Munyaradzi</Text>
+          <Text style={s.headerGreeting}>Good afternoon</Text>
+          <Text style={s.headerName}>Munyaradzi</Text>
         </View>
-        <Pressable style={styles.headerAvatar}>
-          <Text style={styles.headerAvatarText}>MR</Text>
+        <Pressable style={s.avatar}>
+          <Text style={s.avatarText}>MR</Text>
         </Pressable>
       </Animated.View>
 
-      {/* Daily Progress */}
-      <DailyRing />
-
-      {/* Hero — last meal */}
       <HeroCard />
-
-      {/* Macros Grid — 3 + Scan */}
-      <View style={styles.macroGrid}>
-        <View style={styles.macroRow}>
-          <MacroCard label="Protein" value="42g" pct="35% of goal" progress={65} color={IGO.protein} delay={400} />
-          <MacroCard label="Carbs" value="28g" pct="22% of goal" progress={45} color={IGO.carbs} delay={450} />
-        </View>
-        <View style={styles.macroRow}>
-          <MacroCard label="Fat" value="18g" pct="15% of goal" progress={30} color={IGO.fat} delay={500} />
-          <ScanCTA />
-        </View>
-      </View>
-
-      {/* Recent Meals */}
+      <DailyProgress />
+      <MacroCards />
+      <WeeklyChart />
       <RecentMeals />
-
-      {/* Weekly Activity */}
-      <WeeklyActivity />
-
-      {/* Quick Actions */}
-      <QuickActions />
-
-      {/* Wellness Tip */}
+      <Achievements />
       <WellnessTip />
 
-      {/* Bottom safe area spacer */}
-      <View style={{ height: 40 }} />
+      <View style={{ height: 48 }} />
     </ScrollView>
   );
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// Styles — every pixel intentional
+// STYLES
 // ═══════════════════════════════════════════════════════════════════════
-const CARD_RADIUS = 22;
-const SUBTLE_BORDER = 'rgba(0,0,0,0.04)';
-const CARD_SHADOW = {
-  shadowColor: '#000',
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.03,
-  shadowRadius: 12,
-  elevation: 2,
-};
+const s = StyleSheet.create({
+  screen: { flex: 1, backgroundColor: '#FAFAFA' },
+  content: { paddingHorizontal: 20, paddingBottom: 140 },
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: '#FAFAFA',
-  },
-  content: {
-    paddingHorizontal: 20,
-    paddingBottom: 130,
-  },
-
-  // ── Header ──
+  // ── Header
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     paddingTop: Platform.OS === 'ios' ? 64 : 52,
-    paddingBottom: 24,
+    paddingBottom: 20,
   },
   headerGreeting: {
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '400',
     color: IGO.gray600,
-    letterSpacing: 0.2,
-    marginBottom: 2,
+    marginBottom: 1,
   },
   headerName: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: '700',
     color: IGO.black,
     letterSpacing: -0.8,
   },
-  headerAvatar: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 14,
     backgroundColor: IGO.black,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  headerAvatarText: {
+  avatarText: {
     fontSize: 13,
     fontWeight: '700',
     color: IGO.white,
     letterSpacing: 0.5,
   },
 
-  // ── Daily Ring ──
-  ringCard: {
-    flexDirection: 'row',
-    backgroundColor: IGO.white,
-    borderRadius: CARD_RADIUS,
-    padding: 20,
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: SUBTLE_BORDER,
-    ...CARD_SHADOW,
-  },
-  ringLeft: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 20,
-  },
-  ringContainer: {
-    width: 90,
-    height: 90,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ringTrack: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    borderWidth: 7,
-    borderColor: IGO.gray200,
-    position: 'absolute',
-  },
-  ringFill: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    borderWidth: 7,
-    borderColor: IGO.black,
-    borderTopColor: 'transparent',
-    borderRightColor: 'transparent',
-    position: 'absolute',
-    transform: [{ rotate: '45deg' }],
-  },
-  ringCenter: {
-    alignItems: 'center',
-  },
-  ringValue: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: IGO.black,
-    letterSpacing: -0.5,
-  },
-  ringUnit: {
-    fontSize: 10,
-    fontWeight: '600',
-    color: IGO.gray600,
-    marginTop: -2,
-  },
-  ringRight: {
-    flex: 1,
-    justifyContent: 'center',
-    gap: 10,
-  },
-  ringMetaRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ringDot: {
-    width: 7,
-    height: 7,
-    borderRadius: 3.5,
-    marginRight: 8,
-  },
-  ringMetaLabel: {
-    flex: 1,
-    fontSize: 13,
-    fontWeight: '400',
-    color: IGO.gray600,
-  },
-  ringMetaValue: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: IGO.black,
-    letterSpacing: -0.3,
-  },
-
-  // ── Hero Card ──
+  // ── Hero
   heroCard: {
-    width: '100%',
-    aspectRatio: 1.6,
-    borderRadius: CARD_RADIUS,
+    borderRadius: CR,
     overflow: 'hidden',
-    marginBottom: 14,
-    ...CARD_SHADOW,
-  },
-  heroGradientBg: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#F8F8FA',
-  },
-  gc: {
-    position: 'absolute',
-    borderRadius: 999,
-  },
-  heroShimmer: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255,255,255,0.15)',
+    marginBottom: 12,
+    height: 200,
+    ...SHADOW,
   },
   heroContent: {
     flex: 1,
@@ -516,400 +376,407 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     zIndex: 2,
   },
-  heroTopRow: {
+  heroTop: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  heroIconCircle: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  heroBadge: {
+  heroPill: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
-    backgroundColor: 'rgba(255,255,255,0.75)',
+    backgroundColor: 'rgba(255,255,255,0.65)',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 100,
   },
-  heroBadgeDot: {
+  heroDot: {
     width: 5,
     height: 5,
     borderRadius: 2.5,
     backgroundColor: '#34C759',
   },
-  heroBadgeText: {
+  heroPillText: {
     fontSize: 11,
     fontWeight: '600',
-    color: 'rgba(0,0,0,0.7)',
-    letterSpacing: 0.1,
+    color: 'rgba(0,0,0,0.6)',
   },
-  heroBottomArea: {},
-  heroTimeLabel: {
-    fontSize: 14,
+  heroTime: {
+    fontSize: 13,
     fontWeight: '500',
-    color: 'rgba(0,0,0,0.5)',
-    marginBottom: 3,
-    letterSpacing: 0.1,
+    color: 'rgba(0,0,0,0.4)',
+    marginBottom: 2,
   },
-  heroCalories: {
-    fontSize: 30,
-    fontWeight: '700',
+  heroCal: {
+    fontSize: 48,
+    fontWeight: '800',
     color: IGO.black,
-    letterSpacing: -1,
-    marginBottom: 1,
+    letterSpacing: -2,
+    lineHeight: 52,
   },
-  heroMealName: {
+  heroUnit: {
     fontSize: 13,
     fontWeight: '500',
     color: 'rgba(0,0,0,0.35)',
-    letterSpacing: 0.1,
+    letterSpacing: 1,
+    textTransform: 'lowercase',
+    marginBottom: 4,
   },
-  heroSparkline: {
+  heroMeal: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: 'rgba(0,0,0,0.5)',
+  },
+  heroChartWrap: {
     position: 'absolute',
-    bottom: 22,
-    right: 22,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    gap: 2.5,
-    height: 32,
-  },
-  sparkBar: {
-    width: 5,
-    borderRadius: 2.5,
+    bottom: 20,
+    right: 16,
+    opacity: 0.6,
+    zIndex: 2,
   },
 
-  // ── Macro Grid ──
-  macroGrid: {
-    gap: 10,
-    marginBottom: 24,
+  // ── Progress
+  progressCard: {
+    flexDirection: 'row',
+    backgroundColor: IGO.white,
+    borderRadius: CR,
+    padding: 18,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: BORDER,
+    ...SHADOW,
   },
+  progressLeft: {
+    marginRight: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  progressRingOuter: {
+    width: 76,
+    height: 76,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  progressRingTrack: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: 38,
+    borderWidth: 6,
+    borderColor: IGO.gray200,
+  },
+  progressRingFill: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: 38,
+    borderWidth: 6,
+    borderColor: IGO.black,
+    borderTopColor: 'transparent',
+    borderRightColor: 'transparent',
+    transform: [{ rotate: '45deg' }],
+  },
+  progressRingInner: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  progressPct: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: IGO.black,
+    letterSpacing: -0.5,
+  },
+  progressRight: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  progressTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: IGO.black,
+    marginBottom: 3,
+    letterSpacing: -0.2,
+  },
+  progressSub: {
+    fontSize: 13,
+    fontWeight: '400',
+    color: IGO.gray600,
+    marginBottom: 10,
+  },
+  progressBold: {
+    fontWeight: '600',
+    color: IGO.black,
+  },
+  progressBar: {
+    height: 4,
+    backgroundColor: IGO.gray200,
+    borderRadius: 2,
+    overflow: 'hidden',
+    marginBottom: 10,
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: IGO.black,
+    borderRadius: 2,
+  },
+  progressMeta: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  progressMetaItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  progressDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+  },
+  progressMetaText: {
+    fontSize: 11,
+    fontWeight: '500',
+    color: IGO.gray600,
+  },
+
+  // ── Macros
   macroRow: {
     flexDirection: 'row',
     gap: 10,
+    marginBottom: 20,
   },
   macroCard: {
     flex: 1,
     backgroundColor: IGO.white,
-    borderRadius: CARD_RADIUS,
-    padding: 16,
-    minHeight: 130,
-    justifyContent: 'space-between',
+    borderRadius: 18,
+    padding: 14,
     borderWidth: 1,
-    borderColor: SUBTLE_BORDER,
-    ...CARD_SHADOW,
+    borderColor: BORDER,
+    ...SHADOW,
   },
-  macroLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: IGO.gray600,
-    textTransform: 'uppercase',
-    letterSpacing: 0.8,
-    marginBottom: 6,
+  macroIconWrap: {
+    width: 32,
+    height: 32,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
   },
   macroValue: {
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: '700',
     color: IGO.black,
-    letterSpacing: -1,
+    letterSpacing: -0.5,
     marginBottom: 1,
   },
-  macroPct: {
+  macroLabel: {
     fontSize: 11,
     fontWeight: '500',
     color: IGO.gray600,
-    marginBottom: 12,
+    marginBottom: 10,
   },
   macroTrack: {
-    height: 5,
+    height: 4,
     backgroundColor: IGO.gray200,
-    borderRadius: 3,
+    borderRadius: 2,
     overflow: 'hidden',
   },
   macroFill: {
     height: '100%',
-    borderRadius: 3,
+    borderRadius: 2,
   },
 
-  // ── Scan CTA ──
-  scanCta: {
-    flex: 1,
-    backgroundColor: IGO.black,
-    borderRadius: CARD_RADIUS,
-    minHeight: 130,
-    ...CARD_SHADOW,
-    overflow: 'hidden',
+  // ── Chart
+  chartCard: {
+    backgroundColor: IGO.white,
+    borderRadius: CR,
+    padding: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: BORDER,
+    ...SHADOW,
   },
-  scanCtaInner: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
+  chartHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 16,
   },
-  scanIconRing: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
+  chartTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: IGO.black,
+    letterSpacing: -0.3,
     marginBottom: 2,
   },
-  scanCtaLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: IGO.white,
-    letterSpacing: -0.1,
-  },
-  scanCtaSub: {
-    fontSize: 11,
+  chartSub: {
+    fontSize: 12,
     fontWeight: '400',
-    color: 'rgba(255,255,255,0.45)',
+    color: IGO.gray600,
+  },
+  chartBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(52,199,89,0.08)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 100,
+  },
+  chartBadgeText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: IGO.fat,
+  },
+  chartLabels: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 10,
+  },
+  chartLabel: {
+    fontSize: 11,
+    fontWeight: '500',
+    color: IGO.gray600,
+  },
+  chartLabelActive: {
+    color: IGO.black,
+    fontWeight: '700',
   },
 
-  // ── Section Headers ──
-  sectionHeader: {
+  // ── Meals
+  sectionRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 10,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: '600',
     color: IGO.black,
     letterSpacing: -0.3,
   },
-  sectionAction: {
-    fontSize: 14,
+  sectionLink: {
+    fontSize: 13,
     fontWeight: '500',
     color: IGO.gray600,
   },
-
-  // ── Recent Meals ──
   mealsCard: {
     backgroundColor: IGO.white,
-    borderRadius: CARD_RADIUS,
+    borderRadius: CR,
     paddingHorizontal: 16,
-    paddingVertical: 6,
-    marginBottom: 24,
+    paddingVertical: 4,
+    marginBottom: 20,
     borderWidth: 1,
-    borderColor: SUBTLE_BORDER,
-    ...CARD_SHADOW,
+    borderColor: BORDER,
+    ...SHADOW,
   },
   mealRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 14,
+    paddingVertical: 13,
   },
   mealEmoji: {
-    width: 42,
-    height: 42,
-    borderRadius: 14,
-    backgroundColor: IGO.gray100,
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: '#F5F5F5',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 14,
+    marginRight: 12,
   },
   mealEmojiText: {
-    fontSize: 20,
+    fontSize: 18,
   },
   mealInfo: {
     flex: 1,
   },
   mealName: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '500',
     color: IGO.black,
     marginBottom: 2,
-    letterSpacing: -0.1,
   },
-  mealMeta: {
+  mealSub: {
     fontSize: 12,
     fontWeight: '400',
     color: IGO.gray600,
   },
-  mealCalBadge: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    gap: 2,
+  mealCalCol: {
+    alignItems: 'flex-end',
   },
-  mealCalText: {
-    fontSize: 16,
+  mealCal: {
+    fontSize: 15,
     fontWeight: '600',
     color: IGO.black,
     letterSpacing: -0.3,
   },
   mealCalUnit: {
-    fontSize: 11,
-    fontWeight: '400',
-    color: IGO.gray600,
-  },
-  mealDivider: {
-    height: 1,
-    backgroundColor: IGO.gray200,
-    marginLeft: 56,
-  },
-
-  // ── Weekly Activity ──
-  weeklyCard: {
-    backgroundColor: IGO.white,
-    borderRadius: CARD_RADIUS,
-    padding: 20,
-    marginBottom: 24,
-    borderWidth: 1,
-    borderColor: SUBTLE_BORDER,
-    ...CARD_SHADOW,
-  },
-  weeklyHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 20,
-  },
-  weeklyTitle: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: IGO.black,
-    letterSpacing: -0.2,
-    marginBottom: 2,
-  },
-  weeklySubtitle: {
-    fontSize: 12,
-    fontWeight: '400',
-    color: IGO.gray600,
-  },
-  weeklyBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: 'rgba(255,149,0,0.08)',
-    paddingHorizontal: 9,
-    paddingVertical: 4,
-    borderRadius: 100,
-  },
-  weeklyBadgeText: {
-    fontSize: 11,
-    fontWeight: '600',
-    color: IGO.carbs,
-  },
-  weeklyBars: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    height: 90,
-  },
-  weeklyCol: {
-    alignItems: 'center',
-    gap: 8,
-    flex: 1,
-  },
-  weeklyBarTrack: {
-    width: 6,
-    height: 64,
-    backgroundColor: IGO.gray200,
-    borderRadius: 3,
-    overflow: 'hidden',
-    justifyContent: 'flex-end',
-  },
-  weeklyBarFill: {
-    width: '100%',
-    borderRadius: 3,
-  },
-  weeklyDay: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '500',
     color: IGO.gray600,
   },
-  weeklyDayActive: {
-    color: IGO.black,
-    fontWeight: '700',
+  divider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: IGO.gray200,
+    marginLeft: 52,
   },
 
-  // ── Quick Actions ──
-  actionsRow: {
-    flexDirection: 'row',
+  // ── Achievements
+  achieveScroll: {
     gap: 10,
-    marginBottom: 24,
+    paddingBottom: 4,
+    marginBottom: 20,
   },
-  actionCard: {
-    flex: 1,
-    backgroundColor: IGO.white,
-    borderRadius: 18,
-    paddingVertical: 18,
-    paddingHorizontal: 14,
+  achieveCard: {
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 16,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: SUBTLE_BORDER,
-    ...CARD_SHADOW,
+    gap: 6,
+    minWidth: 90,
   },
-  actionIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
+  achieveEmoji: {
+    fontSize: 22,
   },
-  actionLabel: {
-    fontSize: 13,
+  achieveLabel: {
+    fontSize: 11,
     fontWeight: '600',
     color: IGO.black,
-    marginBottom: 2,
-  },
-  actionSub: {
-    fontSize: 11,
-    fontWeight: '400',
-    color: IGO.gray600,
   },
 
-  // ── Wellness Tip ──
-  wellnessCard: {
+  // ── Tip
+  tipCard: {
     backgroundColor: IGO.white,
-    borderRadius: CARD_RADIUS,
-    padding: 18,
+    borderRadius: CR,
+    padding: 16,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    gap: 14,
+    gap: 12,
     borderWidth: 1,
-    borderColor: SUBTLE_BORDER,
-    marginBottom: 14,
-    ...CARD_SHADOW,
+    borderColor: BORDER,
+    ...SHADOW,
   },
-  wellnessLeft: {},
-  wellnessIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 12,
+  tipIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 10,
     backgroundColor: 'rgba(52,199,89,0.08)',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  wellnessRight: {
+  tipContent: {
     flex: 1,
   },
-  wellnessSource: {
-    fontSize: 10,
+  tipSource: {
+    fontSize: 9,
     fontWeight: '700',
-    color: IGO.gray600,
-    letterSpacing: 1.8,
-    marginBottom: 5,
+    color: IGO.gray500,
+    letterSpacing: 2,
+    marginBottom: 4,
   },
-  wellnessTip: {
-    fontSize: 14,
+  tipText: {
+    fontSize: 13,
     fontWeight: '400',
-    color: 'rgba(0,0,0,0.65)',
-    lineHeight: 20,
-    letterSpacing: -0.1,
+    color: 'rgba(0,0,0,0.55)',
+    lineHeight: 19,
   },
-  wellnessBold: {
+  tipBold: {
     fontWeight: '600',
     color: IGO.black,
   },
