@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Pressable,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -178,14 +179,14 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: IGO.white,
+    backgroundColor: '#FAFAFA',
   },
   content: {
-    paddingHorizontal: 24,
-    paddingBottom: 120,
+    paddingHorizontal: 20,
+    paddingBottom: 130,
   },
   header: {
-    paddingTop: 60,
+    paddingTop: Platform.OS === 'ios' ? 64 : 52,
     paddingBottom: 8,
   },
   headerLabel: {

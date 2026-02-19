@@ -17,42 +17,40 @@ interface FloatingDockProps {
   onTabPress: (tab: TabKey) => void;
 }
 
-interface DockItemProps {
-  tabKey: TabKey;
-  icon: React.ReactNode;
+function DockItem({
+  isActive,
+  isScan,
+  onPress,
+  children,
+}: {
   isActive: boolean;
   isScan?: boolean;
   onPress: () => void;
-}
-
-function DockItem({ tabKey, icon, isActive, isScan, onPress }: DockItemProps) {
+  children: React.ReactNode;
+}) {
   const scale = useSharedValue(1);
 
-  const animatedStyle = useAnimatedStyle(() => ({
+  const animStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
   }));
-
-  const handlePressIn = () => {
-    scale.value = withSpring(0.88, { damping: 15, stiffness: 400 });
-  };
-
-  const handlePressOut = () => {
-    scale.value = withSpring(1, { damping: 12, stiffness: 300 });
-  };
 
   return (
     <AnimatedPressable
       onPress={onPress}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
+      onPressIn={() => {
+        scale.value = withSpring(0.85, { damping: 15, stiffness: 400 });
+      }}
+      onPressOut={() => {
+        scale.value = withSpring(1, { damping: 12, stiffness: 300 });
+      }}
       style={[
         styles.dockItem,
         isScan && styles.dockItemScan,
         isActive && !isScan && styles.dockItemActive,
-        animatedStyle,
+        animStyle,
       ]}
     >
-      {icon}
+      {children}
     </AnimatedPressable>
   );
 }
@@ -62,38 +60,36 @@ export function FloatingDock({ activeTab, onTabPress }: FloatingDockProps) {
     <View style={styles.container}>
       <View style={styles.pill}>
         <DockItem
-          tabKey="stats"
           isActive={activeTab === 'stats'}
           onPress={() => onTabPress('stats')}
-          icon={
-            <Ionicons
-              name="bar-chart-outline"
-              size={20}
-              color="#FFFFFF"
-              style={{ opacity: activeTab === 'stats' ? 1 : 0.5 }}
-            />
-          }
-        />
+        >
+          <Ionicons
+            name={activeTab === 'stats' ? 'bar-chart' : 'bar-chart-outline'}
+            size={19}
+            color={IGO.white}
+            style={{ opacity: activeTab === 'stats' ? 1 : 0.45 }}
+          />
+        </DockItem>
+
         <DockItem
-          tabKey="scan"
           isActive={activeTab === 'scan'}
           isScan
           onPress={() => onTabPress('scan')}
-          icon={<Ionicons name="scan" size={22} color={IGO.black} />}
-        />
+        >
+          <Ionicons name="scan" size={21} color={IGO.black} />
+        </DockItem>
+
         <DockItem
-          tabKey="profile"
           isActive={activeTab === 'profile'}
           onPress={() => onTabPress('profile')}
-          icon={
-            <Ionicons
-              name="person-outline"
-              size={20}
-              color="#FFFFFF"
-              style={{ opacity: activeTab === 'profile' ? 1 : 0.5 }}
-            />
-          }
-        />
+        >
+          <Ionicons
+            name={activeTab === 'profile' ? 'person' : 'person-outline'}
+            size={19}
+            color={IGO.white}
+            style={{ opacity: activeTab === 'profile' ? 1 : 0.45 }}
+          />
+        </DockItem>
       </View>
     </View>
   );
@@ -102,7 +98,7 @@ export function FloatingDock({ activeTab, onTabPress }: FloatingDockProps) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 34 : 24,
+    bottom: Platform.OS === 'ios' ? 36 : 20,
     left: 0,
     right: 0,
     alignItems: 'center',
@@ -110,28 +106,33 @@ const styles = StyleSheet.create({
     pointerEvents: 'box-none',
   },
   pill: {
-    backgroundColor: IGO.black,
-    borderRadius: IGO.radiusFull,
-    paddingHorizontal: IGO.space6,
-    paddingVertical: IGO.space6,
+    backgroundColor: 'rgba(0,0,0,0.92)',
+    borderRadius: 100,
+    paddingHorizontal: 6,
+    paddingVertical: 6,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: IGO.space4,
-    ...IGO.shadowDock,
+    gap: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.25,
+    shadowRadius: 30,
+    elevation: 14,
   },
   dockItem: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
   },
   dockItemScan: {
-    width: 64,
+    width: 62,
+    height: 50,
     backgroundColor: IGO.white,
-    borderRadius: 32,
+    borderRadius: 25,
   },
   dockItemActive: {
-    backgroundColor: 'rgba(255,255,255,0.15)',
+    backgroundColor: 'rgba(255,255,255,0.12)',
   },
 });

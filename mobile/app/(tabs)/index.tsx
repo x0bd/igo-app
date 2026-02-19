@@ -35,6 +35,6 @@ export default function AppIndex() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FAFAFA',
   },
 });
