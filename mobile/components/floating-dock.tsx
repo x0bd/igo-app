@@ -17,10 +17,10 @@ interface FloatingDockProps {
 }
 
 const TABS: { key: TabKey; icon: string; iconActive: string; label: string }[] = [
-  { key: 'home', icon: 'grid-outline', iconActive: 'grid', label: 'Home' },
-  { key: 'stats', icon: 'analytics-outline', iconActive: 'analytics', label: 'Stats' },
-  { key: 'scan', icon: 'camera-outline', iconActive: 'camera', label: 'Scan' },
-  { key: 'profile', icon: 'person-outline', iconActive: 'person', label: 'You' },
+  { key: 'home', label: 'Home', icon: 'grid-outline', iconActive: 'grid' },
+  { key: 'stats', label: 'Stats', icon: 'analytics-outline', iconActive: 'analytics' },
+  { key: 'scan', label: 'Scan', icon: 'scan-outline', iconActive: 'scan' },
+  { key: 'profile', label: 'You', icon: 'person-outline', iconActive: 'person' },
 ];
 
 function TabItem({
@@ -52,7 +52,7 @@ function TabItem({
       <Ionicons
         name={(isActive ? tab.iconActive : tab.icon) as any}
         size={20}
-        color={isActive ? '#FFFFFF' : 'rgba(255,255,255,0.35)'}
+        color={isActive ? '#FFFFFF' : 'rgba(255,255,255,0.4)'}
       />
       <Text style={[styles.tabLabel, isActive && styles.tabLabelActive]}>
         {tab.label}
@@ -80,8 +80,13 @@ function ScanButton({ isActive, onPress }: { isActive: boolean; onPress: () => v
       style={[styles.scanButton, animStyle]}
     >
       <View style={styles.scanButtonInner}>
-        <Ionicons name="scan" size={24} color="#000" />
+        <Ionicons
+          name={isActive ? 'camera' : 'camera-outline'}
+          size={24}
+          color="#000000"
+        />
       </View>
+      <Text style={styles.scanLabel}>Scan</Text>
     </AnimatedPressable>
   );
 }
@@ -102,7 +107,7 @@ export function FloatingDock({ activeTab, onTabPress }: FloatingDockProps) {
           onPress={() => onTabPress('stats')}
         />
 
-        {/* Center scan — elevated */}
+        {/* Center scan — elevated primary pill */}
         <ScanButton
           isActive={activeTab === 'scan'}
           onPress={() => onTabPress('scan')}
@@ -122,64 +127,74 @@ export function FloatingDock({ activeTab, onTabPress }: FloatingDockProps) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 28 : 16,
-    left: 16,
-    right: 16,
+    bottom: Platform.OS === 'ios' ? 30 : 18,
+    left: 20,
+    right: 20,
     alignItems: 'center',
     zIndex: 100,
     pointerEvents: 'box-none',
   },
   dock: {
-    backgroundColor: 'rgba(10,10,10,0.95)',
-    borderRadius: 28,
-    paddingHorizontal: 8,
-    paddingVertical: 8,
+    backgroundColor: '#050607',
+    borderRadius: 36,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '100%',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 28,
-    elevation: 16,
-    borderWidth: 0.5,
+    shadowOffset: { width: 0, height: 24 },
+    shadowOpacity: 0.45,
+    shadowRadius: 40,
+    elevation: 20,
+    borderWidth: 0.8,
     borderColor: 'rgba(255,255,255,0.06)',
   },
   tabItem: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 6,
-    paddingHorizontal: 14,
-    gap: 3,
+    paddingHorizontal: 12,
+    gap: 2,
   },
   tabLabel: {
-    fontSize: 10,
-    fontWeight: '500',
-    color: 'rgba(255,255,255,0.3)',
-    letterSpacing: 0.2,
+    fontSize: 9,
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.32)',
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
   },
   tabLabelActive: {
     color: '#FFFFFF',
-    fontWeight: '600',
+    fontWeight: '700',
   },
   scanButton: {
-    marginTop: -28,
-    marginHorizontal: 8,
+    marginTop: -30,
+    marginHorizontal: 10,
+    alignItems: 'center',
   },
   scanButtonInner: {
-    width: 56,
-    height: 56,
-    borderRadius: 18,
+    width: 62,
+    height: 62,
+    borderRadius: 24,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#fff',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 8,
-    borderWidth: 3,
-    borderColor: 'rgba(10,10,10,0.95)',
+    shadowColor: '#FFFFFF',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.22,
+    shadowRadius: 18,
+    elevation: 10,
+    borderWidth: 4,
+    borderColor: '#050607',
+  },
+  scanLabel: {
+    marginTop: 4,
+    fontSize: 9,
+    fontWeight: '800',
+    color: '#F9FAFB',
+    letterSpacing: 0.8,
+    textTransform: 'uppercase',
   },
 });
