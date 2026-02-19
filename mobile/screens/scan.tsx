@@ -177,7 +177,7 @@ const s = StyleSheet.create({
 
   heroCard: {
     borderRadius: 36,
-    backgroundColor: '#111827',
+    backgroundColor: '#FFFBF8',
     overflow: 'hidden',
     marginBottom: 18,
     ...LIGHT_CARD_SHADOW,
@@ -189,8 +189,8 @@ const s = StyleSheet.create({
     width: 180,
     height: 180,
     borderRadius: 90,
-    backgroundColor: '#38BDF8',
-    opacity: 0.35,
+    backgroundColor: '#FFE4B5', // soft, warm highlight
+    opacity: 0.55,
   },
   heroGlowBottom: {
     position: 'absolute',
@@ -199,8 +199,8 @@ const s = StyleSheet.create({
     width: 160,
     height: 160,
     borderRadius: 80,
-    backgroundColor: '#22C55E',
-    opacity: 0.25,
+    backgroundColor: '#C7EFD6', // gentle green hint
+    opacity: 0.45,
   },
   heroInner: {
     padding: 20,
@@ -209,29 +209,29 @@ const s = StyleSheet.create({
   heroPill: {
     alignSelf: 'flex-start',
     borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    backgroundColor: 'rgba(15,23,42,0.7)',
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    backgroundColor: 'rgba(255,255,255,0.8)',
     borderWidth: 1,
-    borderColor: 'rgba(148,163,184,0.6)',
+    borderColor: 'rgba(0,0,0,0.04)',
   },
   heroPillText: {
     fontSize: 11,
     fontWeight: '800',
-    letterSpacing: 1.2,
-    color: '#E5E7EB',
+    letterSpacing: 1.4,
+    color: '#6B7280',
   },
   heroTitle: {
     fontSize: 22,
     fontWeight: '900',
-    color: '#F9FAFB',
+    color: '#0F172A',
     letterSpacing: -0.8,
     fontFamily: 'PlusJakartaSans',
   },
   heroSubtitle: {
     fontSize: 12,
     fontWeight: '500',
-    color: '#E5E7EB',
+    color: '#6B7280',
     lineHeight: 18,
   },
   heroButton: {
@@ -240,15 +240,15 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingHorizontal: 18,
+    paddingVertical: 11,
     borderRadius: 999,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#4CAF50',
   },
   heroButtonText: {
     fontSize: 13,
-    fontWeight: '700',
-    color: '#111827',
+    fontWeight: '800',
+    color: '#FFFFFF',
   },
 
   emptyCard: {
@@ -405,11 +405,11 @@ const s = StyleSheet.create({
   suggestCard: {
     width: 220,
     borderRadius: 22,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     padding: 14,
     marginRight: 10,
     borderWidth: 1,
-    borderColor: 'rgba(148,163,184,0.5)',
+    borderColor: BORDER,
     ...LIGHT_CARD_SHADOW,
   },
   suggestDot: {
@@ -421,14 +421,14 @@ const s = StyleSheet.create({
   suggestMealTitle: {
     fontSize: 14,
     fontWeight: '800',
-    color: '#F9FAFB',
+    color: '#111827',
     letterSpacing: -0.2,
     marginBottom: 4,
   },
   suggestMealSubtitle: {
     fontSize: 12,
     fontWeight: '500',
-    color: '#CBD5F5',
+    color: '#6B7280',
     lineHeight: 17,
   },
 });
