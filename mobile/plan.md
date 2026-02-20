@@ -64,53 +64,53 @@
 ## Step 1: Design System & Style Understanding
 
 ### 1.1 Analyze Design Inspiration (`inspo/smooth.js`)
-- [ ] Study depth shadow patterns (adapted for Cimas blue/yellow):
-  - [ ] Cimas Blue depth shadow: `0 20px 40px -10px rgba(0, 51, 153, 0.4), 0 10px 20px -5px rgba(0, 51, 153, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
-  - [ ] Cimas Yellow depth shadow: `0 20px 40px -10px rgba(255, 214, 0, 0.4), 0 10px 20px -5px rgba(255, 214, 0, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
-  - [ ] Blue-Yellow gradient shadow: Combined blue and yellow shadows for split complementary accents
-  - [ ] Navigation island shadow: `0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.1)`
-  - [ ] White card shadow: `0 10px 30px -5px rgba(0, 0, 0, 0.05)` (subtle for white background)
-- [ ] Study decorative elements:
-  - [ ] Blur orbs/glows using absolute positioning
-  - [ ] Gradient backgrounds with multiple color stops
-  - [ ] Overlapping decorative shapes (circles, rounded squares)
-- [ ] Study typography:
-  - [ ] Tight letter spacing: `-0.04em` for large headings
-  - [ ] Font weights: 400, 500, 600, 700, 800, 900
-  - [ ] Plus Jakarta Sans font family
-- [ ] Study card patterns:
-  - [ ] Super cards with `borderRadius: 2.5rem` (40px)
-  - [ ] White cards with subtle borders (`border-gray-100`)
-  - [ ] Colored cards with depth shadows
-  - [ ] Active state transforms: `scale(0.96)` on press
+- [x] Study depth shadow patterns (adapted for Cimas blue/yellow):
+  - [x] Cimas Blue depth shadow: `0 20px 40px -10px rgba(0, 51, 153, 0.4), 0 10px 20px -5px rgba(0, 51, 153, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
+  - [x] Cimas Yellow depth shadow: `0 20px 40px -10px rgba(255, 214, 0, 0.4), 0 10px 20px -5px rgba(255, 214, 0, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
+  - [x] Blue-Yellow gradient shadow: Combined blue and yellow shadows for split complementary accents
+  - [x] Navigation island shadow: `0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.1)`
+  - [x] White card shadow: `0 10px 30px -5px rgba(0, 0, 0, 0.05)` (subtle for white background)
+- [x] Study decorative elements:
+  - [x] Blur orbs/glows using absolute positioning
+  - [x] Gradient backgrounds with multiple color stops
+  - [x] Overlapping decorative shapes (circles, rounded squares)
+- [x] Study typography:
+  - [x] Tight letter spacing: `-0.04em` for large headings
+  - [x] Font weights: 400, 500, 600, 700, 800, 900
+  - [x] Plus Jakarta Sans font family
+- [x] Study card patterns:
+  - [x] Super cards with `borderRadius: 2.5rem` (40px)
+  - [x] White cards with subtle borders (`border-gray-100`)
+  - [x] Colored cards with depth shadows
+  - [x] Active state transforms: `scale(0.96)` on press
 
 ### 1.2 Create Design Tokens File
-- [ ] Create `constants/design.ts`:
-  - [ ] Export color palette:
-    - [ ] Cimas Blue: `#003399`
-    - [ ] Cimas Yellow: `#FFD600`
-    - [ ] Cimas White: `#FFFFFF`
-    - [ ] Cimas Off-White: `#F8F9FA`
-  - [ ] Export shadow presets (depthShadowBlue, depthShadowYellow, navIslandShadow, whiteCardShadow)
-  - [ ] Export spacing scale
-  - [ ] Export typography scale (font sizes, weights, letter spacing)
-  - [ ] Export transition timings (cubic-bezier curves)
-  - [ ] Export blur values for decorative elements
+- [x] Create `constants/design.ts`:
+  - [x] Export color palette:
+    - [x] Cimas Blue: `#003399`
+    - [x] Cimas Yellow: `#FFD600`
+    - [x] Cimas White: `#FFFFFF`
+    - [x] Cimas Off-White: `#F8F9FA`
+  - [x] Export shadow presets (depthShadowBlue, depthShadowYellow, navIslandShadow, whiteCardShadow)
+  - [x] Export spacing scale
+  - [x] Export typography scale (font sizes, weights, letter spacing)
+  - [x] Export transition timings (cubic-bezier curves)
+  - [x] Export blur values for decorative elements
 
 ### 1.3 Create Reusable Style Utilities
-- [ ] Create `utils/styles.ts`:
-  - [ ] Helper function for depth shadows (accepts color)
-  - [ ] Helper function for decorative blur orbs
-  - [ ] Helper function for tight text spacing
-  - [ ] Helper function for super card styles
-  - [ ] Helper function for active press transforms
+- [x] Create `utils/styles.ts`:
+  - [x] Helper function for depth shadows (accepts color)
+  - [x] Helper function for decorative blur orbs
+  - [x] Helper function for tight text spacing
+  - [x] Helper function for super card styles
+  - [x] Helper function for active press transforms
 
 ### 1.4 Update Global Styles
-- [ ] Update `global.css`:
-  - [ ] Add custom CSS variables if needed
-  - [ ] Add utility classes for tight text
-  - [ ] Add utility classes for scrollbar hiding
-  - [ ] Add any custom animations
+- [x] Update `global.css`:
+  - [x] Add custom CSS variables if needed
+  - [x] Add utility classes for tight text
+  - [x] Add utility classes for scrollbar hiding
+  - [x] Add any custom animations
 
 ---
 
