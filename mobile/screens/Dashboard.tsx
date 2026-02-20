@@ -2,7 +2,12 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import { useAppContext } from '../context/AppContext';
 
 import GoalsChips from '../components/dashboard/GoalsChips';
@@ -31,6 +36,8 @@ const days = getWeekDays();
 
 const Dashboard = () => {
   const { user } = useAppContext();
+  const bellScale = useSharedValue(1);
+  const bellStyle = useAnimatedStyle(() => ({ transform: [{ scale: bellScale.value }] }));
   return (
     <View className="flex-1 bg-[#F8F9FC]">
       <ScrollView
@@ -39,7 +46,7 @@ const Dashboard = () => {
         showsVerticalScrollIndicator={false}>
         {/* Header */}
         <Animated.View
-          entering={FadeInDown.duration(400)}
+          entering={FadeInDown.springify()}
           className="z-20 flex-row items-center justify-between px-6 pb-4 pt-16">
           <View className="flex-row items-center gap-4">
             <View
@@ -63,20 +70,29 @@ const Dashboard = () => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg active:scale-90"
-            style={{
-              shadowColor: '#000',
-              shadowOpacity: 0.1,
-              shadowRadius: 10,
-              shadowOffset: { width: 0, height: 4 },
-            }}>
-            <Ionicons name="notifications-outline" size={24} color="#111827" />
-          </TouchableOpacity>
+          <Animated.View style={bellStyle}>
+            <TouchableOpacity
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg"
+              onPressIn={() => {
+                bellScale.value = withSpring(0.85, { damping: 15, stiffness: 300 });
+              }}
+              onPressOut={() => {
+                bellScale.value = withSpring(1, { damping: 15, stiffness: 300 });
+              }}
+              activeOpacity={1}
+              style={{
+                shadowColor: '#000',
+                shadowOpacity: 0.1,
+                shadowRadius: 10,
+                shadowOffset: { width: 0, height: 4 },
+              }}>
+              <Ionicons name="notifications-outline" size={24} color="#111827" />
+            </TouchableOpacity>
+          </Animated.View>
         </Animated.View>
 
         {/* Day Selector */}
-        <Animated.View entering={FadeInDown.duration(400).delay(80)} className="px-6 py-3">
+        <Animated.View entering={FadeInDown.springify().delay(80)} className="px-6 py-3">
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -122,7 +138,7 @@ const Dashboard = () => {
         </Animated.View>
 
         {/* Hero Card */}
-        <Animated.View entering={FadeInDown.duration(400).delay(150)} className="mb-8 mt-4 px-6">
+        <Animated.View entering={FadeInDown.springify().delay(150)} className="mb-8 mt-4 px-6">
           <View
             className="relative h-[320px] w-full flex-col justify-between overflow-hidden rounded-[2.5rem] bg-[#003399] p-8"
             style={{
@@ -208,7 +224,7 @@ const Dashboard = () => {
         </Animated.View>
 
         {/* Quick Glance */}
-        <Animated.View entering={FadeInDown.duration(400).delay(200)} className="mb-8 px-6">
+        <Animated.View entering={FadeInDown.springify().delay(200)} className="mb-8 px-6">
           <View className="flex-row gap-3">
             <View
               className="flex-1 flex-col items-start gap-2 rounded-[2rem] bg-[#1A1A1A] px-4 py-4"
@@ -281,7 +297,7 @@ const Dashboard = () => {
         </View>
 
         {/* Routine Section */}
-        <Animated.View entering={FadeInDown.duration(400).delay(250)} className="mb-8 px-6">
+        <Animated.View entering={FadeInDown.springify().delay(250)} className="mb-8 px-6">
           <Text
             className="mb-6 text-[26px] font-extrabold text-gray-900"
             style={{ letterSpacing: -1 }}>
@@ -392,7 +408,7 @@ const Dashboard = () => {
         </Animated.View>
 
         {/* Featured Session */}
-        <Animated.View entering={FadeInDown.duration(400).delay(300)} className="mb-8 mt-2 px-6">
+        <Animated.View entering={FadeInDown.springify().delay(300)} className="mb-8 mt-2 px-6">
           <View
             className="flex-row items-center gap-5 rounded-[2.5rem] border border-gray-100 bg-white p-5 shadow-sm"
             style={{

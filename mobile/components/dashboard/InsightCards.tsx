@@ -1,15 +1,32 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 
 const InsightCards = () => {
+  const scaleA = useSharedValue(1);
+  const scaleB = useSharedValue(1);
+  const animA = useAnimatedStyle(() => ({ transform: [{ scale: scaleA.value }] }));
+  const animB = useAnimatedStyle(() => ({ transform: [{ scale: scaleB.value }] }));
+  const spring = { damping: 18, stiffness: 280 };
+
   return (
     <View style={{ paddingHorizontal: 24, marginBottom: 32, marginTop: 16, gap: 12 }}>
       {/* Dark card — Breakfast Recap */}
-      <Animated.View entering={FadeInDown.delay(350).duration(500).springify()}>
+      <Animated.View entering={FadeInDown.delay(350).duration(500).springify()} style={animA}>
         <TouchableOpacity
-          activeOpacity={0.88}
+          activeOpacity={1}
+          onPressIn={() => {
+            scaleA.value = withSpring(0.95, spring);
+          }}
+          onPressOut={() => {
+            scaleA.value = withSpring(1, spring);
+          }}
           style={{
             backgroundColor: '#111111',
             borderRadius: 28,
@@ -91,9 +108,15 @@ const InsightCards = () => {
       </Animated.View>
 
       {/* White card — Tomorrow's Prep */}
-      <Animated.View entering={FadeInDown.delay(450).duration(500).springify()}>
+      <Animated.View entering={FadeInDown.delay(450).duration(500).springify()} style={animB}>
         <TouchableOpacity
-          activeOpacity={0.88}
+          activeOpacity={1}
+          onPressIn={() => {
+            scaleB.value = withSpring(0.95, spring);
+          }}
+          onPressOut={() => {
+            scaleB.value = withSpring(1, spring);
+          }}
           style={{
             backgroundColor: '#FFFFFF',
             borderRadius: 28,

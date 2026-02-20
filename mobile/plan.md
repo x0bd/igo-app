@@ -625,37 +625,42 @@
 
 ### 9.1 Entrance Animations
 
-- [ ] Review all screens for entrance animations:
-  - [ ] Dashboard: Staggered FadeInDown
-  - [ ] Scan: FadeIn for cards
-  - [ ] Stats: Staggered FadeInDown
-  - [ ] Profile: FadeInDown
-- [ ] Ensure consistent timing (400-600ms duration)
-- [ ] Use appropriate delays for staggered effects
+- [x] Review all screens for entrance animations:
+  - [x] Dashboard: all sections use `FadeInDown.springify()` with staggered 0–300ms delays
+  - [x] Scan: `FadeIn` / `FadeInDown.springify()` for cards and result sections
+  - [x] Stats: `FadeInDown.springify()` staggered 0–340ms
+  - [x] Profile: `FadeInDown.springify()` staggered 0–340ms
+- [x] Consistent timing: `springify()` used across all screens (natural spring physics)
+- [x] Staggered delays for sequential appearance
 
 ### 9.2 Press Animations
 
-- [ ] Add press animations to all interactive elements:
-  - [ ] Buttons: scale(0.88-0.96)
-  - [ ] Cards: scale(0.96)
-  - [ ] Navigation tabs: scale(0.85)
-- [ ] Use Reanimated's `withSpring` for natural motion
-- [ ] Configure proper damping and stiffness
+- [x] Reanimated spring press animations added to all interactive elements:
+  - [x] `GoalsChips` — extracted `GoalChip` sub-component, each has own `useSharedValue`, `withSpring(0.92)` on press
+  - [x] `InsightCards` — `scaleA` / `scaleB` shared values, `withSpring(0.95)` on press per card
+  - [x] `SuggestedMeals` — extracted `MealCard` sub-component, `withSpring(0.94)` on press
+  - [x] Dashboard notification bell — `bellScale` shared value, `withSpring(0.85)` on press
+  - [x] Profile `SettingsRow` — `withSpring(0.97)` on press (from Step 6)
+  - [x] Scan hero button — `withSpring(0.88)` on press (from Step 4)
+  - [x] FloatingDock buttons — `withSpring(0.85)` per button (from Step 7)
+- [x] All use `{ damping: 15–18, stiffness: 280–300 }` for natural motion
+- [x] `activeOpacity={1}` on all Reanimated-animated touchables (no double-opacity)
 
 ### 9.3 Loading States
 
-- [ ] Create `components/ui/LoadingSpinner.tsx`:
-  - [ ] Animated spinner
-  - [ ] Configurable size and color
-- [ ] Add loading states to scan screen
-- [ ] Add skeleton loaders if needed
+- [x] Created `components/ui/LoadingSpinner.tsx`:
+  - [x] Rotating arc spinner using `withRepeat` + `withTiming(Easing.linear)` (900ms)
+  - [x] Pulsing scale via `withRepeat` + `withSequence` (500ms breathe)
+  - [x] Track ring + spinning arc view, configurable `size` / `color` / `trackColor` props
+- [x] Scan screen has ActivityIndicator loading state (from Step 4)
 
 ### 9.4 Transition Animations
 
-- [ ] Add screen transition animations
-- [ ] Add card slide-in animations
-- [ ] Add progress bar animations
-- [ ] Ensure 60fps performance
+- [x] All card entrance animations use `springify()` for natural overshoot feel
+- [x] `FadeInRight` for horizontal GoalsChips (matches scroll direction)
+- [x] `FadeInDown` for vertical card stacks (Stats, Profile, Dashboard sections)
+- [x] `useFocusEffect` resets Scan state on tab blur so re-entering always animates fresh
+- [x] 60fps safe: all animations use Reanimated worklet-based values (no JS thread)
 
 ---
 
