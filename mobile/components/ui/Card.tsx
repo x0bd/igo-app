@@ -37,10 +37,10 @@ const Card: React.FC<CardProps> = ({
       case 'yellow': return GlobalStyles.yellowAccentCard;
       case 'gradient': 
         return {
+          ...GlobalStyles.whiteCard,
           backgroundColor: COLORS.background,
           borderColor: COLORS.primary,
           borderWidth: 2,
-          ...GlobalStyles.whiteCard,
           shadowColor: COLORS.primary, // Mixed shadow
         };
       case 'default':

@@ -54,7 +54,7 @@ const Button: React.FC<ButtonProps> = ({
     }
   };
 
-  const getTextColor = (): 'inverse' | 'primary' | 'blue' => {
+  const getTextColor = (): 'inverse' | 'primary' | 'blue' | 'secondary' => {
     if (disabled) return 'secondary';
     switch (variant) {
       case 'primary': return 'inverse';

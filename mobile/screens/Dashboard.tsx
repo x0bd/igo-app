@@ -4,6 +4,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
+import GoalsChips from '../components/dashboard/GoalsChips';
+import InsightCards from '../components/dashboard/InsightCards';
+import SuggestedMeals from '../components/dashboard/SuggestedMeals';
+
 const getWeekDays = () => {
   const daysList = [];
   const today = new Date();
@@ -167,15 +171,9 @@ const Dashboard = () => {
           </View>
 
           <View className="flex-row -space-x-3 relative z-10 mt-4">
-            <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-blue-200 items-center justify-center">
-              <Text className="text-blue-700 text-xs font-bold">AB</Text>
-            </View>
-            <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-yellow-100 items-center justify-center">
-              <Text className="text-yellow-700 text-xs font-bold">CD</Text>
-            </View>
-            <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-blue-100 items-center justify-center">
-              <Text className="text-blue-700 text-xs font-bold">EF</Text>
-            </View>
+            <Image source={{ uri: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&fit=crop' }} className="w-10 h-10 rounded-full border-[2px] border-[#003399]" />
+            <Image source={{ uri: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&fit=crop' }} className="w-10 h-10 rounded-full border-[2px] border-[#003399]" />
+            <Image source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&fit=crop' }} className="w-10 h-10 rounded-full border-[2px] border-[#003399]" />
             <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-white items-center justify-center">
               <Text className="text-blue-600 text-[10px] font-bold">+8k</Text>
             </View>
@@ -217,6 +215,11 @@ const Dashboard = () => {
           </View>
         </View>
       </Animated.View>
+
+      {/* Goals Chips */}
+      <View className="mb-8">
+        <GoalsChips />
+      </View>
 
       {/* Routine Section */}
       <Animated.View entering={FadeInDown.duration(400).delay(250)} className="px-6 mb-8">
@@ -314,6 +317,12 @@ const Dashboard = () => {
           </View>
         </View>
       </Animated.View>
+
+      {/* Insight Cards */}
+      <InsightCards />
+
+      {/* AI Suggested Meals */}
+      <SuggestedMeals />
     </ScrollView>
   </View>
   );

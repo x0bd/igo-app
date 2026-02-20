@@ -117,42 +117,42 @@
 ## Step 2: Core Components Foundation
 
 ### 2.1 Create Base Components
-- [ ] Create `components/ui/Card.tsx`:
-  - [ ] Base card component with variants:
-    - [ ] White card (default, `#FFFFFF`)
-    - [ ] Blue accent card (Cimas Blue background or border)
-    - [ ] Yellow accent card (Cimas Yellow background or border)
-    - [ ] Blue-yellow gradient card (split complementary)
-  - [ ] Support for depth shadows
-  - [ ] Support for decorative elements
-  - [ ] Rounded corners (configurable)
-  - [ ] Press animations with Reanimated
+- [x] Create `components/ui/Card.tsx`:
+  - [x] Base card component with variants:
+    - [x] White card (default, `#FFFFFF`)
+    - [x] Blue accent card (Cimas Blue background or border)
+    - [x] Yellow accent card (Cimas Yellow background or border)
+    - [x] Blue-yellow gradient card (split complementary)
+  - [x] Support for depth shadows
+  - [x] Support for decorative elements
+  - [x] Rounded corners (configurable)
+  - [x] Press animations with Reanimated
   
-- [ ] Create `components/ui/Text.tsx`:
-  - [ ] Typography component with variants (heading, body, label, caption)
-  - [ ] Support for tight letter spacing
-  - [ ] Font weight presets
-  - [ ] Color variants (dark gray on white background)
+- [x] Create `components/ui/Text.tsx`:
+  - [x] Typography component with variants (heading, body, label, caption)
+  - [x] Support for tight letter spacing
+  - [x] Font weight presets
+  - [x] Color variants (dark gray on white background)
   
-- [ ] Create `components/ui/Button.tsx`:
-  - [ ] Primary button variant (Cimas Blue background with yellow accent)
-  - [ ] Secondary button variant (white with blue border)
-  - [ ] Accent button variant (Cimas Yellow)
-  - [ ] Ghost/outline variant
-  - [ ] Press animations (scale down)
-  - [ ] Loading state support
-  - [ ] Icon support
+- [x] Create `components/ui/Button.tsx`:
+  - [x] Primary button variant (Cimas Blue background with yellow accent)
+  - [x] Secondary button variant (white with blue border)
+  - [x] Accent button variant (Cimas Yellow)
+  - [x] Ghost/outline variant
+  - [x] Press animations (scale down)
+  - [x] Loading state support
+  - [x] Icon support
 
 ### 2.2 Create Decorative Components
-- [ ] Create `components/decorative/BlurOrb.tsx`:
-  - [ ] Configurable size, color, position
-  - [ ] Blur effect using absolute positioning
-  - [ ] Opacity controls
+- [x] Create `components/decorative/BlurOrb.tsx`:
+  - [x] Configurable size, color, position
+  - [x] Blur effect using absolute positioning
+  - [x] Opacity controls
   
-- [ ] Create `components/decorative/GradientBackground.tsx`:
-  - [ ] Multi-color gradient support
-  - [ ] Directional gradients
-  - [ ] Overlay support
+- [x] Create `components/decorative/GradientBackground.tsx`:
+  - [x] Multi-color gradient support
+  - [x] Directional gradients
+  - [x] Overlay support
 
 ### 2.3 Create Navigation Component
 - [x] Create `components/navigation/FloatingDock.tsx`:
@@ -217,11 +217,11 @@
   - [x] Mock data for values
 
 ### 3.6 Goals Chips
-- [ ] Create `components/dashboard/GoalsChips.tsx`:
-  - [ ] Horizontal ScrollView
-  - [ ] White background chips with blue/yellow accent border
-  - [ ] Goal labels and values
-  - [ ] Mock goal data
+- [x] Create `components/dashboard/GoalsChips.tsx`:
+  - [x] Horizontal ScrollView
+  - [x] White background chips with blue/yellow accent border
+  - [x] Goal labels and values
+  - [x] Mock goal data
 
 ### 3.7 Routine Section
 - [x] Create `components/dashboard/RoutineSection.tsx`:
@@ -254,20 +254,20 @@
   - [x] Proper spacing and layout
 
 ### 3.9 Extra Insight Cards
-- [ ] Create `components/dashboard/InsightCards.tsx`:
-  - [ ] Two white cards
-  - [ ] Emoji icons
-  - [ ] Titles ("Breakfast recap", "Prep for tomorrow")
-  - [ ] Subtle styling
+- [x] Create `components/dashboard/InsightCards.tsx`:
+  - [x] Two white cards
+  - [x] Emoji icons
+  - [x] Titles ("Breakfast recap", "Prep for tomorrow")
+  - [x] Subtle styling
 
 ### 3.10 AI Suggested Meals
-- [ ] Create `components/dashboard/SuggestedMeals.tsx`:
-  - [ ] Horizontal ScrollView
-  - [ ] Dark cards with colored accent dots
-  - [ ] Meal title and subtitle
-  - [ ] Kcal display
-  - [ ] Tag badges
-  - [ ] Mock meal data
+- [x] Create `components/dashboard/SuggestedMeals.tsx`:
+  - [x] Horizontal ScrollView
+  - [x] Dark cards with colored accent dots
+  - [x] Meal title and subtitle
+  - [x] Kcal display
+  - [x] Tag badges
+  - [x] Mock meal data
 
 ### 3.11 Dashboard Animations
 - [x] Add entrance animations:
@@ -275,8 +275,8 @@
   - [x] FadeInDown for day selector (delay: 80ms)
   - [x] FadeInDown for hero card (delay: 150ms)
   - [x] Staggered delays for other sections
-- [ ] Add press animations for interactive elements
-- [ ] Ensure smooth 60fps performance
+- [x] Add press animations for interactive elements
+- [x] Ensure smooth 60fps performance
 
 ---
 
