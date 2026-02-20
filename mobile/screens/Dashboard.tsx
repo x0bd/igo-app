@@ -160,8 +160,8 @@ const Dashboard = () => {
               </Text>
             </View>
             <Text
-              className="text-[40px] font-black text-white leading-[0.9] mb-2"
-              style={{ letterSpacing: -2, textShadowColor: 'rgba(0,0,0,0.1)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4 }}
+              className="text-[42px] font-black text-white leading-[0.9] mb-2"
+              style={{ letterSpacing: -2, textShadowColor: 'rgba(0,0,0,0.15)', textShadowOffset: { width: 0, height: 4 }, textShadowRadius: 8 }}
             >
               Scan your{'\n'}Lunch
             </Text>
@@ -229,10 +229,11 @@ const Dashboard = () => {
         
         <View className="flex-row gap-4">
           {/* Hydration Card */}
-          <View className="flex-1 bg-[#3B82F6] rounded-[2.5rem] p-6 h-[280px] relative overflow-hidden"
-            style={{ shadowColor: '#3B82F6', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { width: 0, height: 10 }, elevation: 10 }}
+          <View className="flex-1 bg-[#003399] rounded-[2.5rem] p-6 h-[280px] relative overflow-hidden"
+            style={{ shadowColor: '#003399', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { width: 0, height: 12 }, elevation: 12 }}
           >
-            <View className="absolute top-0 right-0 w-32 h-32 bg-[#60A5FA] rounded-full blur-2xl opacity-40 -mr-8 -mt-8" />
+            {/* Soft Ambient Glow */}
+            <View className="absolute top-0 right-0 w-40 h-40 bg-[#3366CC] rounded-full blur-3xl opacity-50 -mr-12 -mt-12" />
             
             <View className="relative z-10 flex-1 justify-between">
               <View>
@@ -255,35 +256,36 @@ const Dashboard = () => {
           </View>
 
           {/* Sleep Card */}
-          <View className="flex-1 bg-[#FF9F1C] rounded-[2.5rem] p-6 h-[280px] relative overflow-hidden"
-            style={{ shadowColor: '#FF9F1C', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { width: 0, height: 10 }, elevation: 10 }}
+          <View className="flex-1 bg-[#FFD600] rounded-[2.5rem] p-6 h-[280px] relative overflow-hidden"
+            style={{ shadowColor: '#FFD600', shadowOpacity: 0.35, shadowRadius: 20, shadowOffset: { width: 0, height: 12 }, elevation: 12 }}
           >
-            <View className="absolute bottom-0 left-0 w-32 h-32 bg-[#FFB703] rounded-full blur-2xl opacity-40 -ml-8 -mb-8" />
+            {/* Soft Ambient Glow */}
+            <View className="absolute bottom-0 left-0 w-40 h-40 bg-[#FFFFFF] rounded-full blur-3xl opacity-30 -ml-12 -mb-12" />
             
             <View className="relative z-10 flex-1 justify-between">
               <View>
-                <View className="self-start px-3 py-1.5 rounded-lg mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
-                  <Text className="text-white text-[10px] font-bold tracking-[0.1em]">MEDIUM</Text>
+                <View className="self-start px-3 py-1.5 rounded-lg mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.4)' }}>
+                  <Text className="text-black text-[10px] font-bold tracking-[0.1em]">MEDIUM</Text>
                 </View>
-                <Text className="text-[26px] font-black text-white leading-[1.1]" style={{ letterSpacing: -1 }}>
+                <Text className="text-[26px] font-black text-black leading-[1.1]" style={{ letterSpacing: -1 }}>
                   Sleep{'\n'}Cycle
                 </Text>
               </View>
 
               <View className="flex-col gap-2">
                 <View className="flex-row items-end gap-1">
-                  <Text className="text-[38px] font-black text-white leading-none" style={{ letterSpacing: -1.5 }}>7.5</Text>
-                  <Text className="text-orange-100 font-bold mb-1">hrs</Text>
+                  <Text className="text-[38px] font-black text-black leading-none" style={{ letterSpacing: -1.5 }}>7.5</Text>
+                  <Text className="text-yellow-900 font-bold mb-1">hrs</Text>
                 </View>
 
                 <View className="flex-row items-center gap-2 mt-1">
-                  <View className="w-10 h-10 rounded-full items-center justify-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
-                    <Ionicons name="moon" size={20} color="#FFFFFF" />
+                  <View className="w-10 h-10 rounded-full items-center justify-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.4)' }}>
+                    <Ionicons name="moon" size={20} color="#000000" />
                   </View>
                   <View>
-                    <Text className="text-[11px] text-orange-50 font-medium leading-tight">
+                    <Text className="text-[11px] text-yellow-900 font-medium leading-tight">
                       Quality{'\n'}
-                      <Text className="text-white font-bold text-[12px]">Excellent</Text>
+                      <Text className="text-black font-black text-[12px]">Excellent</Text>
                     </Text>
                   </View>
                 </View>
@@ -298,8 +300,8 @@ const Dashboard = () => {
         <View className="bg-white p-5 flex-row items-center gap-5 rounded-[2.5rem] border border-gray-100 shadow-sm"
           style={{ shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 15, shadowOffset: { width: 0, height: 5 } }}
         >
-          <View className="w-20 h-20 rounded-[1.5rem] bg-pink-100 flex-shrink-0 items-center justify-center overflow-hidden">
-            <Ionicons name="moon" size={32} color="#EC4899" />
+          <View className="w-20 h-20 rounded-[1.5rem] bg-[#F0F5FF] flex-shrink-0 items-center justify-center overflow-hidden">
+            <Ionicons name="moon" size={32} color="#003399" />
           </View>
           <View className="flex-1">
             <Text className="text-[20px] font-black text-gray-900 mb-1" style={{ letterSpacing: -1 }}>
@@ -307,11 +309,11 @@ const Dashboard = () => {
             </Text>
             <Text className="text-gray-400 text-[13px] font-medium mb-3">Trainer: Sarah K.</Text>
             <View className="flex-row gap-2">
-              <View className="px-3 py-1.5 bg-gray-100 rounded-lg">
-                <Text className="text-[11px] font-bold text-gray-600 tracking-wide">15 min</Text>
+              <View className="px-3 py-1.5 bg-[#F8F9FA] rounded-lg">
+                <Text className="text-[11px] font-bold text-gray-500 tracking-wide">15 min</Text>
               </View>
-              <View className="px-3 py-1.5 bg-pink-50 rounded-lg">
-                <Text className="text-[11px] font-bold text-pink-600 tracking-wide">Relax</Text>
+              <View className="px-3 py-1.5 bg-[#F0F5FF] rounded-lg">
+                <Text className="text-[11px] font-bold text-[#003399] tracking-wide">Relax</Text>
               </View>
             </View>
           </View>
