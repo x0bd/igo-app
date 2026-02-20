@@ -468,66 +468,64 @@
 
 ### 6.1 Profile Screen Layout
 
-- [ ] Create `screens/profile.tsx`
-- [ ] Set up ScrollView with proper padding
-- [ ] Configure background color (`#FFFFFF` - Cimas White)
-- [ ] Add bottom padding for floating dock
+- [x] Create `screens/Profile.tsx`
+- [x] Set up ScrollView with proper padding
+- [x] Configure background color (`#F8F9FA` - Cimas Off-White)
+- [x] Add bottom padding for floating dock (140px)
+- [x] `app/(tabs)/profile.tsx` wired to `screens/Profile.tsx`
 
 ### 6.2 Profile Header
 
-- [ ] Create header:
-  - [ ] "ACCOUNT" label (uppercase, small)
-  - [ ] "Profile" title
-  - [ ] Proper spacing
+- [x] Create header:
+  - [x] "ACCOUNT" label (uppercase, 10px, letterSpacing 2, Cimas Blue)
+  - [x] "Profile" title (34px, weight 900, letterSpacing -1.5)
+  - [x] Proper spacing
 
 ### 6.3 Profile Header Section
 
-- [ ] Create `components/profile/ProfileHeader.tsx`:
-  - [ ] Large circular avatar (80px) with initials
-  - [ ] User name (large, bold)
-  - [ ] Email address
-  - [ ] Premium member badge with ribbon icon
-  - [ ] Mock user data
+- [x] Built inline in `screens/Profile.tsx`:
+  - [x] Cimas Blue `#003399` hero card with depth shadow
+  - [x] Yellow + blue decorative glow blobs, yellow circle outline (inspo pattern)
+  - [x] Large circular avatar (80px) — yellow background, Cimas Blue initials
+  - [x] User name (22px, weight 900) + email (rgba white)
+  - [x] Premium badge — yellow pill with ribbon icon + "PREMIUM" text in Cimas Blue
+  - [x] Mock user: Tatenda Moyo, tatenda@cimashealth.co.zw
 
 ### 6.4 Quick Stats Row
 
-- [ ] Create `components/profile/QuickStats.tsx`:
-  - [ ] Three-column white card
-  - [ ] Stats:
-    - [ ] Meals Scanned
-    - [ ] Day Streak
-    - [ ] Avg Score
-  - [ ] Vertical dividers between stats
-  - [ ] Mock stats data
+- [x] Built inline in `screens/Profile.tsx`:
+  - [x] White card, borderRadius 24, 3-column flex row
+  - [x] Stats: Meals Scanned (247) · Day Streak (12) · Avg Score (78)
+  - [x] Vertical `#F1F5F9` dividers between columns
+  - [x] Mock stats data inline
 
 ### 6.5 Settings Groups
 
-- [ ] Create `components/profile/SettingsList.tsx`:
-  - [ ] **PREFERENCES group:**
-    - [ ] Daily Goals (with subtitle, chevron)
-    - [ ] Notifications (with subtitle, chevron)
-    - [ ] Appearance (with subtitle, chevron)
-  - [ ] **OTHER group:**
-    - [ ] Cimas Health Connect (with chevron)
-    - [ ] Privacy & Data (with chevron)
-    - [ ] Help & Support (with chevron)
-  - [ ] **Sign Out** (destructive, red, no chevron)
-  - [ ] Icon + label + chevron pattern
-  - [ ] Press animations
-  - [ ] Mock navigation handlers
+- [x] Built as `<SettingsRow />` sub-component with press animation (`useSharedValue` scale):
+  - [x] **PREFERENCES group** (white card, borderRadius 24):
+    - [x] Daily Goals — blue icon, subtitle
+    - [x] Notifications — amber icon, subtitle
+    - [x] Appearance — purple icon, subtitle
+  - [x] **OTHER group** (white card, borderRadius 24):
+    - [x] Cimas Health Connect — red icon, subtitle
+    - [x] Privacy & Data — green icon, subtitle
+    - [x] Help & Support — slate icon, subtitle
+  - [x] **Sign Out** — standalone white card, red destructive, no chevron
+  - [x] Each row: colored 40×40 borderRadius-12 icon square + label + subtitle + chevron
+  - [x] `onPressIn` / `onPressOut` → `withSpring(0.97)` press animation per row
 
 ### 6.6 Profile Footer
 
-- [ ] Create `components/profile/ProfileFooter.tsx`:
-  - [ ] App version display
-  - [ ] "Powered by Cimas Health Group" text
-  - [ ] Subtle styling
+- [x] Built inline in `screens/Profile.tsx`:
+  - [x] "Powered by Cimas Health Group" (12px, `#CBD5E1`)
+  - [x] "iGo Vision · v1.0.0-prototype" (11px, `#E2E8F0`)
+  - [x] Centered, subtle styling
 
 ### 6.7 Profile Screen Animations
 
-- [ ] Add entrance animations
-- [ ] Add press animations for settings items
-- [ ] Smooth transitions
+- [x] `FadeInDown.springify()` on every section (0 → 340ms staggered delays)
+- [x] `withSpring(0.97)` `onPressIn` / `onPressOut` per `SettingsRow`
+- [x] Each `SettingsRow` has its own `useSharedValue(1)` (no shared-scale bug)
 
 ---
 
@@ -554,7 +552,7 @@
 - [x] Create `app/(tabs)/index.tsx` → Dashboard screen
 - [x] Create `app/(tabs)/scan.tsx` → Scan screen (wired to `screens/Scan.tsx`)
 - [x] Create `app/(tabs)/stats.tsx` → Stats screen (wired to `screens/Stats.tsx`)
-- [ ] Create `app/(tabs)/profile.tsx` → Profile screen (placeholder, pending Step 6)
+- [x] Create `app/(tabs)/profile.tsx` → Profile screen (wired to `screens/Profile.tsx`)
 
 ### 7.4 Floating Dock Integration
 
