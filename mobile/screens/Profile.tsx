@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Platform, Image } from 'react-native';
 import Animated, {
   FadeInDown,
   useAnimatedStyle,
@@ -11,9 +11,11 @@ import { Ionicons } from '@expo/vector-icons';
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
 const MOCK_USER = {
-  name: 'Tatenda Moyo',
-  email: 'tatenda@cimashealth.co.zw',
-  initials: 'TM',
+  name: 'Mei Lin',
+  shortName: 'Mei L.',
+  email: 'mei.lin@cimashealth.co.zw',
+  avatar:
+    'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop',
   plan: 'Premium',
   joinedYear: '2025',
 };
@@ -283,32 +285,26 @@ export default function Profile() {
             />
 
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              {/* Avatar */}
+              {/* Avatar photo */}
               <View
                 style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: 40,
-                  backgroundColor: '#FFD600',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  width: 84,
+                  height: 84,
+                  borderRadius: 42,
                   borderWidth: 3,
-                  borderColor: 'rgba(255,255,255,0.3)',
+                  borderColor: '#FFD600',
+                  overflow: 'hidden',
                   shadowColor: '#000',
-                  shadowOpacity: 0.2,
-                  shadowRadius: 10,
-                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 12,
+                  shadowOffset: { width: 0, height: 6 },
+                  ...Platform.select({ android: { elevation: 10 } }),
                 }}>
-                <Text
-                  style={{
-                    fontSize: 28,
-                    fontWeight: '900',
-                    color: '#003399',
-                    letterSpacing: -1,
-                    fontFamily: 'PlusJakartaSans_800ExtraBold',
-                  }}>
-                  {MOCK_USER.initials}
-                </Text>
+                <Image
+                  source={{ uri: MOCK_USER.avatar }}
+                  style={{ width: '100%', height: '100%' }}
+                  resizeMode="cover"
+                />
               </View>
 
               {/* Name + email */}
