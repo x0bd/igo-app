@@ -3,7 +3,6 @@ import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import FloatingDock from '../components/FloatingDock';
 
 const getWeekDays = () => {
   const daysList = [];
@@ -316,7 +315,6 @@ const Dashboard = () => {
         </View>
       </Animated.View>
     </ScrollView>
-    <FloatingDock activeRoute="home" />
   </View>
   );
 };
