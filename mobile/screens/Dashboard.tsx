@@ -1,17 +1,29 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import FloatingDock from '../components/FloatingDock';
 
-const days = [
-  { label: 'Mon', date: 24 },
-  { label: 'Tue', date: 25 },
-  { label: 'Wed', date: 26 },
-  { label: 'Thu', date: 27 },
-  { label: 'Fri', date: 28 },
-];
+const getWeekDays = () => {
+  const daysList = [];
+  const today = new Date();
+  const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  
+  // Create 5 days around today: 2 days before, today, and 2 days after
+  for (let i = -2; i <= 2; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    daysList.push({
+      label: labels[d.getDay()],
+      date: d.getDate(),
+      isToday: i === 0
+    });
+  }
+  return daysList;
+};
+
+const days = getWeekDays();
 
 const Dashboard = () => {
   return (
@@ -28,14 +40,10 @@ const Dashboard = () => {
       >
         <View className="flex-row items-center gap-4">
           <View className="w-14 h-14 rounded-full p-1 shadow-lg bg-white" style={{ shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } }}>
-            <LinearGradient
-              colors={['#E9D5FF', '#FBCFE8']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{ flex: 1, borderRadius: 9999, alignItems: 'center', justifyContent: 'center' }}
-            >
-              <Text className="text-purple-700 text-lg font-black" style={{ letterSpacing: -1 }}>MT</Text>
-            </LinearGradient>
+            <Image 
+              source={{ uri: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop' }} 
+              className="flex-1 rounded-full" 
+            />
           </View>
           <View>
             <Text className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.18em]">
@@ -45,7 +53,7 @@ const Dashboard = () => {
               className="text-[26px] font-extrabold text-gray-900"
               style={{ letterSpacing: -1 }}
             >
-              Marcus T.
+              Mei L.
             </Text>
           </View>
         </View>
@@ -59,13 +67,13 @@ const Dashboard = () => {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ columnGap: 12, paddingRight: 24 }}
+          contentContainerStyle={{ columnGap: 12, paddingRight: 24, paddingVertical: 12 }}
         >
-          {days.map((day, index) => {
-            const isActive = index === 2;
+          {days.map((day) => {
+            const isActive = day.isToday;
             return (
               <TouchableOpacity
-                key={day.label}
+                key={day.label + day.date.toString()}
                 activeOpacity={0.9}
                 className={`w-[72px] h-[96px] flex-col items-center justify-center rounded-[2rem] ${
                   isActive ? 'bg-[#1A1A1A]' : 'bg-white border border-gray-100'
@@ -107,9 +115,9 @@ const Dashboard = () => {
       {/* Hero Card */}
       <Animated.View entering={FadeInDown.duration(400).delay(150)} className="px-6 mb-8 mt-4">
         <View
-          className="relative w-full h-[320px] rounded-[2.5rem] overflow-hidden bg-[#8B5CF6] p-8 flex-col justify-between"
+          className="relative w-full h-[320px] rounded-[2.5rem] overflow-hidden bg-[#003399] p-8 flex-col justify-between"
           style={{
-            shadowColor: '#8B5CF6',
+            shadowColor: '#003399',
             shadowOpacity: 0.4,
             shadowRadius: 20,
             shadowOffset: { width: 0, height: 20 },
@@ -117,8 +125,8 @@ const Dashboard = () => {
           }}
         >
           {/* Decorative Blobs */}
-          <View className="absolute top-0 right-0 w-64 h-64 bg-[#A78BFA] rounded-full blur-3xl opacity-50 -mr-16 -mt-16" />
-          <View className="absolute bottom-0 left-0 w-48 h-48 bg-[#7C3AED] rounded-full blur-2xl opacity-50 -ml-10 -mb-10" />
+          <View className="absolute top-0 right-0 w-64 h-64 bg-[#3366CC] rounded-full blur-3xl opacity-50 -mr-16 -mt-16" />
+          <View className="absolute bottom-0 left-0 w-48 h-48 bg-[#FFD600] rounded-full blur-2xl opacity-20 -ml-10 -mb-10" />
 
           {/* Decorative Shapes */}
           <View className="absolute top-1/2 right-[-20px] -translate-y-1/2 w-40 h-40">
@@ -132,7 +140,7 @@ const Dashboard = () => {
               }}
             />
             <View
-              className="w-32 h-32 rounded-[2rem] absolute top-10 right-0 rotate-12 z-0 bg-[#C084FC]"
+              className="w-32 h-32 rounded-[2rem] absolute top-10 right-0 rotate-12 z-0 bg-[#0055FF]"
               style={{
                 shadowColor: '#000',
                 shadowOpacity: 0.2,
@@ -154,23 +162,23 @@ const Dashboard = () => {
             >
               Scan your{'\n'}Lunch
             </Text>
-            <Text className="text-purple-100 text-[14px] font-medium w-2/3 leading-relaxed opacity-90">
+            <Text className="text-blue-100 text-[14px] font-medium w-2/3 leading-relaxed opacity-90">
               Capture your meal before 2:00 PM for optimal tracking.
             </Text>
           </View>
 
           <View className="flex-row -space-x-3 relative z-10 mt-4">
-            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-purple-200 items-center justify-center">
-              <Text className="text-purple-700 text-xs font-bold">AB</Text>
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-blue-200 items-center justify-center">
+              <Text className="text-blue-700 text-xs font-bold">AB</Text>
             </View>
-            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-pink-200 items-center justify-center">
-              <Text className="text-pink-700 text-xs font-bold">CD</Text>
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-yellow-100 items-center justify-center">
+              <Text className="text-yellow-700 text-xs font-bold">CD</Text>
             </View>
-            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-blue-200 items-center justify-center">
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-blue-100 items-center justify-center">
               <Text className="text-blue-700 text-xs font-bold">EF</Text>
             </View>
-            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-white items-center justify-center">
-              <Text className="text-purple-600 text-[10px] font-bold">+8k</Text>
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#003399] bg-white items-center justify-center">
+              <Text className="text-blue-600 text-[10px] font-bold">+8k</Text>
             </View>
           </View>
         </View>
