@@ -38,13 +38,13 @@
   - [x] Update content paths to include all source files
 
 ### 0.3 Configure Expo Router
-- [ ] Create `app/` directory structure
-- [ ] Set up `app/_layout.tsx` as root layout
-- [ ] Configure NativeWindProvider in root layout
-- [ ] Set up font loading in root layout
-- [ ] Create `app/(tabs)/` directory for tab navigation
-- [ ] Configure `app/(tabs)/_layout.tsx` (hidden tabs, custom dock)
-- [ ] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx`
+- [x] Create `app/` directory structure
+- [x] Set up `app/_layout.tsx` as root layout
+- [x] Configure NativeWindProvider in root layout
+- [x] Set up font loading in root layout
+- [x] Create `app/(tabs)/` directory for tab navigation
+- [x] Configure `app/(tabs)/_layout.tsx` (hidden tabs, custom dock)
+- [x] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx`
 
 ### 0.4 Environment Setup
 - [x] Create `.env` file in mobile directory
@@ -53,11 +53,11 @@
 - [x] Create `.env.example` with template
 
 ### 0.5 TypeScript Types Setup
-- [ ] Create `types/` directory
-- [ ] Create `types/nutrition.ts` with `NutritionAnalysis` interface
-- [ ] Create `types/navigation.ts` for navigation types
-- [ ] Create `types/theme.ts` for theme-related types
-- [ ] Update `tsconfig.json` paths if needed
+- [x] Create `types/` directory
+- [x] Create `types/nutrition.ts` with `NutritionAnalysis` interface
+- [x] Create `types/navigation.ts` for navigation types
+- [x] Create `types/theme.ts` for theme-related types
+- [x] Update `tsconfig.json` paths if needed
 
 ---
 
