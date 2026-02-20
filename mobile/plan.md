@@ -3,6 +3,7 @@
 > **Goal:** Build the complete mobile UI first (without backend integration) following the design system and inspiration provided.
 
 ## Color Scheme
+
 - **Primary Background:** Cimas White (`#FFFFFF`)
 - **Subtle Background:** Cimas Off-White (`#F8F9FA`)
 - **Primary Accent:** Cimas Blue (`#003399`)
@@ -14,6 +15,7 @@
 ## Step 0: Project Setup & Dependencies
 
 ### 0.1 Install Missing Core Dependencies
+
 - [x] Install Expo Router: `pnpm add expo-router`
 - [x] Install React Navigation dependencies: `pnpm add @react-navigation/native`
 - [x] Install Axios for API calls: `pnpm add axios`
@@ -26,6 +28,7 @@
 - [x] Install react-native-svg for custom graphics: `pnpm add react-native-svg`
 
 ### 0.2 Update Tailwind Configuration
+
 - [x] Update `tailwind.config.js` with custom theme from spec:
   - [x] Add Cimas brand colors:
     - [x] `cimas-blue`: `#003399` (Primary accent)
@@ -38,6 +41,7 @@
   - [x] Update content paths to include all source files
 
 ### 0.3 Configure Expo Router
+
 - [x] Create `app/` directory structure
 - [x] Set up `app/_layout.tsx` as root layout
 - [x] Configure NativeWindProvider in root layout
@@ -47,12 +51,14 @@
 - [x] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx`
 
 ### 0.4 Environment Setup
+
 - [x] Create `.env` file in mobile directory
 - [x] Add `EXPO_PUBLIC_API_URL` placeholder (for future backend integration)
 - [x] Add `.env` to `.gitignore`
 - [x] Create `.env.example` with template
 
 ### 0.5 TypeScript Types Setup
+
 - [x] Create `types/` directory
 - [x] Create `types/nutrition.ts` with `NutritionAnalysis` interface
 - [x] Create `types/navigation.ts` for navigation types
@@ -64,6 +70,7 @@
 ## Step 1: Design System & Style Understanding
 
 ### 1.1 Analyze Design Inspiration (`inspo/smooth.js`)
+
 - [x] Study depth shadow patterns (adapted for Cimas blue/yellow):
   - [x] Cimas Blue depth shadow: `0 20px 40px -10px rgba(0, 51, 153, 0.4), 0 10px 20px -5px rgba(0, 51, 153, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
   - [x] Cimas Yellow depth shadow: `0 20px 40px -10px rgba(255, 214, 0, 0.4), 0 10px 20px -5px rgba(255, 214, 0, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
@@ -85,6 +92,7 @@
   - [x] Active state transforms: `scale(0.96)` on press
 
 ### 1.2 Create Design Tokens File
+
 - [x] Create `constants/design.ts`:
   - [x] Export color palette:
     - [x] Cimas Blue: `#003399`
@@ -98,6 +106,7 @@
   - [x] Export blur values for decorative elements
 
 ### 1.3 Create Reusable Style Utilities
+
 - [x] Create `utils/styles.ts`:
   - [x] Helper function for depth shadows (accepts color)
   - [x] Helper function for decorative blur orbs
@@ -106,6 +115,7 @@
   - [x] Helper function for active press transforms
 
 ### 1.4 Update Global Styles
+
 - [x] Update `global.css`:
   - [x] Add custom CSS variables if needed
   - [x] Add utility classes for tight text
@@ -117,6 +127,7 @@
 ## Step 2: Core Components Foundation
 
 ### 2.1 Create Base Components
+
 - [x] Create `components/ui/Card.tsx`:
   - [x] Base card component with variants:
     - [x] White card (default, `#FFFFFF`)
@@ -127,13 +138,11 @@
   - [x] Support for decorative elements
   - [x] Rounded corners (configurable)
   - [x] Press animations with Reanimated
-  
 - [x] Create `components/ui/Text.tsx`:
   - [x] Typography component with variants (heading, body, label, caption)
   - [x] Support for tight letter spacing
   - [x] Font weight presets
   - [x] Color variants (dark gray on white background)
-  
 - [x] Create `components/ui/Button.tsx`:
   - [x] Primary button variant (Cimas Blue background with yellow accent)
   - [x] Secondary button variant (white with blue border)
@@ -144,17 +153,18 @@
   - [x] Icon support
 
 ### 2.2 Create Decorative Components
+
 - [x] Create `components/decorative/BlurOrb.tsx`:
   - [x] Configurable size, color, position
   - [x] Blur effect using absolute positioning
   - [x] Opacity controls
-  
 - [x] Create `components/decorative/GradientBackground.tsx`:
   - [x] Multi-color gradient support
   - [x] Directional gradients
   - [x] Overlay support
 
 ### 2.3 Create Navigation Component
+
 - [x] Create `components/navigation/FloatingDock.tsx`:
   - [x] Dark background (`#050607` or `#111111`)
   - [x] Rounded pill shape (40px radius)
@@ -171,12 +181,14 @@
 ## Step 3: Dashboard Screen Implementation
 
 ### 3.1 Dashboard Layout Structure
+
 - [x] Create `screens/dashboard.tsx`
 - [x] Set up ScrollView with proper padding
 - [x] Configure background color (`#FFFFFF` - Cimas White)
 - [x] Add bottom padding for floating dock clearance (130-140px)
 
 ### 3.2 Header Section
+
 - [x] Create header component:
   - [x] User avatar with gradient ring border
   - [x] Greeting text ("Good morning/afternoon/evening")
@@ -185,6 +197,7 @@
   - [x] Proper spacing and alignment
 
 ### 3.3 Day Selector Component
+
 - [x] Create `components/dashboard/DaySelector.tsx`:
   - [x] Horizontal ScrollView
   - [x] Day cards (Mon-Fri) with dates
@@ -194,6 +207,7 @@
   - [x] Mock data for days/dates
 
 ### 3.4 Hero Card Component
+
 - [x] Create `components/dashboard/HeroCard.tsx`:
   - [x] White background with blue-yellow split complementary accents
   - [x] Blue gradient accent (left side, `#003399`)
@@ -208,6 +222,7 @@
   - [x] Proper z-index layering
 
 ### 3.5 Quick Glance Strip
+
 - [x] Create `components/dashboard/QuickGlance.tsx`:
   - [x] Three pill cards in horizontal row:
     - [x] Today's calories (dark background or Cimas Blue)
@@ -217,13 +232,17 @@
   - [x] Mock data for values
 
 ### 3.6 Goals Chips
+
 - [x] Create `components/dashboard/GoalsChips.tsx`:
   - [x] Horizontal ScrollView
-  - [x] White background chips with blue/yellow accent border
-  - [x] Goal labels and values
+  - [x] Colored chips (Cimas Blue, deep blue, Cimas Yellow) with matching depth shadows
+  - [x] Icon circle with semi-transparent background
+  - [x] Goal labels (uppercase, subdued) and large value text
   - [x] Mock goal data
+  - [x] **Styling refactor:** Removed broken `Card` abstraction — plain `TouchableOpacity` with direct inline styles
 
 ### 3.7 Routine Section
+
 - [x] Create `components/dashboard/RoutineSection.tsx`:
   - [x] Two-column grid layout
   - [x] **Hydration Card:**
@@ -245,6 +264,7 @@
   - [x] Mock data for hydration and sleep
 
 ### 3.8 Featured Session Card
+
 - [x] Create `components/dashboard/FeaturedSession.tsx`:
   - [x] White card with border
   - [x] Thumbnail image placeholder
@@ -254,13 +274,15 @@
   - [x] Proper spacing and layout
 
 ### 3.9 Extra Insight Cards
+
 - [x] Create `components/dashboard/InsightCards.tsx`:
-  - [x] Two white cards
-  - [x] Emoji icons
-  - [x] Titles ("Breakfast recap", "Prep for tomorrow")
-  - [x] Subtle styling
+  - [x] Dark card (`#111111`) — Breakfast Recap with restaurant icon, metric pill (42g Protein)
+  - [x] White card — Tomorrow's Prep with calendar icon and chevron badge
+  - [x] Label badge pills, icon containers with rounded corners
+  - [x] **Styling refactor:** Removed broken `Card` abstraction — plain `TouchableOpacity` with direct inline styles
 
 ### 3.10 AI Suggested Meals
+
 - [x] Create `components/dashboard/SuggestedMeals.tsx`:
   - [x] Horizontal ScrollView
   - [x] Dark cards with colored accent dots
@@ -270,6 +292,7 @@
   - [x] Mock meal data
 
 ### 3.11 Dashboard Animations
+
 - [x] Add entrance animations:
   - [x] FadeInDown for header (delay: 0ms)
   - [x] FadeInDown for day selector (delay: 80ms)
@@ -283,18 +306,21 @@
 ## Step 4: Scan Screen Implementation
 
 ### 4.1 Scan Screen Layout
+
 - [ ] Create `screens/scan.tsx`
 - [ ] Set up ScrollView with proper padding
 - [ ] Configure background color (`#FFFFFF` - Cimas White)
 - [ ] Add bottom padding for floating dock
 
 ### 4.2 Scan Header
+
 - [ ] Create header:
   - [ ] "SCAN" label (uppercase, small, gray)
   - [ ] "Meal analysis" title
   - [ ] Proper spacing
 
 ### 4.3 Hero Scan Card
+
 - [ ] Create `components/scan/HeroScanCard.tsx`:
   - [ ] White background with blue-yellow accent accents (`#FFFFFF`)
   - [ ] Blue decorative glow blob (top-left)
@@ -306,6 +332,7 @@
   - [ ] Proper spacing and layout
 
 ### 4.4 Result Card Component
+
 - [ ] Create `components/scan/ResultCard.tsx`:
   - [ ] Conditional rendering (only show when scan exists)
   - [ ] White card with subtle border (`border-gray-100`)
@@ -323,6 +350,7 @@
   - [ ] Mock result data structure
 
 ### 4.5 Empty State Component
+
 - [ ] Create `components/scan/EmptyState.tsx`:
   - [ ] Centered white card
   - [ ] Image outline icon
@@ -331,6 +359,7 @@
   - [ ] Conditional rendering (show when no scan)
 
 ### 4.6 Suggested Follow-up Meals
+
 - [ ] Create `components/scan/SuggestedMeals.tsx`:
   - [ ] Horizontal ScrollView
   - [ ] Dark cards with colored accent dots
@@ -339,12 +368,14 @@
   - [ ] Mock meal data
 
 ### 4.7 Scan Screen State Management
+
 - [ ] Set up state for scan results
 - [ ] Mock scan function (simulate API call)
 - [ ] Loading state handling
 - [ ] Error state handling (for "No image selected")
 
 ### 4.8 Scan Screen Animations
+
 - [ ] Add entrance animations for cards
 - [ ] Add loading spinner animation
 - [ ] Add result card slide-in animation
@@ -355,18 +386,21 @@
 ## Step 5: Stats Screen Implementation
 
 ### 5.1 Stats Screen Layout
+
 - [ ] Create `screens/stats.tsx`
 - [ ] Set up ScrollView with proper padding
 - [ ] Configure background color (`#FFFFFF` - Cimas White)
 - [ ] Add bottom padding for floating dock
 
 ### 5.2 Stats Header
+
 - [ ] Create header:
   - [ ] "THIS WEEK" label (uppercase, small)
   - [ ] "Statistics" title
   - [ ] Proper spacing
 
 ### 5.3 Stats Hero Card
+
 - [ ] Create `components/stats/StatsHero.tsx`:
   - [ ] White background with blue-yellow split complementary accents
   - [ ] Blue gradient accent (left side)
@@ -382,6 +416,7 @@
   - [ ] Mock weekly data
 
 ### 5.4 At a Glance Section
+
 - [ ] Create `components/stats/AtAGlance.tsx`:
   - [ ] Four stat rows:
     - [ ] Calories
@@ -395,6 +430,7 @@
   - [ ] Mock stat data with trends
 
 ### 5.5 AI Insights Rail
+
 - [ ] Create `components/stats/InsightsRail.tsx`:
   - [ ] Horizontal ScrollView
   - [ ] Dark cards with colored accent dots
@@ -402,6 +438,7 @@
   - [ ] Mock insight data
 
 ### 5.6 Daily Graph Component
+
 - [ ] Create `components/stats/DailyGraph.tsx`:
   - [ ] White card with border
   - [ ] Bar chart with six time slots (6a, 9a, 12p, 3p, 6p, 9p)
@@ -412,6 +449,7 @@
   - [ ] Animated bar entrance (FadeInUp)
 
 ### 5.7 Macro Summary Component
+
 - [ ] Create `components/stats/MacroSummary.tsx`:
   - [ ] White card with border
   - [ ] Three macro progress bars:
@@ -427,6 +465,7 @@
   - [ ] Animated progress bars
 
 ### 5.8 Health Score Card
+
 - [ ] Create `components/stats/HealthScoreCard.tsx`:
   - [ ] Black card with circular progress ring
   - [ ] Score value in center (large number)
@@ -437,6 +476,7 @@
   - [ ] Animated progress ring
 
 ### 5.9 Stats Screen Animations
+
 - [ ] Add entrance animations for all sections
 - [ ] Staggered delays for sequential appearance
 - [ ] Animated progress bars and rings
@@ -447,18 +487,21 @@
 ## Step 6: Profile Screen Implementation
 
 ### 6.1 Profile Screen Layout
+
 - [ ] Create `screens/profile.tsx`
 - [ ] Set up ScrollView with proper padding
 - [ ] Configure background color (`#FFFFFF` - Cimas White)
 - [ ] Add bottom padding for floating dock
 
 ### 6.2 Profile Header
+
 - [ ] Create header:
   - [ ] "ACCOUNT" label (uppercase, small)
   - [ ] "Profile" title
   - [ ] Proper spacing
 
 ### 6.3 Profile Header Section
+
 - [ ] Create `components/profile/ProfileHeader.tsx`:
   - [ ] Large circular avatar (80px) with initials
   - [ ] User name (large, bold)
@@ -467,6 +510,7 @@
   - [ ] Mock user data
 
 ### 6.4 Quick Stats Row
+
 - [ ] Create `components/profile/QuickStats.tsx`:
   - [ ] Three-column white card
   - [ ] Stats:
@@ -477,6 +521,7 @@
   - [ ] Mock stats data
 
 ### 6.5 Settings Groups
+
 - [ ] Create `components/profile/SettingsList.tsx`:
   - [ ] **PREFERENCES group:**
     - [ ] Daily Goals (with subtitle, chevron)
@@ -492,12 +537,14 @@
   - [ ] Mock navigation handlers
 
 ### 6.6 Profile Footer
+
 - [ ] Create `components/profile/ProfileFooter.tsx`:
   - [ ] App version display
   - [ ] "Powered by Cimas Health Group" text
   - [ ] Subtle styling
 
 ### 6.7 Profile Screen Animations
+
 - [ ] Add entrance animations
 - [ ] Add press animations for settings items
 - [ ] Smooth transitions
@@ -507,6 +554,7 @@
 ## Step 7: Navigation & Routing Integration
 
 ### 7.1 Expo Router Setup
+
 - [ ] Configure `app/_layout.tsx`:
   - [ ] NativeWindProvider wrapper
   - [ ] Font loading (Plus Jakarta Sans)
@@ -515,18 +563,21 @@
   - [ ] Root navigation structure
 
 ### 7.2 Tab Layout Configuration
+
 - [ ] Configure `app/(tabs)/_layout.tsx`:
   - [ ] Hide default tab bar
   - [ ] Set up screen routes
   - [ ] Configure navigation options
 
 ### 7.3 Screen Routes
+
 - [ ] Create `app/(tabs)/index.tsx` → Dashboard screen
 - [ ] Create `app/(tabs)/scan.tsx` → Scan screen
 - [ ] Create `app/(tabs)/stats.tsx` → Stats screen
 - [ ] Create `app/(tabs)/profile.tsx` → Profile screen
 
 ### 7.4 Floating Dock Integration
+
 - [ ] Integrate FloatingDock with Expo Router:
   - [ ] Use `useRouter()` and `usePathname()` hooks
   - [ ] Handle navigation on tab press
@@ -534,6 +585,7 @@
   - [ ] Handle scan button navigation
 
 ### 7.5 Navigation State Management
+
 - [ ] Ensure proper navigation state
 - [ ] Handle deep linking (if needed)
 - [ ] Handle back button behavior
@@ -543,25 +595,24 @@
 ## Step 8: Mock Data & State Management
 
 ### 8.1 Create Mock Data Files
+
 - [ ] Create `data/mockUser.ts`:
   - [ ] User profile data
   - [ ] Avatar, name, email
   - [ ] Premium status
-  
 - [ ] Create `data/mockNutrition.ts`:
   - [ ] Mock scan results
   - [ ] Mock daily nutrition data
   - [ ] Mock weekly stats
-  
 - [ ] Create `data/mockMeals.ts`:
   - [ ] Suggested meals
   - [ ] Meal details
-  
 - [ ] Create `data/mockGoals.ts`:
   - [ ] Daily goals
   - [ ] Target values
 
 ### 8.2 State Management Setup
+
 - [ ] Decide on state management approach:
   - [ ] React Context API for global state
   - [ ] Or simple useState for now (can upgrade later)
@@ -572,6 +623,7 @@
   - [ ] Goals state
 
 ### 8.3 Mock API Service
+
 - [ ] Create `services/mockMealService.ts`:
   - [ ] Mock `analyzeMeal()` function
   - [ ] Simulate API delay (setTimeout)
@@ -584,6 +636,7 @@
 ## Step 9: Animations & Interactions
 
 ### 9.1 Entrance Animations
+
 - [ ] Review all screens for entrance animations:
   - [ ] Dashboard: Staggered FadeInDown
   - [ ] Scan: FadeIn for cards
@@ -593,6 +646,7 @@
 - [ ] Use appropriate delays for staggered effects
 
 ### 9.2 Press Animations
+
 - [ ] Add press animations to all interactive elements:
   - [ ] Buttons: scale(0.88-0.96)
   - [ ] Cards: scale(0.96)
@@ -601,6 +655,7 @@
 - [ ] Configure proper damping and stiffness
 
 ### 9.3 Loading States
+
 - [ ] Create `components/ui/LoadingSpinner.tsx`:
   - [ ] Animated spinner
   - [ ] Configurable size and color
@@ -608,6 +663,7 @@
 - [ ] Add skeleton loaders if needed
 
 ### 9.4 Transition Animations
+
 - [ ] Add screen transition animations
 - [ ] Add card slide-in animations
 - [ ] Add progress bar animations
@@ -618,15 +674,17 @@
 ## Step 10: Polish & Refinement
 
 ### 10.1 Typography Consistency
+
 - [ ] Review all text for proper typography:
-  - [ ] Large titles: 28-32px, weight 900, tight spacing
-  - [ ] Section titles: 18-20px, weight 800
+  - [x] Large titles: 28-32px, weight 900, tight spacing (GoalsChips values, InsightCards titles)
+  - [x] Section titles: 18-20px, weight 800 (InsightCards card titles)
   - [ ] Body text: 12-14px, weight 500-600
-  - [ ] Labels: 10-12px, weight 700, uppercase
+  - [x] Labels: 10-12px, weight 700, uppercase (GoalsChips label, InsightCards badge text)
 - [ ] Ensure Plus Jakarta Sans is loaded everywhere
 - [ ] Verify letter spacing for large headings
 
 ### 10.2 Color Consistency
+
 - [ ] Verify all brand colors match new scheme:
   - [ ] Cimas Blue: `#003399` (Primary accent)
   - [ ] Cimas Yellow: `#FFD600` (Complementary accent)
@@ -639,6 +697,7 @@
 - [ ] Verify opacity modifiers for overlays and decorative elements
 
 ### 10.3 Spacing Consistency
+
 - [ ] Review all spacing:
   - [ ] Screen padding: 20px horizontal
   - [ ] Card gaps: 10-18px
@@ -647,10 +706,11 @@
 - [ ] Ensure consistent use of Tailwind spacing scale
 
 ### 10.4 Shadow & Depth
+
 - [ ] Verify depth shadows match new color scheme:
-  - [ ] Blue accent cards use depthShadowBlue (Cimas Blue)
-  - [ ] Yellow accent cards use depthShadowYellow (Cimas Yellow)
-  - [ ] White cards use subtle whiteCardShadow
+  - [x] Blue accent cards use depthShadowBlue (GoalsChips Cimas Blue + deep blue chips)
+  - [x] Yellow accent cards use depthShadowYellow (GoalsChips yellow chip, shadow `#C8A800`)
+  - [x] White cards use subtle whiteCardShadow (InsightCards white card)
   - [ ] Navigation uses navIslandShadow
   - [ ] Cards with blue-yellow accents use combined shadow
 - [ ] Check all cards have appropriate shadows
@@ -658,6 +718,7 @@
 - [ ] Ensure shadows work well on white background
 
 ### 10.5 Border Radius Consistency
+
 - [ ] Verify border radius usage:
   - [ ] Super cards: 40px (3xl)
   - [ ] Regular cards: 20-28px (lg-xl)
@@ -666,18 +727,21 @@
 - [ ] Ensure consistent rounding
 
 ### 10.6 Responsive Design
+
 - [ ] Test on different screen sizes (if possible)
 - [ ] Ensure horizontal ScrollViews work properly
 - [ ] Verify cards don't overflow
 - [ ] Check text wrapping
 
 ### 10.7 Accessibility
+
 - [ ] Add accessibility labels to interactive elements
 - [ ] Ensure proper contrast ratios
 - [ ] Test with screen readers (if available)
 - [ ] Add proper semantic roles
 
 ### 10.8 Performance Optimization
+
 - [ ] Use `React.memo` for expensive components
 - [ ] Optimize Reanimated animations
 - [ ] Use `expo-image` for all images
@@ -689,6 +753,7 @@
 ## Step 11: Testing & Validation
 
 ### 11.1 Visual Testing
+
 - [ ] Compare each screen with design inspiration
 - [ ] Verify all components match spec
 - [ ] Check spacing and alignment
@@ -696,6 +761,7 @@
 - [ ] Test animations and transitions
 
 ### 11.2 Interaction Testing
+
 - [ ] Test all navigation flows
 - [ ] Test all button presses
 - [ ] Test all scrollable sections
@@ -704,6 +770,7 @@
 - [ ] Test error states
 
 ### 11.3 Edge Cases
+
 - [ ] Test empty states
 - [ ] Test with long text (meal names, tips)
 - [ ] Test with very large numbers
@@ -711,6 +778,7 @@
 - [ ] Test animation edge cases
 
 ### 11.4 Code Quality
+
 - [ ] Run ESLint and fix all errors
 - [ ] Run Prettier and format all files
 - [ ] Check TypeScript errors
@@ -722,18 +790,21 @@
 ## Step 12: Documentation & Cleanup
 
 ### 12.1 Code Documentation
+
 - [ ] Add JSDoc comments to complex components
 - [ ] Document prop interfaces
 - [ ] Document utility functions
 - [ ] Add inline comments for complex logic
 
 ### 12.2 File Organization
+
 - [ ] Ensure proper file structure
 - [ ] Remove unused files
 - [ ] Remove console.logs
 - [ ] Clean up commented code
 
 ### 12.3 README Updates
+
 - [ ] Update mobile README with:
   - [ ] Setup instructions
   - [ ] Project structure
@@ -742,6 +813,7 @@
   - [ ] Development workflow
 
 ### 12.4 Final Checklist
+
 - [ ] All screens implemented
 - [ ] All components working
 - [ ] All animations smooth
@@ -765,4 +837,3 @@
 ---
 
 **Status:** Ready to begin implementation 🚀
-
