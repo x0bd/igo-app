@@ -567,18 +567,20 @@
 
 ### 7.3 Screen Routes
 
-- [ ] Create `app/(tabs)/index.tsx` → Dashboard screen
-- [ ] Create `app/(tabs)/scan.tsx` → Scan screen
-- [ ] Create `app/(tabs)/stats.tsx` → Stats screen
-- [ ] Create `app/(tabs)/profile.tsx` → Profile screen
+- [x] Create `app/(tabs)/index.tsx` → Dashboard screen
+- [x] Create `app/(tabs)/scan.tsx` → Scan screen (wired to `screens/Scan.tsx`)
+- [ ] Create `app/(tabs)/stats.tsx` → Stats screen (placeholder)
+- [ ] Create `app/(tabs)/profile.tsx` → Profile screen (placeholder)
 
 ### 7.4 Floating Dock Integration
 
-- [ ] Integrate FloatingDock with Expo Router:
-  - [ ] Use `useRouter()` and `usePathname()` hooks
-  - [ ] Handle navigation on tab press
-  - [ ] Update active state based on current route
-  - [ ] Handle scan button navigation
+- [x] Integrate FloatingDock with Expo Router:
+  - [x] Use `useRouter()` and `usePathname()` hooks (removed prop-based `onNavigate`)
+  - [x] `router.push(ROUTES[id])` on every tab press
+  - [x] Active state driven by `pathnameToId(usePathname())` — highlights correct tab on each screen
+  - [x] Scan button navigates to `/scan`; turns Cimas Blue when active
+  - [x] Each button has its own `useSharedValue` (fixed shared-scale bug)
+  - [x] `onPressIn` / `onPressOut` replaces setTimeout pattern for snappier feel
 
 ### 7.5 Navigation State Management
 
