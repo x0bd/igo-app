@@ -47,17 +47,17 @@
 - [x] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx` ✅
 
 ### 0.4 Environment Setup
-- [ ] Create `.env` file in mobile directory
-- [ ] Add `EXPO_PUBLIC_API_URL` placeholder (for future backend integration)
-- [ ] Add `.env` to `.gitignore`
-- [ ] Create `.env.example` with template
+- [x] Create `.env` file in mobile directory ✅
+- [x] Add `EXPO_PUBLIC_API_URL` placeholder (for future backend integration) ✅
+- [x] Add `.env` to `.gitignore` ✅
+- [x] Create `.env.example` with template ✅
 
 ### 0.5 TypeScript Types Setup
-- [ ] Create `types/` directory
-- [ ] Create `types/nutrition.ts` with `NutritionAnalysis` interface
-- [ ] Create `types/navigation.ts` for navigation types
-- [ ] Create `types/theme.ts` for theme-related types
-- [ ] Update `tsconfig.json` paths if needed
+- [x] Create `types/` directory ✅
+- [x] Create `types/nutrition.ts` with `NutritionAnalysis` interface ✅
+- [x] Create `types/navigation.ts` for navigation types ✅
+- [x] Create `types/theme.ts` for theme-related types ✅
+- [x] Update `tsconfig.json` paths if needed ✅
 
 ---
 
