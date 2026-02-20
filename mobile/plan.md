@@ -14,28 +14,28 @@
 ## Step 0: Project Setup & Dependencies
 
 ### 0.1 Install Missing Core Dependencies
-- [ ] Install Expo Router: `pnpm add expo-router`
-- [ ] Install React Navigation dependencies: `pnpm add @react-navigation/native`
-- [ ] Install Axios for API calls: `pnpm add axios`
-- [ ] Install expo-image-picker: `pnpm add expo-image-picker`
-- [ ] Install expo-image for optimized images: `pnpm add expo-image`
-- [ ] Install Plus Jakarta Sans font: `pnpm add @expo-google-fonts/plus-jakarta-sans`
-- [ ] Install expo-font for font loading: `pnpm add expo-font`
-- [ ] Install Lucide React Native for icons: `pnpm add lucide-react-native` (or keep Ionicons)
-- [ ] Install expo-linear-gradient for gradients: `pnpm add expo-linear-gradient`
-- [ ] Install react-native-svg for custom graphics: `pnpm add react-native-svg`
+- [x] Install Expo Router: `pnpm add expo-router`
+- [x] Install React Navigation dependencies: `pnpm add @react-navigation/native`
+- [x] Install Axios for API calls: `pnpm add axios`
+- [x] Install expo-image-picker: `pnpm add expo-image-picker`
+- [x] Install expo-image for optimized images: `pnpm add expo-image`
+- [x] Install Plus Jakarta Sans font: `pnpm add @expo-google-fonts/plus-jakarta-sans`
+- [x] Install expo-font for font loading: `pnpm add expo-font`
+- [x] Install Lucide React Native for icons: `pnpm add lucide-react-native` (or keep Ionicons)
+- [x] Install expo-linear-gradient for gradients: `pnpm add expo-linear-gradient`
+- [x] Install react-native-svg for custom graphics: `pnpm add react-native-svg`
 
 ### 0.2 Update Tailwind Configuration
-- [ ] Update `tailwind.config.js` with custom theme from spec:
-  - [ ] Add Cimas brand colors:
-    - [ ] `cimas-blue`: `#003399` (Primary accent)
-    - [ ] `cimas-yellow`: `#FFD600` (Complementary accent)
-    - [ ] `cimas-white`: `#FFFFFF` (Primary background)
-    - [ ] `cimas-off-white`: `#F8F9FA` (Subtle background variant)
-  - [ ] Add semantic colors (protein, carbs, fat, health-score)
-  - [ ] Add custom border radius scale (xs: 8px → 3xl: 40px)
-  - [ ] Configure Plus Jakarta Sans font family
-  - [ ] Update content paths to include all source files
+- [x] Update `tailwind.config.js` with custom theme from spec:
+  - [x] Add Cimas brand colors:
+    - [x] `cimas-blue`: `#003399` (Primary accent)
+    - [x] `cimas-yellow`: `#FFD600` (Complementary accent)
+    - [x] `cimas-white`: `#FFFFFF` (Primary background)
+    - [x] `cimas-off-white`: `#F8F9FA` (Subtle background variant)
+  - [x] Add semantic colors (protein, carbs, fat, health-score)
+  - [x] Add custom border radius scale (xs: 8px → 3xl: 40px)
+  - [x] Configure Plus Jakarta Sans font family
+  - [x] Update content paths to include all source files
 
 ### 0.3 Configure Expo Router
 - [ ] Create `app/` directory structure
@@ -47,10 +47,10 @@
 - [ ] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx`
 
 ### 0.4 Environment Setup
-- [ ] Create `.env` file in mobile directory
-- [ ] Add `EXPO_PUBLIC_API_URL` placeholder (for future backend integration)
-- [ ] Add `.env` to `.gitignore`
-- [ ] Create `.env.example` with template
+- [x] Create `.env` file in mobile directory
+- [x] Add `EXPO_PUBLIC_API_URL` placeholder (for future backend integration)
+- [x] Add `.env` to `.gitignore`
+- [x] Create `.env.example` with template
 
 ### 0.5 TypeScript Types Setup
 - [ ] Create `types/` directory
@@ -155,15 +155,15 @@
   - [ ] Overlay support
 
 ### 2.3 Create Navigation Component
-- [ ] Create `components/navigation/FloatingDock.tsx`:
-  - [ ] Dark background (`#050607` or `#111111`)
-  - [ ] Rounded pill shape (40px radius)
-  - [ ] Fixed bottom positioning with safe area
-  - [ ] Navigation island shadow
-  - [ ] Four tabs: Home, Stats, Scan (elevated), Profile
-  - [ ] Elevated scan button (white pill, 70x70px)
-  - [ ] Spring animations on press
-  - [ ] Active state indicators
+- [x] Create `components/navigation/FloatingDock.tsx`:
+  - [x] Dark background (`#050607` or `#111111`)
+  - [x] Rounded pill shape (40px radius)
+  - [x] Fixed bottom positioning with safe area
+  - [x] Navigation island shadow
+  - [x] Four tabs: Home, Stats, Scan (elevated), Profile
+  - [x] Elevated scan button (white pill, 70x70px)
+  - [x] Spring animations on press
+  - [x] Active state indicators
   - [ ] Integration with Expo Router navigation
 
 ---
@@ -171,50 +171,50 @@
 ## Step 3: Dashboard Screen Implementation
 
 ### 3.1 Dashboard Layout Structure
-- [ ] Create `screens/dashboard.tsx`
-- [ ] Set up ScrollView with proper padding
-- [ ] Configure background color (`#FFFFFF` - Cimas White)
-- [ ] Add bottom padding for floating dock clearance (130-140px)
+- [x] Create `screens/dashboard.tsx`
+- [x] Set up ScrollView with proper padding
+- [x] Configure background color (`#FFFFFF` - Cimas White)
+- [x] Add bottom padding for floating dock clearance (130-140px)
 
 ### 3.2 Header Section
-- [ ] Create header component:
-  - [ ] User avatar with gradient ring border
-  - [ ] Greeting text ("Good morning/afternoon/evening")
-  - [ ] User name display
-  - [ ] Notification bell icon button
-  - [ ] Proper spacing and alignment
+- [x] Create header component:
+  - [x] User avatar with gradient ring border
+  - [x] Greeting text ("Good morning/afternoon/evening")
+  - [x] User name display
+  - [x] Notification bell icon button
+  - [x] Proper spacing and alignment
 
 ### 3.3 Day Selector Component
-- [ ] Create `components/dashboard/DaySelector.tsx`:
-  - [ ] Horizontal ScrollView
-  - [ ] Day cards (Mon-Fri) with dates
-  - [ ] Active day styling (dark background or Cimas Blue background, scale transform)
-  - [ ] Blue or yellow dot indicator for active day
-  - [ ] Smooth transitions on day change
-  - [ ] Mock data for days/dates
+- [x] Create `components/dashboard/DaySelector.tsx`:
+  - [x] Horizontal ScrollView
+  - [x] Day cards (Mon-Fri) with dates
+  - [x] Active day styling (dark background or Cimas Blue background, scale transform)
+  - [x] Blue or yellow dot indicator for active day
+  - [x] Smooth transitions on day change
+  - [x] Mock data for days/dates
 
 ### 3.4 Hero Card Component
-- [ ] Create `components/dashboard/HeroCard.tsx`:
-  - [ ] White background with blue-yellow split complementary accents
-  - [ ] Blue gradient accent (left side, `#003399`)
-  - [ ] Yellow gradient accent (right side, `#FFD600`)
-  - [ ] Decorative blur orbs (blue orb top-left, yellow orb bottom-right)
-  - [ ] Decorative shapes (yellow circle accent, blue rounded square accent)
-  - [ ] "TODAY'S FOCUS" or "DAILY GOAL" pill badge (white with blue/yellow border)
-  - [ ] Large title text (tight spacing, dark gray on white)
-  - [ ] Subtitle text
-  - [ ] Avatar row showing user + others ("+8k" indicator)
-  - [ ] Depth shadow (blue-yellow combined or subtle white card shadow)
-  - [ ] Proper z-index layering
+- [x] Create `components/dashboard/HeroCard.tsx`:
+  - [x] White background with blue-yellow split complementary accents
+  - [x] Blue gradient accent (left side, `#003399`)
+  - [x] Yellow gradient accent (right side, `#FFD600`)
+  - [x] Decorative blur orbs (blue orb top-left, yellow orb bottom-right)
+  - [x] Decorative shapes (yellow circle accent, blue rounded square accent)
+  - [x] "TODAY'S FOCUS" or "DAILY GOAL" pill badge (white with blue/yellow border)
+  - [x] Large title text (tight spacing, dark gray on white)
+  - [x] Subtitle text
+  - [x] Avatar row showing user + others ("+8k" indicator)
+  - [x] Depth shadow (blue-yellow combined or subtle white card shadow)
+  - [x] Proper z-index layering
 
 ### 3.5 Quick Glance Strip
-- [ ] Create `components/dashboard/QuickGlance.tsx`:
-  - [ ] Three pill cards in horizontal row:
-    - [ ] Today's calories (dark background or Cimas Blue)
-    - [ ] Streak counter with flame icon (dark background or Cimas Yellow)
-    - [ ] Scans count (white with blue/yellow accent border)
-  - [ ] Icon + value + label layout
-  - [ ] Mock data for values
+- [x] Create `components/dashboard/QuickGlance.tsx`:
+  - [x] Three pill cards in horizontal row:
+    - [x] Today's calories (dark background or Cimas Blue)
+    - [x] Streak counter with flame icon (dark background or Cimas Yellow)
+    - [x] Scans count (white with blue/yellow accent border)
+  - [x] Icon + value + label layout
+  - [x] Mock data for values
 
 ### 3.6 Goals Chips
 - [ ] Create `components/dashboard/GoalsChips.tsx`:
@@ -224,34 +224,34 @@
   - [ ] Mock goal data
 
 ### 3.7 Routine Section
-- [ ] Create `components/dashboard/RoutineSection.tsx`:
-  - [ ] Two-column grid layout
-  - [ ] **Hydration Card:**
-    - [ ] Cimas Blue background (`#003399`) or white with blue accent border
-    - [ ] Water icon in white/transparent pill
-    - [ ] "Water Intake" title
-    - [ ] Progress gauge (rounded bar, blue accent)
-    - [ ] Percentage display
-    - [ ] Depth shadow (blue)
-    - [ ] Decorative blur orb (blue)
-  - [ ] **Sleep/Recovery Card:**
-    - [ ] Cimas Yellow background (`#FFD600`) or white with yellow accent border
-    - [ ] Moon icon
-    - [ ] "Sleep Cycle" title
-    - [ ] Hours display (large number)
-    - [ ] Quality rating with icon
-    - [ ] Depth shadow (yellow)
-    - [ ] Decorative blur orb (yellow)
-  - [ ] Mock data for hydration and sleep
+- [x] Create `components/dashboard/RoutineSection.tsx`:
+  - [x] Two-column grid layout
+  - [x] **Hydration Card:**
+    - [x] Cimas Blue background (`#003399`) or white with blue accent border
+    - [x] Water icon in white/transparent pill
+    - [x] "Water Intake" title
+    - [x] Progress gauge (rounded bar, blue accent)
+    - [x] Percentage display
+    - [x] Depth shadow (blue)
+    - [x] Decorative blur orb (blue)
+  - [x] **Sleep/Recovery Card:**
+    - [x] Cimas Yellow background (`#FFD600`) or white with yellow accent border
+    - [x] Moon icon
+    - [x] "Sleep Cycle" title
+    - [x] Hours display (large number)
+    - [x] Quality rating with icon
+    - [x] Depth shadow (yellow)
+    - [x] Decorative blur orb (yellow)
+  - [x] Mock data for hydration and sleep
 
 ### 3.8 Featured Session Card
-- [ ] Create `components/dashboard/FeaturedSession.tsx`:
-  - [ ] White card with border
-  - [ ] Thumbnail image placeholder
-  - [ ] Title ("Evening Wind Down")
-  - [ ] Trainer info
-  - [ ] Tag badges (duration, type)
-  - [ ] Proper spacing and layout
+- [x] Create `components/dashboard/FeaturedSession.tsx`:
+  - [x] White card with border
+  - [x] Thumbnail image placeholder
+  - [x] Title ("Evening Wind Down")
+  - [x] Trainer info
+  - [x] Tag badges (duration, type)
+  - [x] Proper spacing and layout
 
 ### 3.9 Extra Insight Cards
 - [ ] Create `components/dashboard/InsightCards.tsx`:
@@ -270,11 +270,11 @@
   - [ ] Mock meal data
 
 ### 3.11 Dashboard Animations
-- [ ] Add entrance animations:
-  - [ ] FadeInDown for header (delay: 0ms)
-  - [ ] FadeInDown for day selector (delay: 80ms)
-  - [ ] FadeInDown for hero card (delay: 150ms)
-  - [ ] Staggered delays for other sections
+- [x] Add entrance animations:
+  - [x] FadeInDown for header (delay: 0ms)
+  - [x] FadeInDown for day selector (delay: 80ms)
+  - [x] FadeInDown for hero card (delay: 150ms)
+  - [x] Staggered delays for other sections
 - [ ] Add press animations for interactive elements
 - [ ] Ensure smooth 60fps performance
 
