@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================================================
+   Custom Utility Classes
+   ============================================================================ */
+
+/* Tight Text - For large headings with premium feel */
+@layer utilities {
+  .tight-text {
+    letter-spacing: -0.04em;
+  }
+}
+
+/* Scrollbar Hiding - For horizontal scrollable sections */
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+/* Super Card Active State - Press transform */
+@layer utilities {
+  .super-card-active {
+    transform: scale(0.96);
+  }
+}
+
+/* Smooth Transitions */
+@layer utilities {
+  .transition-smooth {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .transition-spring {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-duration: 300ms;
+  }
+}
+
+/* Backdrop Blur Support (for glass morphism effects) */
+@layer utilities {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .backdrop-blur-md {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  .backdrop-blur-lg {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+}
+
+/* Custom Selection Colors */
+@layer utilities {
+  .selection-blue::selection {
+    background-color: rgba(0, 51, 153, 0.2);
+    color: rgba(0, 51, 153, 0.9);
+  }
+  
+  .selection-yellow::selection {
+    background-color: rgba(255, 214, 0, 0.2);
+    color: rgba(255, 214, 0, 0.9);
+  }
+}

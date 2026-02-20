@@ -10,7 +10,6 @@ import {
   PlusJakartaSans_700Bold,
   PlusJakartaSans_800ExtraBold,
 } from '@expo-google-fonts/plus-jakarta-sans';
-import { NativeWindProvider } from 'nativewind';
 
 import '../global.css';
 
@@ -34,17 +33,15 @@ export default function RootLayout() {
   }
 
   return (
-    <NativeWindProvider>
-      <SafeAreaProvider>
-        <StatusBar style="auto" />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: { backgroundColor: '#FFFFFF' },
-          }}
-        />
-      </SafeAreaProvider>
-    </NativeWindProvider>
+    <SafeAreaProvider>
+      <StatusBar style="auto" />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+    </SafeAreaProvider>
   );
 }
 
