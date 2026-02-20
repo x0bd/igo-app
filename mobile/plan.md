@@ -14,103 +14,103 @@
 ## Step 0: Project Setup & Dependencies
 
 ### 0.1 Install Missing Core Dependencies
-- [x] Install Expo Router: `pnpm add expo-router` ✅
-- [x] Install React Navigation dependencies: `pnpm add @react-navigation/native` ✅
-- [x] Install Axios for API calls: `pnpm add axios` ✅
-- [x] Install expo-image-picker: `pnpm add expo-image-picker` ✅
-- [x] Install expo-image for optimized images: `pnpm add expo-image` ✅
-- [x] Install Plus Jakarta Sans font: `pnpm add @expo-google-fonts/plus-jakarta-sans` ✅
-- [x] Install expo-font for font loading: `pnpm add expo-font` ✅
-- [x] Install Lucide React Native for icons: `pnpm add lucide-react-native` ✅
-- [x] Install expo-linear-gradient for gradients: `pnpm add expo-linear-gradient` ✅
-- [x] Install react-native-svg for custom graphics: `pnpm add react-native-svg` ✅
+- [ ] Install Expo Router: `pnpm add expo-router`
+- [ ] Install React Navigation dependencies: `pnpm add @react-navigation/native`
+- [ ] Install Axios for API calls: `pnpm add axios`
+- [ ] Install expo-image-picker: `pnpm add expo-image-picker`
+- [ ] Install expo-image for optimized images: `pnpm add expo-image`
+- [ ] Install Plus Jakarta Sans font: `pnpm add @expo-google-fonts/plus-jakarta-sans`
+- [ ] Install expo-font for font loading: `pnpm add expo-font`
+- [ ] Install Lucide React Native for icons: `pnpm add lucide-react-native` (or keep Ionicons)
+- [ ] Install expo-linear-gradient for gradients: `pnpm add expo-linear-gradient`
+- [ ] Install react-native-svg for custom graphics: `pnpm add react-native-svg`
 
 ### 0.2 Update Tailwind Configuration
-- [x] Update `tailwind.config.js` with custom theme from spec: ✅
-  - [x] Add Cimas brand colors:
-    - [x] `cimas-blue`: `#003399` (Primary accent) ✅
-    - [x] `cimas-yellow`: `#FFD600` (Complementary accent) ✅
-    - [x] `cimas-white`: `#FFFFFF` (Primary background) ✅
-    - [x] `cimas-off-white`: `#F8F9FA` (Subtle background variant) ✅
-  - [x] Add semantic colors (protein, carbs, fat, health-score) ✅
-  - [x] Add custom border radius scale (xs: 8px → 3xl: 40px) ✅
-  - [x] Configure Plus Jakarta Sans font family ✅
-  - [x] Update content paths to include all source files ✅
+- [ ] Update `tailwind.config.js` with custom theme from spec:
+  - [ ] Add Cimas brand colors:
+    - [ ] `cimas-blue`: `#003399` (Primary accent)
+    - [ ] `cimas-yellow`: `#FFD600` (Complementary accent)
+    - [ ] `cimas-white`: `#FFFFFF` (Primary background)
+    - [ ] `cimas-off-white`: `#F8F9FA` (Subtle background variant)
+  - [ ] Add semantic colors (protein, carbs, fat, health-score)
+  - [ ] Add custom border radius scale (xs: 8px → 3xl: 40px)
+  - [ ] Configure Plus Jakarta Sans font family
+  - [ ] Update content paths to include all source files
 
 ### 0.3 Configure Expo Router
-- [x] Create `app/` directory structure ✅
-- [x] Set up `app/_layout.tsx` as root layout ✅
-- [x] Configure NativeWindProvider in root layout ✅
-- [x] Set up font loading in root layout ✅
-- [x] Create `app/(tabs)/` directory for tab navigation ✅
-- [x] Configure `app/(tabs)/_layout.tsx` (hidden tabs, custom dock) ✅
-- [x] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx` ✅
+- [ ] Create `app/` directory structure
+- [ ] Set up `app/_layout.tsx` as root layout
+- [ ] Configure NativeWindProvider in root layout
+- [ ] Set up font loading in root layout
+- [ ] Create `app/(tabs)/` directory for tab navigation
+- [ ] Configure `app/(tabs)/_layout.tsx` (hidden tabs, custom dock)
+- [ ] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx`
 
 ### 0.4 Environment Setup
-- [x] Create `.env` file in mobile directory ✅
-- [x] Add `EXPO_PUBLIC_API_URL` placeholder (for future backend integration) ✅
-- [x] Add `.env` to `.gitignore` ✅
-- [x] Create `.env.example` with template ✅
+- [ ] Create `.env` file in mobile directory
+- [ ] Add `EXPO_PUBLIC_API_URL` placeholder (for future backend integration)
+- [ ] Add `.env` to `.gitignore`
+- [ ] Create `.env.example` with template
 
 ### 0.5 TypeScript Types Setup
-- [x] Create `types/` directory ✅
-- [x] Create `types/nutrition.ts` with `NutritionAnalysis` interface ✅
-- [x] Create `types/navigation.ts` for navigation types ✅
-- [x] Create `types/theme.ts` for theme-related types ✅
-- [x] Update `tsconfig.json` paths if needed ✅
+- [ ] Create `types/` directory
+- [ ] Create `types/nutrition.ts` with `NutritionAnalysis` interface
+- [ ] Create `types/navigation.ts` for navigation types
+- [ ] Create `types/theme.ts` for theme-related types
+- [ ] Update `tsconfig.json` paths if needed
 
 ---
 
 ## Step 1: Design System & Style Understanding
 
 ### 1.1 Analyze Design Inspiration (`inspo/smooth.js`)
-- [x] Study depth shadow patterns (adapted for Cimas blue/yellow): ✅
-  - [x] Cimas Blue depth shadow: `0 20px 40px -10px rgba(0, 51, 153, 0.4), 0 10px 20px -5px rgba(0, 51, 153, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)` ✅
-  - [x] Cimas Yellow depth shadow: `0 20px 40px -10px rgba(255, 214, 0, 0.4), 0 10px 20px -5px rgba(255, 214, 0, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)` ✅
-  - [x] Blue-Yellow gradient shadow: Combined blue and yellow shadows for split complementary accents ✅
-  - [x] Navigation island shadow: `0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.1)` ✅
-  - [x] White card shadow: `0 10px 30px -5px rgba(0, 0, 0, 0.05)` (subtle for white background) ✅
-- [x] Study decorative elements: ✅
-  - [x] Blur orbs/glows using absolute positioning ✅
-  - [x] Gradient backgrounds with multiple color stops ✅
-  - [x] Overlapping decorative shapes (circles, rounded squares) ✅
-- [x] Study typography: ✅
-  - [x] Tight letter spacing: `-0.04em` for large headings ✅
-  - [x] Font weights: 400, 500, 600, 700, 800, 900 ✅
-  - [x] Plus Jakarta Sans font family ✅
-- [x] Study card patterns: ✅
-  - [x] Super cards with `borderRadius: 2.5rem` (40px) ✅
-  - [x] White cards with subtle borders (`border-gray-100`) ✅
-  - [x] Colored cards with depth shadows ✅
-  - [x] Active state transforms: `scale(0.96)` on press ✅
+- [ ] Study depth shadow patterns (adapted for Cimas blue/yellow):
+  - [ ] Cimas Blue depth shadow: `0 20px 40px -10px rgba(0, 51, 153, 0.4), 0 10px 20px -5px rgba(0, 51, 153, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
+  - [ ] Cimas Yellow depth shadow: `0 20px 40px -10px rgba(255, 214, 0, 0.4), 0 10px 20px -5px rgba(255, 214, 0, 0.2), inset 0 2px 4px rgba(255,255,255,0.3)`
+  - [ ] Blue-Yellow gradient shadow: Combined blue and yellow shadows for split complementary accents
+  - [ ] Navigation island shadow: `0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.1)`
+  - [ ] White card shadow: `0 10px 30px -5px rgba(0, 0, 0, 0.05)` (subtle for white background)
+- [ ] Study decorative elements:
+  - [ ] Blur orbs/glows using absolute positioning
+  - [ ] Gradient backgrounds with multiple color stops
+  - [ ] Overlapping decorative shapes (circles, rounded squares)
+- [ ] Study typography:
+  - [ ] Tight letter spacing: `-0.04em` for large headings
+  - [ ] Font weights: 400, 500, 600, 700, 800, 900
+  - [ ] Plus Jakarta Sans font family
+- [ ] Study card patterns:
+  - [ ] Super cards with `borderRadius: 2.5rem` (40px)
+  - [ ] White cards with subtle borders (`border-gray-100`)
+  - [ ] Colored cards with depth shadows
+  - [ ] Active state transforms: `scale(0.96)` on press
 
 ### 1.2 Create Design Tokens File
-- [x] Create `constants/design.ts`: ✅
-  - [x] Export color palette:
-    - [x] Cimas Blue: `#003399` ✅
-    - [x] Cimas Yellow: `#FFD600` ✅
-    - [x] Cimas White: `#FFFFFF` ✅
-    - [x] Cimas Off-White: `#F8F9FA` ✅
-  - [x] Export shadow presets (depthShadowBlue, depthShadowYellow, navIslandShadow, whiteCardShadow) ✅
-  - [x] Export spacing scale ✅
-  - [x] Export typography scale (font sizes, weights, letter spacing) ✅
-  - [x] Export transition timings (cubic-bezier curves) ✅
-  - [x] Export blur values for decorative elements ✅
+- [ ] Create `constants/design.ts`:
+  - [ ] Export color palette:
+    - [ ] Cimas Blue: `#003399`
+    - [ ] Cimas Yellow: `#FFD600`
+    - [ ] Cimas White: `#FFFFFF`
+    - [ ] Cimas Off-White: `#F8F9FA`
+  - [ ] Export shadow presets (depthShadowBlue, depthShadowYellow, navIslandShadow, whiteCardShadow)
+  - [ ] Export spacing scale
+  - [ ] Export typography scale (font sizes, weights, letter spacing)
+  - [ ] Export transition timings (cubic-bezier curves)
+  - [ ] Export blur values for decorative elements
 
 ### 1.3 Create Reusable Style Utilities
-- [x] Create `utils/styles.ts`: ✅
-  - [x] Helper function for depth shadows (accepts color) ✅
-  - [x] Helper function for decorative blur orbs ✅
-  - [x] Helper function for tight text spacing ✅
-  - [x] Helper function for super card styles ✅
-  - [x] Helper function for active press transforms ✅
+- [ ] Create `utils/styles.ts`:
+  - [ ] Helper function for depth shadows (accepts color)
+  - [ ] Helper function for decorative blur orbs
+  - [ ] Helper function for tight text spacing
+  - [ ] Helper function for super card styles
+  - [ ] Helper function for active press transforms
 
 ### 1.4 Update Global Styles
-- [x] Update `global.css`: ✅
-  - [x] Add custom CSS variables if needed ✅
-  - [x] Add utility classes for tight text ✅
-  - [x] Add utility classes for scrollbar hiding ✅
-  - [x] Add any custom animations ✅
+- [ ] Update `global.css`:
+  - [ ] Add custom CSS variables if needed
+  - [ ] Add utility classes for tight text
+  - [ ] Add utility classes for scrollbar hiding
+  - [ ] Add any custom animations
 
 ---
 
