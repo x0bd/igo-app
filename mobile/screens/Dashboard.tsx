@@ -15,7 +15,7 @@ const days = [
 
 const Dashboard = () => {
   return (
-    <View className="flex-1 bg-cimas-off-white">
+    <View className="flex-1 bg-[#F8F9FC]">
     <ScrollView
       className="flex-1"
       contentContainerStyle={{ paddingBottom: 140 }}
@@ -24,20 +24,17 @@ const Dashboard = () => {
       {/* Header */}
       <Animated.View
         entering={FadeInDown.duration(400)}
-        className="px-5 pt-12 pb-4 flex-row justify-between items-center"
+        className="px-6 pt-16 pb-4 flex-row justify-between items-center z-20"
       >
         <View className="flex-row items-center gap-4">
-          <View
-            className="w-14 h-14 rounded-full p-1 shadow-lg"
-            style={{ backgroundColor: 'rgba(0, 51, 153, 0.12)' }}
-          >
+          <View className="w-14 h-14 rounded-full p-1 shadow-lg bg-white" style={{ shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } }}>
             <LinearGradient
-              colors={['#FFFFFF', '#E0EBFF']}
+              colors={['#E9D5FF', '#FBCFE8']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={{ flex: 1, borderRadius: 9999, alignItems: 'center', justifyContent: 'center' }}
             >
-              <Text className="text-cimas-blue text-lg font-black">MT</Text>
+              <Text className="text-purple-700 text-lg font-black" style={{ letterSpacing: -1 }}>MT</Text>
             </LinearGradient>
           </View>
           <View>
@@ -45,24 +42,24 @@ const Dashboard = () => {
               Good Morning
             </Text>
             <Text
-              className="text-2xl font-extrabold text-gray-900"
-              style={{ letterSpacing: -0.04 }}
+              className="text-[26px] font-extrabold text-gray-900"
+              style={{ letterSpacing: -1 }}
             >
               Marcus T.
             </Text>
           </View>
         </View>
-        <TouchableOpacity className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg active:scale-95">
+        <TouchableOpacity className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg active:scale-90" style={{ shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } }}>
           <Ionicons name="notifications-outline" size={24} color="#111827" />
         </TouchableOpacity>
       </Animated.View>
 
       {/* Day Selector */}
-      <Animated.View entering={FadeInDown.duration(400).delay(80)} className="px-5 py-3">
+      <Animated.View entering={FadeInDown.duration(400).delay(80)} className="px-6 py-3">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ columnGap: 10, paddingRight: 10 }}
+          contentContainerStyle={{ columnGap: 12, paddingRight: 24 }}
         >
           {days.map((day, index) => {
             const isActive = index === 2;
@@ -70,41 +67,37 @@ const Dashboard = () => {
               <TouchableOpacity
                 key={day.label}
                 activeOpacity={0.9}
-                className={`w-[68px] h-[90px] flex-col items-center justify-center transition-all ${
-                  isActive
-                    ? 'bg-gray-950'
-                    : 'bg-white border border-gray-200'
-                } rounded-3xl shadow-sm`}
+                className={`w-[72px] h-[96px] flex-col items-center justify-center rounded-[2rem] ${
+                  isActive ? 'bg-[#1A1A1A]' : 'bg-white border border-gray-100'
+                }`}
                 style={
                   isActive
                     ? {
                         shadowColor: '#000',
-                        shadowOpacity: 0.25,
+                        shadowOpacity: 0.3,
                         shadowRadius: 16,
                         shadowOffset: { width: 0, height: 10 },
-                        transform: [{ translateY: -2 }],
+                        transform: [{ scale: 1.05 }],
                       }
-                    : { transform: [{ translateY: 0 }] }
+                    : { opacity: 0.6 }
                 }
               >
                 <Text
-                  className={`text-[11px] font-bold mb-1 ${
+                  className={`text-[12px] font-bold mb-1 ${
                     isActive ? 'text-gray-400' : 'text-gray-400'
                   }`}
                 >
                   {day.label}
                 </Text>
                 <Text
-                  className={`text-[22px] font-black ${
+                  className={`text-[26px] font-black ${
                     isActive ? 'text-white' : 'text-gray-900'
                   }`}
-                  style={{ letterSpacing: -0.04 }}
+                  style={{ letterSpacing: -1 }}
                 >
                   {day.date}
                 </Text>
-                <View className="mt-2 h-[3px] w-6 rounded-full bg-transparent overflow-hidden">
-                  {isActive && <View className="h-full w-full rounded-full bg-cimas-blue" />}
-                </View>
+                {isActive && <View className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C084FC]" />}
               </TouchableOpacity>
             );
           })}
@@ -112,180 +105,165 @@ const Dashboard = () => {
       </Animated.View>
 
       {/* Hero Card */}
-      <Animated.View entering={FadeInDown.duration(400).delay(150)} className="px-5 mb-8">
+      <Animated.View entering={FadeInDown.duration(400).delay(150)} className="px-6 mb-8 mt-4">
         <View
-          className="relative h-[320px] rounded-[2.5rem] overflow-hidden"
+          className="relative w-full h-[320px] rounded-[2.5rem] overflow-hidden bg-[#8B5CF6] p-8 flex-col justify-between"
           style={{
-            shadowColor: '#000',
-            shadowOpacity: 0.18,
+            shadowColor: '#8B5CF6',
+            shadowOpacity: 0.4,
             shadowRadius: 20,
-            shadowOffset: { width: 0, height: 12 },
-            elevation: 10,
+            shadowOffset: { width: 0, height: 20 },
+            elevation: 15,
           }}
         >
-          <LinearGradient
-            colors={['#FFFFFF', '#E5EEFF']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={{ flex: 1 }}
-          >
-            {/* Decorative Blobs */}
-            <View className="absolute top-0 right-0 w-64 h-64 bg-cimas-blue/20 rounded-full blur-3xl -mr-16 -mt-16" />
-            <View className="absolute bottom-0 left-0 w-48 h-48 bg-cimas-yellow/25 rounded-full blur-2xl -ml-10 -mb-10" />
+          {/* Decorative Blobs */}
+          <View className="absolute top-0 right-0 w-64 h-64 bg-[#A78BFA] rounded-full blur-3xl opacity-50 -mr-16 -mt-16" />
+          <View className="absolute bottom-0 left-0 w-48 h-48 bg-[#7C3AED] rounded-full blur-2xl opacity-50 -ml-10 -mb-10" />
 
-            {/* Decorative Shapes */}
-            <View className="absolute top-1/2 right-[-20px] -translate-y-1/2 w-40 h-40">
-              <View
-                className="w-24 h-24 rounded-full absolute top-0 right-10 z-10"
-                style={{
-                  backgroundColor: '#FFD600',
-                  shadowColor: '#000',
-                  shadowOpacity: 0.25,
-                  shadowRadius: 16,
-                  shadowOffset: { width: 0, height: 10 },
-                }}
-              />
-              <View
-                className="w-32 h-32 rounded-3xl absolute top-10 right-0 rotate-12 z-0"
-                style={{
-                  backgroundColor: '#003399',
-                  shadowColor: '#000',
-                  shadowOpacity: 0.25,
-                  shadowRadius: 16,
-                  shadowOffset: { width: 0, height: 10 },
-                }}
-              />
+          {/* Decorative Shapes */}
+          <View className="absolute top-1/2 right-[-20px] -translate-y-1/2 w-40 h-40">
+            <View
+              className="w-24 h-24 rounded-full absolute top-0 right-10 z-10 bg-[#FFD600]"
+              style={{
+                shadowColor: '#000',
+                shadowOpacity: 0.2,
+                shadowRadius: 10,
+                shadowOffset: { width: 10, height: 10 },
+              }}
+            />
+            <View
+              className="w-32 h-32 rounded-[2rem] absolute top-10 right-0 rotate-12 z-0 bg-[#C084FC]"
+              style={{
+                shadowColor: '#000',
+                shadowOpacity: 0.2,
+                shadowRadius: 10,
+                shadowOffset: { width: 10, height: 10 },
+              }}
+            />
+          </View>
+
+          <View className="relative z-10">
+            <View className="self-start px-4 py-2 rounded-full mb-4 border border-white/10" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+              <Text className="text-white text-[11px] font-bold tracking-[0.18em]">
+                DAILY GOAL
+              </Text>
             </View>
+            <Text
+              className="text-[40px] font-black text-white leading-[0.9] mb-2"
+              style={{ letterSpacing: -2, textShadowColor: 'rgba(0,0,0,0.1)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4 }}
+            >
+              Scan your{'\n'}Lunch
+            </Text>
+            <Text className="text-purple-100 text-[14px] font-medium w-2/3 leading-relaxed opacity-90">
+              Capture your meal before 2:00 PM for optimal tracking.
+            </Text>
+          </View>
 
-            <View className="relative z-10 p-8 h-full flex-col justify-between">
-              <View>
-                <View
-                  className="px-4 py-2 rounded-full mb-4 border"
-                  style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    borderColor: 'rgba(0, 51, 153, 0.18)',
-                  }}
-                >
-                  <Text className="text-cimas-blue text-[11px] font-bold tracking-[0.18em]">
-                    TODAY'S FOCUS
-                  </Text>
-                </View>
-                <Text
-                  className="text-4xl font-black text-gray-900 leading-[0.95] mb-2"
-                  style={{ letterSpacing: -0.04 }}
-                >
-                  Scan your{'\n'}lunch with iGo
-                </Text>
-                <Text className="text-gray-600 text-sm font-medium w-3/4 leading-relaxed">
-                  Capture any meal and get instant, medical‑grade nutrition feedback from iGo.
-                </Text>
-              </View>
-
-              <View className="flex-row -space-x-3 mt-4">
-                <View className="w-10 h-10 rounded-full border-2 border-white bg-cimas-blue/20 items-center justify-center">
-                  <Text className="text-cimas-blue text-xs font-bold">MT</Text>
-                </View>
-                <View className="w-10 h-10 rounded-full border-2 border-white bg-cimas-yellow/20 items-center justify-center">
-                  <Text className="text-cimas-yellow text-xs font-bold">AB</Text>
-                </View>
-                <View className="w-10 h-10 rounded-full border-2 border-white bg-cimas-blue/20 items-center justify-center">
-                  <Text className="text-cimas-blue text-xs font-bold">CD</Text>
-                </View>
-                <View className="w-10 h-10 rounded-full border-2 border-white bg-white items-center justify-center">
-                  <Text className="text-gray-600 text-[10px] font-bold">+8k</Text>
-                </View>
-              </View>
+          <View className="flex-row -space-x-3 relative z-10 mt-4">
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-purple-200 items-center justify-center">
+              <Text className="text-purple-700 text-xs font-bold">AB</Text>
             </View>
-          </LinearGradient>
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-pink-200 items-center justify-center">
+              <Text className="text-pink-700 text-xs font-bold">CD</Text>
+            </View>
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-blue-200 items-center justify-center">
+              <Text className="text-blue-700 text-xs font-bold">EF</Text>
+            </View>
+            <View className="w-10 h-10 rounded-full border-[2px] border-[#8B5CF6] bg-white items-center justify-center">
+              <Text className="text-purple-600 text-[10px] font-bold">+8k</Text>
+            </View>
+          </View>
         </View>
       </Animated.View>
 
       {/* Quick Glance */}
-      <Animated.View entering={FadeInDown.duration(400).delay(200)} className="px-5 mb-6">
+      <Animated.View entering={FadeInDown.duration(400).delay(200)} className="px-6 mb-8">
         <View className="flex-row gap-3">
-          <View className="flex-1 bg-gray-900 rounded-full px-4 py-3 flex-row items-center gap-3">
-            <View className="w-10 h-10 rounded-full bg-cimas-blue/20 items-center justify-center">
-              <Ionicons name="flame" size={20} color="#FFD600" />
+          <View className="flex-1 bg-[#1A1A1A] rounded-[2rem] px-4 py-4 flex-col gap-2 items-start" style={{ shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } }}>
+            <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center mb-1">
+              <Ionicons name="flame" size={20} color="#C084FC" />
             </View>
             <View>
-              <Text className="text-white text-lg font-black">2,340</Text>
-              <Text className="text-gray-400 text-xs font-medium">Calories</Text>
+              <Text className="text-white text-xl font-black" style={{ letterSpacing: -1 }}>2,340</Text>
+              <Text className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mt-0.5">Calories</Text>
             </View>
           </View>
           
-          <View className="flex-1 bg-gray-900 rounded-full px-4 py-3 flex-row items-center gap-3">
-            <View className="w-10 h-10 rounded-full bg-cimas-yellow/20 items-center justify-center">
-              <Ionicons name="flame" size={20} color="#FFD600" />
+          <View className="flex-1 bg-[#1A1A1A] rounded-[2rem] px-4 py-4 flex-col gap-2 items-start" style={{ shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } }}>
+            <View className="w-10 h-10 rounded-full bg-white/10 items-center justify-center mb-1">
+              <Ionicons name="star" size={20} color="#FFD600" />
             </View>
             <View>
-              <Text className="text-white text-lg font-black">12</Text>
-              <Text className="text-gray-400 text-xs font-medium">Streak</Text>
+              <Text className="text-white text-xl font-black" style={{ letterSpacing: -1 }}>12</Text>
+              <Text className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mt-0.5">Streak</Text>
             </View>
           </View>
           
-          <View className="flex-1 bg-white border-2 border-cimas-yellow/30 rounded-full px-4 py-3 flex-row items-center gap-3">
-            <View className="w-10 h-10 rounded-full bg-cimas-yellow/20 items-center justify-center">
-              <Ionicons name="camera" size={20} color="#FFD600" />
+          <View className="flex-1 bg-white border border-gray-100 rounded-[2rem] px-4 py-4 flex-col gap-2 items-start shadow-sm" style={{ shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } }}>
+            <View className="w-10 h-10 rounded-full bg-blue-50 items-center justify-center mb-1">
+              <Ionicons name="camera" size={20} color="#3B82F6" />
             </View>
             <View>
-              <Text className="text-gray-900 text-lg font-black">45</Text>
-              <Text className="text-gray-600 text-xs font-medium">Scans</Text>
+              <Text className="text-gray-900 text-xl font-black" style={{ letterSpacing: -1 }}>45</Text>
+              <Text className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mt-0.5">Scans</Text>
             </View>
           </View>
         </View>
       </Animated.View>
 
       {/* Routine Section */}
-      <Animated.View entering={FadeInDown.duration(400).delay(250)} className="px-5 mb-6">
-        <Text className="text-2xl font-extrabold text-gray-900 mb-4" style={{ letterSpacing: -0.04 }}>
+      <Animated.View entering={FadeInDown.duration(400).delay(250)} className="px-6 mb-8">
+        <Text className="text-[26px] font-extrabold text-gray-900 mb-6" style={{ letterSpacing: -1 }}>
           Your Routine
         </Text>
         
         <View className="flex-row gap-4">
           {/* Hydration Card */}
-          <View className="flex-1 bg-cimas-blue rounded-3xl p-6 h-[280px] relative overflow-hidden">
-            <View className="absolute top-0 right-0 w-32 h-32 bg-cimas-blue/40 rounded-full blur-2xl -mr-8 -mt-8" />
+          <View className="flex-1 bg-[#3B82F6] rounded-[2.5rem] p-6 h-[280px] relative overflow-hidden"
+            style={{ shadowColor: '#3B82F6', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { width: 0, height: 10 }, elevation: 10 }}
+          >
+            <View className="absolute top-0 right-0 w-32 h-32 bg-[#60A5FA] rounded-full blur-2xl opacity-40 -mr-8 -mt-8" />
             
             <View className="relative z-10 flex-1 justify-between">
               <View>
-                <View className="w-12 h-12 rounded-2xl items-center justify-center mb-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+                <View className="w-12 h-12 rounded-[1rem] items-center justify-center mb-4" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
                   <Ionicons name="water" size={24} color="#FFFFFF" />
                 </View>
-                <Text className="text-2xl font-black text-white leading-none" style={{ letterSpacing: -0.04 }}>
+                <Text className="text-[26px] font-black text-white leading-[1.1]" style={{ letterSpacing: -1 }}>
                   Water{'\n'}Intake
                 </Text>
-                <Text className="text-blue-100 text-xs font-bold mt-2 opacity-80">1,250 / 2,500ml</Text>
+                <Text className="text-blue-100 text-[13px] font-bold mt-2 opacity-80">1,250 / 2,500ml</Text>
               </View>
 
-              <View>
-                <View className="w-full h-24 rounded-3xl mt-4 relative overflow-hidden" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
-                  <View className="absolute bottom-0 left-0 w-full" style={{ height: '50%', backgroundColor: 'rgba(147, 197, 253, 0.4)' }} />
-                  <View className="absolute bottom-2 left-4">
-                    <Text className="text-white font-bold text-lg">50%</Text>
-                  </View>
+              <View className="w-full h-24 rounded-[1.5rem] mt-4 relative overflow-hidden" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
+                <View className="absolute bottom-0 left-0 w-full" style={{ height: '50%', backgroundColor: 'rgba(147, 197, 253, 0.4)' }} />
+                <View className="absolute bottom-3 left-4">
+                  <Text className="text-white font-black text-lg">50%</Text>
                 </View>
               </View>
             </View>
           </View>
 
           {/* Sleep Card */}
-          <View className="flex-1 bg-cimas-yellow rounded-3xl p-6 h-[280px] relative overflow-hidden">
-            <View className="absolute bottom-0 left-0 w-32 h-32 bg-cimas-yellow/40 rounded-full blur-2xl -ml-8 -mb-8" />
+          <View className="flex-1 bg-[#FF9F1C] rounded-[2.5rem] p-6 h-[280px] relative overflow-hidden"
+            style={{ shadowColor: '#FF9F1C', shadowOpacity: 0.4, shadowRadius: 20, shadowOffset: { width: 0, height: 10 }, elevation: 10 }}
+          >
+            <View className="absolute bottom-0 left-0 w-32 h-32 bg-[#FFB703] rounded-full blur-2xl opacity-40 -ml-8 -mb-8" />
             
             <View className="relative z-10 flex-1 justify-between">
               <View>
-                <View className="px-3 py-1 rounded-lg mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
-                  <Text className="text-white text-[10px] font-bold tracking-wider">MEDIUM</Text>
+                <View className="self-start px-3 py-1.5 rounded-lg mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+                  <Text className="text-white text-[10px] font-bold tracking-[0.1em]">MEDIUM</Text>
                 </View>
-                <Text className="text-2xl font-black text-white leading-none" style={{ letterSpacing: -0.04 }}>
+                <Text className="text-[26px] font-black text-white leading-[1.1]" style={{ letterSpacing: -1 }}>
                   Sleep{'\n'}Cycle
                 </Text>
               </View>
 
               <View className="flex-col gap-2">
                 <View className="flex-row items-end gap-1">
-                  <Text className="text-4xl font-black text-white" style={{ letterSpacing: -0.04 }}>7.5</Text>
-                  <Text className="text-yellow-100 font-bold mb-1.5">hrs</Text>
+                  <Text className="text-[38px] font-black text-white leading-none" style={{ letterSpacing: -1.5 }}>7.5</Text>
+                  <Text className="text-orange-100 font-bold mb-1">hrs</Text>
                 </View>
 
                 <View className="flex-row items-center gap-2 mt-1">
@@ -293,9 +271,9 @@ const Dashboard = () => {
                     <Ionicons name="moon" size={20} color="#FFFFFF" />
                   </View>
                   <View>
-                    <Text className="text-xs text-yellow-50 font-medium leading-tight">
+                    <Text className="text-[11px] text-orange-50 font-medium leading-tight">
                       Quality{'\n'}
-                      <Text className="text-white font-bold">Excellent</Text>
+                      <Text className="text-white font-bold text-[12px]">Excellent</Text>
                     </Text>
                   </View>
                 </View>
@@ -306,22 +284,24 @@ const Dashboard = () => {
       </Animated.View>
 
       {/* Featured Session */}
-      <Animated.View entering={FadeInDown.duration(400).delay(300)} className="px-5 mb-6">
-        <View className="bg-white p-5 flex-row items-center gap-5 rounded-3xl border border-gray-100 shadow-sm">
-          <View className="w-20 h-20 rounded-3xl bg-pink-100 flex-shrink-0 items-center justify-center">
+      <Animated.View entering={FadeInDown.duration(400).delay(300)} className="px-6 mb-8 mt-2">
+        <View className="bg-white p-5 flex-row items-center gap-5 rounded-[2.5rem] border border-gray-100 shadow-sm"
+          style={{ shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 15, shadowOffset: { width: 0, height: 5 } }}
+        >
+          <View className="w-20 h-20 rounded-[1.5rem] bg-pink-100 flex-shrink-0 items-center justify-center overflow-hidden">
             <Ionicons name="moon" size={32} color="#EC4899" />
           </View>
           <View className="flex-1">
-            <Text className="text-xl font-black text-gray-900 mb-1" style={{ letterSpacing: -0.04 }}>
+            <Text className="text-[20px] font-black text-gray-900 mb-1" style={{ letterSpacing: -1 }}>
               Evening Wind Down
             </Text>
-            <Text className="text-gray-400 text-sm font-medium mb-3">Trainer: Sarah K.</Text>
+            <Text className="text-gray-400 text-[13px] font-medium mb-3">Trainer: Sarah K.</Text>
             <View className="flex-row gap-2">
-              <View className="px-3 py-1 bg-gray-100 rounded-lg">
-                <Text className="text-xs font-bold text-gray-600">15 min</Text>
+              <View className="px-3 py-1.5 bg-gray-100 rounded-lg">
+                <Text className="text-[11px] font-bold text-gray-600 tracking-wide">15 min</Text>
               </View>
-              <View className="px-3 py-1 bg-pink-50 rounded-lg">
-                <Text className="text-xs font-bold text-pink-600">Relax</Text>
+              <View className="px-3 py-1.5 bg-pink-50 rounded-lg">
+                <Text className="text-[11px] font-bold text-pink-600 tracking-wide">Relax</Text>
               </View>
             </View>
           </View>

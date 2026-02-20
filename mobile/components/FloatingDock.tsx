@@ -34,19 +34,20 @@ const FloatingDock: React.FC<FloatingDockProps> = ({ activeRoute = 'home', onNav
 
   return (
     <View
-      className="absolute bottom-0 left-0 right-0 items-center"
-      style={{ paddingBottom: Math.max(insets.bottom, 32) }}
+      className="absolute bottom-6 left-0 right-0 items-center z-50"
+      style={{ paddingBottom: Math.max(insets.bottom, 0) }}
     >
       <View
-        className="bg-gray-950 rounded-3xl flex-row items-center justify-between px-2"
+        className="bg-[#111111] flex-row items-center justify-between px-2"
         style={{
           width: '90%',
           maxWidth: 400,
           height: 80,
+          borderRadius: 40,
           shadowColor: '#000',
           shadowOpacity: 0.5,
           shadowRadius: 25,
-          shadowOffset: { width: 0, height: 12 },
+          shadowOffset: { width: 0, height: 25 },
           borderWidth: 1,
           borderColor: 'rgba(255, 255, 255, 0.1)',
           ...Platform.select({
@@ -100,29 +101,29 @@ const FloatingDock: React.FC<FloatingDockProps> = ({ activeRoute = 'home', onNav
             );
           }
 
-          // Regular Navigation Items
           if (item.id === 'home') {
             // Home button is always white rounded-full
             return (
-              <TouchableOpacity
-                key={item.id}
-                activeOpacity={0.8}
-                onPress={() => handlePress(item.id)}
-                className="w-16 h-16 rounded-full items-center justify-center bg-white"
-                style={{
-                  shadowColor: '#000',
-                  shadowOpacity: 0.2,
-                  shadowRadius: 8,
-                  shadowOffset: { width: 0, height: 4 },
-                  ...Platform.select({
-                    android: {
-                      elevation: 8,
-                    },
-                  }),
-                }}
-              >
-                <Ionicons name="home" size={28} color="#000000" />
-              </TouchableOpacity>
+              <Animated.View key={item.id} style={animatedStyle}>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => handlePress(item.id)}
+                  className="w-16 h-16 rounded-full items-center justify-center bg-white"
+                  style={{
+                    shadowColor: '#000',
+                    shadowOpacity: 0.2,
+                    shadowRadius: 8,
+                    shadowOffset: { width: 0, height: 4 },
+                    ...Platform.select({
+                      android: {
+                        elevation: 8,
+                      },
+                    }),
+                  }}
+                >
+                  <Ionicons name="home" size={28} color="#000000" />
+                </TouchableOpacity>
+              </Animated.View>
             );
           }
 
