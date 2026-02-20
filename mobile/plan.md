@@ -383,100 +383,84 @@
 
 ### 5.1 Stats Screen Layout
 
-- [ ] Create `screens/stats.tsx`
-- [ ] Set up ScrollView with proper padding
-- [ ] Configure background color (`#FFFFFF` - Cimas White)
-- [ ] Add bottom padding for floating dock
+- [x] Create `screens/Stats.tsx`
+- [x] Set up ScrollView with proper padding
+- [x] Configure background color (`#F8F9FC` - Cimas Off-White)
+- [x] Add bottom padding for floating dock (140px)
+- [x] `app/(tabs)/stats.tsx` wired to `screens/Stats.tsx`
 
 ### 5.2 Stats Header
 
-- [ ] Create header:
-  - [ ] "THIS WEEK" label (uppercase, small)
-  - [ ] "Statistics" title
-  - [ ] Proper spacing
+- [x] Create header:
+  - [x] "THIS WEEK" label (uppercase, 10px, letterSpacing 2)
+  - [x] "Statistics" title (34px, weight 900, letterSpacing -1.5)
+  - [x] Proper spacing
 
 ### 5.3 Stats Hero Card
 
-- [ ] Create `components/stats/StatsHero.tsx`:
-  - [ ] White background with blue-yellow split complementary accents
-  - [ ] Blue gradient accent (left side)
-  - [ ] Yellow gradient accent (right side)
-  - [ ] Decorative blobs and orbs (blue and yellow)
-  - [ ] "THIS WEEK" pill (white with blue/yellow border)
-  - [ ] Title and subtitle
-  - [ ] Metrics row:
-    - [ ] Avg kcal
-    - [ ] Best score
-    - [ ] Consistency grade
-  - [ ] Depth shadow (blue-yellow combined)
-  - [ ] Mock weekly data
+- [x] Built inline in `screens/Stats.tsx`:
+  - [x] Cimas Blue `#003399` background with blue depth shadow
+  - [x] Yellow + blue decorative glow blobs
+  - [x] Decorative yellow circle + rotated dark square (inspo pattern)
+  - [x] "WEEKLY REPORT" frosted pill badge
+  - [x] "Strong Progress" title (38px, weight 900)
+  - [x] Subtitle with weekly performance note
+  - [x] Metrics row: Avg kcal · Best Score · Consistency (frosted glass tiles)
 
 ### 5.4 At a Glance Section
 
-- [ ] Create `components/stats/AtAGlance.tsx`:
-  - [ ] Four stat rows:
-    - [ ] Calories
-    - [ ] Protein
-    - [ ] Carbs
-    - [ ] Health Score
-  - [ ] Each row:
-    - [ ] Icon in colored background pill
-    - [ ] Label and value
-    - [ ] Trend badge (up/down arrow with percentage)
-  - [ ] Mock stat data with trends
+- [x] Built inline in `screens/Stats.tsx`:
+  - [x] White card with divider rows
+  - [x] Four rows: Avg Calories · Avg Protein · Avg Carbs · Avg Health Score
+  - [x] Each row: colored icon square + label/value + trend badge (green ↑ / red ↓)
+  - [x] Trend badges use `trending-up` / `trending-down` Ionicons
 
 ### 5.5 AI Insights Rail
 
-- [ ] Create `components/stats/InsightsRail.tsx`:
-  - [ ] Horizontal ScrollView
-  - [ ] Dark cards with colored accent dots
-  - [ ] Insight title and body text
-  - [ ] Mock insight data
+- [x] Built inline in `screens/Stats.tsx`:
+  - [x] Horizontal ScrollView with section header + "See all"
+  - [x] Dark `#111111` cards (230px wide, borderRadius 28)
+  - [x] Colored accent dot (blue, yellow, purple) per card
+  - [x] Insight title + body text
+  - [x] Staggered FadeInDown entrance per card
 
 ### 5.6 Daily Graph Component
 
-- [ ] Create `components/stats/DailyGraph.tsx`:
-  - [ ] White card with border
-  - [ ] Bar chart with six time slots (6a, 9a, 12p, 3p, 6p, 9p)
-  - [ ] Colored bars (gray → protein → carbs based on height)
-  - [ ] Badge showing current/target calories
-  - [ ] Use react-native-svg or custom View-based bars
-  - [ ] Mock daily calorie data
-  - [ ] Animated bar entrance (FadeInUp)
+- [x] Built as `<BarChart />` sub-component in `screens/Stats.tsx`:
+  - [x] Custom SVG bar chart using `react-native-svg` (already installed)
+  - [x] 6 time slots (6a, 9a, 12p, 3p, 6p, 9p)
+  - [x] SVG LinearGradient fills: purple (protein-rich), orange (carb-heavy), slate (light)
+  - [x] Round-top bars (`rx = barWidth/2`)
+  - [x] SVG time labels below bars
+  - [x] Current/target kcal badge in card header
+  - [x] Color key legend (protein · carbs · light)
+  - [x] Chart note: victory-native v41 required Skia/canvaskit → switched to react-native-svg custom chart for full design control
 
 ### 5.7 Macro Summary Component
 
-- [ ] Create `components/stats/MacroSummary.tsx`:
-  - [ ] White card with border
-  - [ ] Three macro progress bars:
-    - [ ] Protein (purple)
-    - [ ] Carbs (orange)
-    - [ ] Fat (green)
-  - [ ] Each bar shows:
-    - [ ] Label
-    - [ ] Current/target values
-    - [ ] Colored progress bar
-    - [ ] Percentage
-  - [ ] Mock macro data
-  - [ ] Animated progress bars
+- [x] Built as `<MacroBar />` per-item component:
+  - [x] White card with three animated progress bars
+  - [x] Protein (purple `#AF52DE`), Carbs (orange `#FF9500`), Fat (green `#34C759`)
+  - [x] Each bar: label + current/target values + Reanimated width animation
+  - [x] `withDelay` + `withSpring` staggered entrance per bar
+  - [x] Percentage text below each bar
 
 ### 5.8 Health Score Card
 
-- [ ] Create `components/stats/HealthScoreCard.tsx`:
-  - [ ] Black card with circular progress ring
-  - [ ] Score value in center (large number)
-  - [ ] Description text
-  - [ ] Tag badges ("Good", "+5 pts")
-  - [ ] Use react-native-svg for circular progress
-  - [ ] Mock health score data
-  - [ ] Animated progress ring
+- [x] Built as `<HealthRing />` sub-component:
+  - [x] Dark `#111111` card with blue/yellow blob accents (inspo depth pattern)
+  - [x] SVG circular progress ring (Circle + strokeDasharray/offset)
+  - [x] Ring color adaptive: green ≥80 / amber ≥60 / red <60
+  - [x] Score centered inside ring (32px, weight 900)
+  - [x] Left pane: label pill + title + description + tag badges
+  - [x] `withDelay` + `withTiming` (1200ms) animated ring on mount
 
 ### 5.9 Stats Screen Animations
 
-- [ ] Add entrance animations for all sections
-- [ ] Staggered delays for sequential appearance
-- [ ] Animated progress bars and rings
-- [ ] Smooth chart animations
+- [x] `FadeInDown` staggered entrance for every section (0 → 340ms delays)
+- [x] `withSpring` + `withDelay` per bar in BarChart
+- [x] `withSpring` + `withDelay` per MacroBar progress fill
+- [x] `withTiming` (1200ms) for health score ring draw animation
 
 ---
 
@@ -551,26 +535,26 @@
 
 ### 7.1 Expo Router Setup
 
-- [ ] Configure `app/_layout.tsx`:
-  - [ ] NativeWindProvider wrapper
-  - [ ] Font loading (Plus Jakarta Sans)
-  - [ ] SafeAreaProvider
-  - [ ] StatusBar configuration
-  - [ ] Root navigation structure
+- [x] Configure `app/_layout.tsx`:
+  - [x] NativeWindProvider wrapper
+  - [x] Font loading (Plus Jakarta Sans)
+  - [x] SafeAreaProvider
+  - [x] StatusBar configuration
+  - [x] Root navigation structure
 
 ### 7.2 Tab Layout Configuration
 
-- [ ] Configure `app/(tabs)/_layout.tsx`:
-  - [ ] Hide default tab bar
-  - [ ] Set up screen routes
-  - [ ] Configure navigation options
+- [x] Configure `app/(tabs)/_layout.tsx`:
+  - [x] Hide default tab bar
+  - [x] Set up screen routes
+  - [x] Configure navigation options
 
 ### 7.3 Screen Routes
 
 - [x] Create `app/(tabs)/index.tsx` → Dashboard screen
 - [x] Create `app/(tabs)/scan.tsx` → Scan screen (wired to `screens/Scan.tsx`)
-- [ ] Create `app/(tabs)/stats.tsx` → Stats screen (placeholder)
-- [ ] Create `app/(tabs)/profile.tsx` → Profile screen (placeholder)
+- [x] Create `app/(tabs)/stats.tsx` → Stats screen (wired to `screens/Stats.tsx`)
+- [ ] Create `app/(tabs)/profile.tsx` → Profile screen (placeholder, pending Step 6)
 
 ### 7.4 Floating Dock Integration
 
