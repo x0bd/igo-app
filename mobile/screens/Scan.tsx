@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Animated, {
   FadeInDown,
@@ -9,44 +9,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
+import { useFocusEffect } from 'expo-router';
 import { NutritionAnalysis } from '../types/nutrition';
-
-// ─── Mock data ────────────────────────────────────────────────────────────────
-
-const MOCK_RESULT: NutritionAnalysis = {
-  meal_name: 'Grilled Chicken Salad',
-  calories: 480,
-  protein: 42,
-  carbs: 28,
-  fat: 18,
-  health_score: 87,
-  igo_tip:
-    'Great choice! This meal is rich in lean protein which supports muscle recovery. Pair it with a glass of water to stay on track with your Cimas iGo hydration goal.',
-};
-
-const SUGGESTED_MEALS = [
-  {
-    id: '1',
-    title: 'Avocado Rice Bowl',
-    kcal: 520,
-    tag: 'Balanced',
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&fit=crop',
-  },
-  {
-    id: '2',
-    title: 'Grilled Salmon',
-    kcal: 460,
-    tag: 'High Protein',
-    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=400&fit=crop',
-  },
-  {
-    id: '3',
-    title: 'Lentil Power Soup',
-    kcal: 310,
-    tag: 'Low Cal',
-    image: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&fit=crop',
-  },
-];
+import { analyzeMeal } from '../services/mockMealService';
+import { SCAN_SUGGESTED_MEALS } from '../data/mockMeals';
 
 type ScanState = 'idle' | 'loading' | 'result';
 
@@ -56,23 +22,35 @@ const Scan = () => {
   const [scanState, setScanState] = useState<ScanState>('idle');
   const [result, setResult] = useState<NutritionAnalysis | null>(null);
 
+  // §7.5 — reset scan state when navigating away so returning always shows fresh idle
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setScanState('idle');
+        setResult(null);
+      };
+    }, [])
+  );
+
   const btnScale = useSharedValue(1);
   const btnAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: btnScale.value }],
   }));
 
-  const handleScan = () => {
+  const handleScan = async () => {
     if (scanState === 'loading') return;
     btnScale.value = withSpring(0.88, { damping: 15, stiffness: 300 });
     setTimeout(() => {
       btnScale.value = withSpring(1, { damping: 15, stiffness: 300 });
     }, 120);
     setScanState('loading');
-    // Simulate AI API call
-    setTimeout(() => {
-      setResult(MOCK_RESULT);
+    try {
+      const analysis = await analyzeMeal();
+      setResult(analysis);
       setScanState('result');
-    }, 2400);
+    } catch {
+      setScanState('idle');
+    }
   };
 
   const handleReset = () => {
@@ -807,7 +785,7 @@ const Scan = () => {
                   gap: 14,
                   paddingVertical: 4,
                 }}>
-                {SUGGESTED_MEALS.map((meal, index) => (
+                {SCAN_SUGGESTED_MEALS.map((meal, index) => (
                   <Animated.View
                     key={meal.id}
                     entering={FadeInDown.delay(320 + index * 80).duration(400)}>

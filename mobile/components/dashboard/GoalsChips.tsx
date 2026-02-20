@@ -2,36 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Animated, { FadeInRight } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
-
-const goals = [
-  {
-    id: '1',
-    label: 'Protein Left',
-    value: '120g',
-    icon: 'barbell',
-    bg: '#003399',
-    shadowColor: '#003399',
-    isYellow: false,
-  },
-  {
-    id: '2',
-    label: 'Water Intake',
-    value: '4/8',
-    icon: 'water',
-    bg: '#1A56DB',
-    shadowColor: '#1A56DB',
-    isYellow: false,
-  },
-  {
-    id: '3',
-    label: 'Daily Steps',
-    value: '4.2k',
-    icon: 'walk',
-    bg: '#FFD600',
-    shadowColor: '#C8A800',
-    isYellow: true,
-  },
-];
+import { DAILY_GOALS as goals } from '../../data/mockGoals';
 
 const GoalsChips = () => {
   return (

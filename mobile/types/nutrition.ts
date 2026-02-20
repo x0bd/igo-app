@@ -1,12 +1,12 @@
 export interface NutritionAnalysis {
+  meal_name: string;
   calories: number;
   protein: number;
   carbs: number;
   fat: number;
-  healthScore: number;
+  health_score: number;
+  igo_tip?: string;
   ingredients?: string[];
-  tips?: string[];
-  mealName?: string;
 }
 
 export interface MacroSummary {

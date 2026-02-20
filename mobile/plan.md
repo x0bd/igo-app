@@ -566,9 +566,9 @@
 
 ### 7.5 Navigation State Management
 
-- [ ] Ensure proper navigation state
-- [ ] Handle deep linking (if needed)
-- [ ] Handle back button behavior
+- [x] Scan screen resets to `idle` state on tab blur via `useFocusEffect` + `useCallback` (returning users always see the fresh scan hero, not a stale result)
+- [x] Hardware back button handled automatically by Expo Router stack
+- [x] Deep linking not required for prototype (file-based routes sufficient)
 
 ---
 
@@ -576,40 +576,48 @@
 
 ### 8.1 Create Mock Data Files
 
-- [ ] Create `data/mockUser.ts`:
-  - [ ] User profile data
-  - [ ] Avatar, name, email
-  - [ ] Premium status
-- [ ] Create `data/mockNutrition.ts`:
-  - [ ] Mock scan results
-  - [ ] Mock daily nutrition data
-  - [ ] Mock weekly stats
-- [ ] Create `data/mockMeals.ts`:
-  - [ ] Suggested meals
-  - [ ] Meal details
-- [ ] Create `data/mockGoals.ts`:
-  - [ ] Daily goals
-  - [ ] Target values
+- [x] Create `data/mockUser.ts`:
+  - [x] `MOCK_USER` — Mei Lin, avatar URI, email, Premium plan, mealsScanned, dayStreak, avgScore
+  - [x] `MockUser` type exported
+- [x] Create `data/mockNutrition.ts`:
+  - [x] `MOCK_SCAN_RESULT` — NutritionAnalysis (Grilled Chicken Salad, 480 kcal, health_score 87)
+  - [x] `WEEKLY_SUMMARY` — avgKcal, bestScore, consistency
+  - [x] `AT_A_GLANCE` — 4 stats rows with trend + icon metadata
+  - [x] `WEEKLY_INSIGHTS` — 3 AI insight cards
+  - [x] `DAILY_BARS` — 6-slot bar chart data
+  - [x] `MACROS` — protein/carbs/fat with current, target, color
+  - [x] `HEALTH_SCORE` — 78
+- [x] Create `data/mockMeals.ts`:
+  - [x] `DASHBOARD_MEALS` — 3 suggested meals for Dashboard (Unsplash images, tags)
+  - [x] `SCAN_SUGGESTED_MEALS` — 3 follow-up meal suggestions for Scan result screen
+  - [x] `DashboardMeal` + `ScanSuggestedMeal` types exported
+- [x] Create `data/mockGoals.ts`:
+  - [x] `DAILY_GOALS` — Protein Left, Water Intake, Daily Steps (with icon, bg, shadowColor)
+  - [x] Named target constants: `CALORIE_TARGET`, `PROTEIN_TARGET`, `CARBS_TARGET`, `FAT_TARGET`, `WATER_TARGET`, `STEPS_TARGET`
+  - [x] `DailyGoal` type exported
 
 ### 8.2 State Management Setup
 
-- [ ] Decide on state management approach:
-  - [ ] React Context API for global state
-  - [ ] Or simple useState for now (can upgrade later)
-- [ ] Create `context/AppContext.tsx` (if using Context):
-  - [ ] User state
-  - [ ] Scan results state
-  - [ ] Nutrition data state
-  - [ ] Goals state
+- [x] React Context API chosen (appropriate for prototype scope)
+- [x] Create `context/AppContext.tsx`:
+  - [x] `AppProvider` wraps entire app inside `app/_layout.tsx` (inside `<SafeAreaProvider>`)
+  - [x] Provides: `user`, `scanResult` + `setScanResult`, `weeklySummary`, `atAGlance`, `dailyBars`, `macros`, `healthScore`, `weeklyInsights`, `dailyGoals`
+  - [x] `useAppContext()` hook — throws if used outside provider
+- [x] All screens consume from context / data files:
+  - [x] `Dashboard.tsx` — `user.avatar` + `user.shortName` from `useAppContext()`
+  - [x] `Profile.tsx` — `user` from `useAppContext()`, `quickStats` derived from user fields
+  - [x] `Stats.tsx` — all constants imported from `data/mockNutrition.ts`
+  - [x] `GoalsChips.tsx` — goals imported from `data/mockGoals.ts`
+  - [x] `SuggestedMeals.tsx` — meals imported from `data/mockMeals.ts`
 
 ### 8.3 Mock API Service
 
-- [ ] Create `services/mockMealService.ts`:
-  - [ ] Mock `analyzeMeal()` function
-  - [ ] Simulate API delay (setTimeout)
-  - [ ] Return mock NutritionAnalysis data
-  - [ ] Handle loading states
-  - [ ] Handle error states
+- [x] Create `services/mockMealService.ts`:
+  - [x] `analyzeMeal(imageUri?)` — returns `Promise<NutritionAnalysis>`, resolves after 2400ms
+  - [x] `analyzeMealWithError(imageUri?)` — error scenario for testing error states
+  - [x] `Scan.tsx` `handleScan` updated to `async/await analyzeMeal()` with try/catch (falls back to idle on error)
+  - [x] Inline `MOCK_RESULT` and `SUGGESTED_MEALS` constants removed from `Scan.tsx`
+- [x] `types/nutrition.ts` updated: `NutritionAnalysis` now uses snake_case fields (`meal_name`, `health_score`, `igo_tip`) matching actual screen usage
 
 ---
 

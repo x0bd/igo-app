@@ -7,24 +7,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
-
-// ─── Mock Data ────────────────────────────────────────────────────────────────
-
-const MOCK_USER = {
-  name: 'Mei Lin',
-  shortName: 'Mei L.',
-  email: 'mei.lin@cimashealth.co.zw',
-  avatar:
-    'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop',
-  plan: 'Premium',
-  joinedYear: '2025',
-};
-
-const QUICK_STATS = [
-  { id: 'meals', label: 'Meals Scanned', value: '247' },
-  { id: 'streak', label: 'Day Streak', value: '12' },
-  { id: 'score', label: 'Avg Score', value: '78' },
-];
+import { useAppContext } from '../context/AppContext';
 
 const PREFERENCES = [
   {
@@ -194,6 +177,14 @@ const SectionLabel = ({ label }: { label: string }) => (
 // ─── Profile Screen ───────────────────────────────────────────────────────────
 
 export default function Profile() {
+  const { user } = useAppContext();
+
+  const quickStats = [
+    { id: 'meals', label: 'Meals Scanned', value: String(user.mealsScanned) },
+    { id: 'streak', label: 'Day Streak', value: String(user.dayStreak) },
+    { id: 'score', label: 'Avg Score', value: String(user.avgScore) },
+  ];
+
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: '#F8F9FA' }}
@@ -301,7 +292,7 @@ export default function Profile() {
                   ...Platform.select({ android: { elevation: 10 } }),
                 }}>
                 <Image
-                  source={{ uri: MOCK_USER.avatar }}
+                  source={{ uri: user.avatar }}
                   style={{ width: '100%', height: '100%' }}
                   resizeMode="cover"
                 />
@@ -317,7 +308,7 @@ export default function Profile() {
                     letterSpacing: -0.8,
                     fontFamily: 'PlusJakartaSans_800ExtraBold',
                   }}>
-                  {MOCK_USER.name}
+                  {user.name}
                 </Text>
                 <Text
                   style={{
@@ -326,7 +317,7 @@ export default function Profile() {
                     marginTop: 2,
                     fontFamily: 'PlusJakartaSans_400Regular',
                   }}>
-                  {MOCK_USER.email}
+                  {user.email}
                 </Text>
 
                 {/* Premium badge */}
@@ -351,7 +342,7 @@ export default function Profile() {
                       letterSpacing: 0.5,
                       fontFamily: 'PlusJakartaSans_800ExtraBold',
                     }}>
-                    {MOCK_USER.plan.toUpperCase()}
+                    {user.plan.toUpperCase()}
                   </Text>
                 </View>
               </View>
@@ -374,14 +365,14 @@ export default function Profile() {
               shadowOffset: { width: 0, height: 4 },
               ...Platform.select({ android: { elevation: 4 } }),
             }}>
-            {QUICK_STATS.map((stat, i) => (
+            {quickStats.map((stat, i) => (
               <View
                 key={stat.id}
                 style={{
                   flex: 1,
                   alignItems: 'center',
                   paddingVertical: 20,
-                  borderRightWidth: i < QUICK_STATS.length - 1 ? 1 : 0,
+                  borderRightWidth: i < quickStats.length - 1 ? 1 : 0,
                   borderRightColor: '#F1F5F9',
                 }}>
                 <Text
