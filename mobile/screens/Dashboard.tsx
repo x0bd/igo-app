@@ -3,6 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import FloatingDock from '../components/FloatingDock';
 
 const days = [
   { label: 'Mon', date: 24 },
@@ -14,8 +15,9 @@ const days = [
 
 const Dashboard = () => {
   return (
+    <View className="flex-1 bg-cimas-off-white">
     <ScrollView
-      className="flex-1 bg-cimas-off-white"
+      className="flex-1"
       contentContainerStyle={{ paddingBottom: 140 }}
       showsVerticalScrollIndicator={false}
     >
@@ -56,32 +58,53 @@ const Dashboard = () => {
       </Animated.View>
 
       {/* Day Selector */}
-      <Animated.View entering={FadeInDown.duration(400).delay(80)} className="px-5 py-4">
+      <Animated.View entering={FadeInDown.duration(400).delay(80)} className="px-5 py-3">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ columnGap: 12 }}
+          contentContainerStyle={{ columnGap: 10, paddingRight: 10 }}
         >
           {days.map((day, index) => {
             const isActive = index === 2;
             return (
-            <TouchableOpacity
+              <TouchableOpacity
                 key={day.label}
                 activeOpacity={0.9}
-                className={`w-[72px] h-[96px] rounded-[2rem] flex-col items-center justify-center transition-all ${
+                className={`w-[68px] h-[90px] flex-col items-center justify-center transition-all ${
                   isActive
-                    ? 'bg-gray-900 shadow-xl scale-105'
-                    : 'bg-white border border-gray-100 shadow-sm opacity-70'
-                }`}
-            >
-                <Text className="text-xs font-bold mb-1 text-gray-400">{day.label}</Text>
+                    ? 'bg-gray-950'
+                    : 'bg-white border border-gray-200'
+                } rounded-3xl shadow-sm`}
+                style={
+                  isActive
+                    ? {
+                        shadowColor: '#000',
+                        shadowOpacity: 0.25,
+                        shadowRadius: 16,
+                        shadowOffset: { width: 0, height: 10 },
+                        transform: [{ translateY: -2 }],
+                      }
+                    : { transform: [{ translateY: 0 }] }
+                }
+              >
                 <Text
-                  className={`text-2xl font-black ${isActive ? 'text-white' : 'text-gray-900'}`}
+                  className={`text-[11px] font-bold mb-1 ${
+                    isActive ? 'text-gray-400' : 'text-gray-400'
+                  }`}
+                >
+                  {day.label}
+                </Text>
+                <Text
+                  className={`text-[22px] font-black ${
+                    isActive ? 'text-white' : 'text-gray-900'
+                  }`}
                   style={{ letterSpacing: -0.04 }}
                 >
                   {day.date}
                 </Text>
-                {isActive && <View className="w-1.5 h-1.5 bg-cimas-blue rounded-full mt-2" />}
+                <View className="mt-2 h-[3px] w-6 rounded-full bg-transparent overflow-hidden">
+                  {isActive && <View className="h-full w-full rounded-full bg-cimas-blue" />}
+                </View>
               </TouchableOpacity>
             );
           })}
@@ -305,6 +328,8 @@ const Dashboard = () => {
         </View>
       </Animated.View>
     </ScrollView>
+    <FloatingDock activeRoute="home" />
+  </View>
   );
 };
 
