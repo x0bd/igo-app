@@ -14,37 +14,37 @@
 ## Step 0: Project Setup & Dependencies
 
 ### 0.1 Install Missing Core Dependencies
-- [ ] Install Expo Router: `pnpm add expo-router`
-- [ ] Install React Navigation dependencies: `pnpm add @react-navigation/native`
-- [ ] Install Axios for API calls: `pnpm add axios`
-- [ ] Install expo-image-picker: `pnpm add expo-image-picker`
-- [ ] Install expo-image for optimized images: `pnpm add expo-image`
-- [ ] Install Plus Jakarta Sans font: `pnpm add @expo-google-fonts/plus-jakarta-sans`
-- [ ] Install expo-font for font loading: `pnpm add expo-font`
-- [ ] Install Lucide React Native for icons: `pnpm add lucide-react-native` (or keep Ionicons)
-- [ ] Install expo-linear-gradient for gradients: `pnpm add expo-linear-gradient`
-- [ ] Install react-native-svg for custom graphics: `pnpm add react-native-svg`
+- [x] Install Expo Router: `pnpm add expo-router` ✅
+- [x] Install React Navigation dependencies: `pnpm add @react-navigation/native` ✅
+- [x] Install Axios for API calls: `pnpm add axios` ✅
+- [x] Install expo-image-picker: `pnpm add expo-image-picker` ✅
+- [x] Install expo-image for optimized images: `pnpm add expo-image` ✅
+- [x] Install Plus Jakarta Sans font: `pnpm add @expo-google-fonts/plus-jakarta-sans` ✅
+- [x] Install expo-font for font loading: `pnpm add expo-font` ✅
+- [x] Install Lucide React Native for icons: `pnpm add lucide-react-native` ✅
+- [x] Install expo-linear-gradient for gradients: `pnpm add expo-linear-gradient` ✅
+- [x] Install react-native-svg for custom graphics: `pnpm add react-native-svg` ✅
 
 ### 0.2 Update Tailwind Configuration
-- [ ] Update `tailwind.config.js` with custom theme from spec:
-  - [ ] Add Cimas brand colors:
-    - [ ] `cimas-blue`: `#003399` (Primary accent)
-    - [ ] `cimas-yellow`: `#FFD600` (Complementary accent)
-    - [ ] `cimas-white`: `#FFFFFF` (Primary background)
-    - [ ] `cimas-off-white`: `#F8F9FA` (Subtle background variant)
-  - [ ] Add semantic colors (protein, carbs, fat, health-score)
-  - [ ] Add custom border radius scale (xs: 8px → 3xl: 40px)
-  - [ ] Configure Plus Jakarta Sans font family
-  - [ ] Update content paths to include all source files
+- [x] Update `tailwind.config.js` with custom theme from spec: ✅
+  - [x] Add Cimas brand colors:
+    - [x] `cimas-blue`: `#003399` (Primary accent) ✅
+    - [x] `cimas-yellow`: `#FFD600` (Complementary accent) ✅
+    - [x] `cimas-white`: `#FFFFFF` (Primary background) ✅
+    - [x] `cimas-off-white`: `#F8F9FA` (Subtle background variant) ✅
+  - [x] Add semantic colors (protein, carbs, fat, health-score) ✅
+  - [x] Add custom border radius scale (xs: 8px → 3xl: 40px) ✅
+  - [x] Configure Plus Jakarta Sans font family ✅
+  - [x] Update content paths to include all source files ✅
 
 ### 0.3 Configure Expo Router
-- [ ] Create `app/` directory structure
-- [ ] Set up `app/_layout.tsx` as root layout
-- [ ] Configure NativeWindProvider in root layout
-- [ ] Set up font loading in root layout
-- [ ] Create `app/(tabs)/` directory for tab navigation
-- [ ] Configure `app/(tabs)/_layout.tsx` (hidden tabs, custom dock)
-- [ ] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx`
+- [x] Create `app/` directory structure ✅
+- [x] Set up `app/_layout.tsx` as root layout ✅
+- [x] Configure NativeWindProvider in root layout ✅
+- [x] Set up font loading in root layout ✅
+- [x] Create `app/(tabs)/` directory for tab navigation ✅
+- [x] Configure `app/(tabs)/_layout.tsx` (hidden tabs, custom dock) ✅
+- [x] Create placeholder route files: `index.tsx`, `scan.tsx`, `stats.tsx`, `profile.tsx` ✅
 
 ### 0.4 Environment Setup
 - [ ] Create `.env` file in mobile directory
