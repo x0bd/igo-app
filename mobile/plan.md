@@ -307,79 +307,75 @@
 
 ### 4.1 Scan Screen Layout
 
-- [ ] Create `screens/scan.tsx`
-- [ ] Set up ScrollView with proper padding
-- [ ] Configure background color (`#FFFFFF` - Cimas White)
-- [ ] Add bottom padding for floating dock
+- [x] Create `screens/Scan.tsx`
+- [x] Set up ScrollView with proper padding
+- [x] Configure background color (`#F8F9FC` - Cimas Off-White)
+- [x] Add bottom padding for floating dock (140px)
 
 ### 4.2 Scan Header
 
-- [ ] Create header:
-  - [ ] "SCAN" label (uppercase, small, gray)
-  - [ ] "Meal analysis" title
-  - [ ] Proper spacing
+- [x] Create header:
+  - [x] "SCAN" label (uppercase, small, gray, letterSpacing 2)
+  - [x] "Meal Analysis" title (34px, weight 900, letterSpacing -1.5)
+  - [x] Proper spacing
 
 ### 4.3 Hero Scan Card
 
-- [ ] Create `components/scan/HeroScanCard.tsx`:
-  - [ ] White background with blue-yellow accent accents (`#FFFFFF`)
-  - [ ] Blue decorative glow blob (top-left)
-  - [ ] Yellow decorative glow blob (bottom-right)
-  - [ ] "TEST RUN" pill badge (white with blue/yellow border)
-  - [ ] Title and subtitle explaining mock scan
-  - [ ] Primary button with Cimas Blue background and yellow accent
-  - [ ] Camera icon
-  - [ ] Proper spacing and layout
+- [x] Built inline in `screens/Scan.tsx` (no separate component file needed):
+  - [x] Cimas Blue `#003399` background with blue depth shadow
+  - [x] Yellow glow blob top-right, blue glow blob bottom-left
+  - [x] Decorative yellow circle + rotated blue square top-right
+  - [x] "AI POWERED" frosted pill badge
+  - [x] "Scan your Meal" title (42px, weight 900, letterSpacing -2)
+  - [x] Subtitle text
+  - [x] White pill CTA button with camera icon + yellow arrow-badge accent
+  - [x] Spring press animation on CTA button
+  - [x] Button transitions to "Analysing..." + ActivityIndicator during loading
 
 ### 4.4 Result Card Component
 
-- [ ] Create `components/scan/ResultCard.tsx`:
-  - [ ] Conditional rendering (only show when scan exists)
-  - [ ] White card with subtle border (`border-gray-100`)
-  - [ ] Header row:
-    - [ ] Meal name (large, bold)
-    - [ ] Health score pill (Cimas Blue background with yellow accent)
-  - [ ] Macro row:
-    - [ ] Three chips (Protein, Carbs, Fat)
-    - [ ] Colored labels matching semantic colors
-    - [ ] Values display
-  - [ ] iGo Tip card:
-    - [ ] White background with blue-yellow accent border
-    - [ ] Leaf icon (blue or yellow)
-    - [ ] Encouraging tip text
-  - [ ] Mock result data structure
+- [x] Built inline in `screens/Scan.tsx`:
+  - [x] Conditional rendering (only shown in `result` state)
+  - [x] White card with subtle border
+  - [x] Meal name + dynamic health score badge (green/amber/red by score)
+  - [x] Dark `#111111` calories strip with flame icon + large kcal value
+  - [x] Three macro chips: Protein (purple), Carbs (orange), Fat (green)
+  - [x] iGo Tip card with leaf icon, blue border, yellow dot accent
+  - [x] Mock `NutritionAnalysis` result data
 
 ### 4.5 Empty State Component
 
-- [ ] Create `components/scan/EmptyState.tsx`:
-  - [ ] Centered white card
-  - [ ] Image outline icon
-  - [ ] "No scans yet" message
-  - [ ] Subtitle text
-  - [ ] Conditional rendering (show when no scan)
+- [x] Built inline in `screens/Scan.tsx`:
+  - [x] Centered white card with rounded corners
+  - [x] `image-outline` icon in blue-tinted square
+  - [x] "No scans yet" title + helper subtitle
+  - [x] Three hint chips (Instant results, AI-powered, Cimas iGo)
+  - [x] Shown only in `idle` state
 
 ### 4.6 Suggested Follow-up Meals
 
-- [ ] Create `components/scan/SuggestedMeals.tsx`:
-  - [ ] Horizontal ScrollView
-  - [ ] Dark cards with colored accent dots
-  - [ ] Meal suggestions with descriptions
-  - [ ] Conditional rendering (show when scan exists)
-  - [ ] Mock meal data
+- [x] Built inline in `screens/Scan.tsx`:
+  - [x] Horizontal ScrollView with section header + "See all"
+  - [x] Dark photo cards (200×240px, borderRadius 28) with image overlay
+  - [x] Yellow accent dot, kcal badge, tag badge per card
+  - [x] Shown only in `result` state
+  - [x] Mock meal data (3 items)
 
 ### 4.7 Scan Screen State Management
 
-- [ ] Set up state for scan results
-- [ ] Mock scan function (simulate API call)
-- [ ] Loading state handling
-- [ ] Error state handling (for "No image selected")
+- [x] Three-state machine: `idle → loading → result` via `useState<ScanState>`
+- [x] Mock `handleScan()` simulates 2.4s API delay then sets mock result
+- [x] `handleReset()` resets back to `idle`
+- [x] Loading state renders spinner card instead of empty state
+- [x] `app/(tabs)/scan.tsx` updated to render `<Scan />`
 
 ### 4.8 Scan Screen Animations
 
-- [ ] Add entrance animations for cards
-- [ ] Add loading spinner animation
-- [ ] Add result card slide-in animation
-- [ ] Smooth transitions between states
+- [x] `FadeInDown` entrance for header, hero card, empty state (staggered delays)
+- [x] `FadeIn` for loading card
+- [x] `FadeInDown` staggered for results header, result card, tip card, meals section
+- [x] `withSpring` scale animation on CTA button press
+- [x] Per-card `FadeInDown` on suggested meal items
 
 ---
 
