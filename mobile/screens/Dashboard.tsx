@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { Image as ExpoImage } from 'expo-image';
 import Animated, {
   FadeInDown,
   useAnimatedStyle,
@@ -9,6 +10,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { useAppContext } from '../context/AppContext';
+import { TODAY_FOOD_LOG } from '../data/mockNutrition';
 
 import GoalsChips from '../components/dashboard/GoalsChips';
 import InsightCards from '../components/dashboard/InsightCards';
@@ -289,6 +291,182 @@ const Dashboard = () => {
               </View>
             </View>
           </View>
+        </Animated.View>
+
+        {/* Today's Food Log */}
+        <Animated.View entering={FadeInDown.springify().delay(210)} className="mb-8">
+          {/* Header */}
+          <View className="mb-4 flex-row items-end justify-between px-6">
+            <View>
+              <Text className="mb-1 text-[10px] font-extrabold uppercase tracking-[0.15em] text-gray-400">
+                TODAY
+              </Text>
+              <Text
+                className="text-[22px] font-black text-gray-900"
+                style={{ letterSpacing: -0.8 }}>
+                Food Log
+              </Text>
+            </View>
+            <View
+              style={{
+                backgroundColor: '#EEF3FF',
+                borderRadius: 12,
+                paddingHorizontal: 12,
+                paddingVertical: 6,
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 5,
+              }}>
+              <Ionicons name="flame" size={12} color="#003399" />
+              <Text style={{ fontSize: 12, fontWeight: '800', color: '#003399' }}>
+                {TODAY_FOOD_LOG.reduce((s, m) => s + m.calories, 0)} kcal
+              </Text>
+            </View>
+          </View>
+          {/* Horizontal scroll */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 24, gap: 12, paddingVertical: 4 }}>
+            {TODAY_FOOD_LOG.map((item, index) => {
+              const scoreColor =
+                item.health_score >= 80
+                  ? '#16A34A'
+                  : item.health_score >= 60
+                    ? '#D97706'
+                    : '#DC2626';
+              return (
+                <Animated.View
+                  key={item.id}
+                  entering={FadeInDown.springify().delay(220 + index * 70)}>
+                  <TouchableOpacity
+                    activeOpacity={0.88}
+                    style={{
+                      width: 190,
+                      height: 130,
+                      borderRadius: 24,
+                      overflow: 'hidden',
+                      backgroundColor: '#1A1A1A',
+                      shadowColor: '#000',
+                      shadowOffset: { width: 0, height: 8 },
+                      shadowOpacity: 0.18,
+                      shadowRadius: 14,
+                      elevation: 8,
+                    }}>
+                    <ExpoImage
+                      source={{ uri: item.image_url }}
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        opacity: 0.65,
+                      }}
+                      contentFit="cover"
+                    />
+                    <LinearGradient
+                      colors={['transparent', 'rgba(0,0,0,0.80)']}
+                      style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 80 }}
+                    />
+                    {/* Time badge top-left */}
+                    <View
+                      style={{
+                        position: 'absolute',
+                        top: 10,
+                        left: 10,
+                        backgroundColor: 'rgba(255,255,255,0.2)',
+                        borderRadius: 8,
+                        paddingHorizontal: 8,
+                        paddingVertical: 3,
+                      }}>
+                      <Text style={{ fontSize: 9, fontWeight: '800', color: '#fff' }}>
+                        {item.time}
+                      </Text>
+                    </View>
+                    {/* Score badge top-right */}
+                    <View
+                      style={{
+                        position: 'absolute',
+                        top: 10,
+                        right: 10,
+                        backgroundColor: scoreColor,
+                        borderRadius: 8,
+                        paddingHorizontal: 8,
+                        paddingVertical: 3,
+                      }}>
+                      <Text style={{ fontSize: 10, fontWeight: '900', color: '#fff' }}>
+                        {item.health_score}
+                      </Text>
+                    </View>
+                    {/* Bottom info */}
+                    <View style={{ position: 'absolute', bottom: 10, left: 12, right: 12, gap: 2 }}>
+                      <Text
+                        style={{
+                          fontSize: 13,
+                          fontWeight: '900',
+                          color: '#fff',
+                          letterSpacing: -0.3,
+                        }}
+                        numberOfLines={1}>
+                        {item.meal_name}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: 10,
+                          fontWeight: '600',
+                          color: 'rgba(255,255,255,0.55)',
+                        }}>
+                        {item.meal_type} · {item.calories} kcal
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </Animated.View>
+              );
+            })}
+            {/* Add scan CTA card */}
+            <Animated.View
+              entering={FadeInDown.springify().delay(220 + TODAY_FOOD_LOG.length * 70)}>
+              <TouchableOpacity
+                activeOpacity={0.85}
+                style={{
+                  width: 110,
+                  height: 130,
+                  borderRadius: 24,
+                  backgroundColor: '#003399',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 10,
+                  shadowColor: '#003399',
+                  shadowOffset: { width: 0, height: 8 },
+                  shadowOpacity: 0.35,
+                  shadowRadius: 14,
+                  elevation: 8,
+                }}>
+                <View
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 22,
+                    backgroundColor: 'rgba(255,255,255,0.2)',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Ionicons name="camera" size={22} color="#FFFFFF" />
+                </View>
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontWeight: '800',
+                    color: '#FFFFFF',
+                    textAlign: 'center',
+                    letterSpacing: -0.2,
+                  }}>
+                  Scan{`\n`}Meal
+                </Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </ScrollView>
         </Animated.View>
 
         {/* Goals Chips */}

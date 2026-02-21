@@ -97,7 +97,17 @@ const STROKE_W = 14;
 const RADIUS = (RING_SIZE - STROKE_W) / 2;
 const CIRCUMF = 2 * Math.PI * RADIUS;
 
-const HealthRing = ({ score }: { score: number }) => {
+const HealthRing = ({
+  score,
+  trackColor = '#F3F4F6',
+  scoreTextColor = '#111827',
+  labelColor = '#9CA3AF',
+}: {
+  score: number;
+  trackColor?: string;
+  scoreTextColor?: string;
+  labelColor?: string;
+}) => {
   const progress = useSharedValue(0);
 
   useEffect(() => {
@@ -105,7 +115,6 @@ const HealthRing = ({ score }: { score: number }) => {
   }, []);
 
   const dashOffset = CIRCUMF * (1 - score / 100);
-
   const ringColor = score >= 80 ? '#16A34A' : score >= 60 ? '#D97706' : '#DC2626';
 
   return (
@@ -117,16 +126,14 @@ const HealthRing = ({ score }: { score: number }) => {
         justifyContent: 'center',
       }}>
       <Svg width={RING_SIZE} height={RING_SIZE} style={{ position: 'absolute' }}>
-        {/* Track */}
         <Circle
           cx={RING_SIZE / 2}
           cy={RING_SIZE / 2}
           r={RADIUS}
-          stroke="#F3F4F6"
+          stroke={trackColor}
           strokeWidth={STROKE_W}
           fill="none"
         />
-        {/* Progress arc */}
         <Circle
           cx={RING_SIZE / 2}
           cy={RING_SIZE / 2}
@@ -141,14 +148,15 @@ const HealthRing = ({ score }: { score: number }) => {
         />
       </Svg>
       <View style={{ alignItems: 'center' }}>
-        <Text style={{ fontSize: 32, fontWeight: '900', color: '#111827', letterSpacing: -1.5 }}>
+        <Text
+          style={{ fontSize: 32, fontWeight: '900', color: scoreTextColor, letterSpacing: -1.5 }}>
           {score}
         </Text>
         <Text
           style={{
             fontSize: 10,
             fontWeight: '800',
-            color: '#9CA3AF',
+            color: labelColor,
             letterSpacing: 0.8,
             textTransform: 'uppercase',
           }}>
@@ -524,61 +532,125 @@ const Stats = () => {
               justifyContent: 'space-between',
               alignItems: 'flex-end',
             }}>
-            <Text
-              style={{ fontSize: 22, fontWeight: '900', color: '#111827', letterSpacing: -0.8 }}>
-              AI Insights
-            </Text>
-            <TouchableOpacity>
-              <Text style={{ fontSize: 13, fontWeight: '700', color: '#003399' }}>See all</Text>
-            </TouchableOpacity>
+            <View>
+              <Text
+                style={{
+                  fontSize: 9,
+                  fontWeight: '800',
+                  color: '#9CA3AF',
+                  letterSpacing: 1.5,
+                  textTransform: 'uppercase',
+                  marginBottom: 4,
+                }}>
+                PERSONALISED
+              </Text>
+              <Text
+                style={{ fontSize: 22, fontWeight: '900', color: '#111827', letterSpacing: -0.8 }}>
+                AI Insights
+              </Text>
+            </View>
+            <View
+              style={{
+                backgroundColor: '#EEF3FF',
+                borderRadius: 10,
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 4,
+              }}>
+              <Ionicons name="sparkles" size={10} color="#003399" />
+              <Text style={{ fontSize: 10, fontWeight: '800', color: '#003399' }}>iGo AI</Text>
+            </View>
           </View>
 
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingHorizontal: 24, gap: 14, paddingVertical: 4 }}>
-            {INSIGHTS.map((insight, i) => (
-              <Animated.View
-                key={insight.id}
-                entering={FadeInDown.delay(200 + i * 80).duration(400)}>
-                <TouchableOpacity
-                  activeOpacity={0.88}
-                  style={{
-                    width: 230,
-                    backgroundColor: '#111111',
-                    borderRadius: 28,
-                    padding: 22,
-                    gap: 12,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 10 },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 18,
-                    elevation: 10,
-                  }}>
-                  <View
-                    style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: insight.dot }}
-                  />
-                  <Text
+            {INSIGHTS.map((insight, i) => {
+              const ICON_NAMES = ['trending-up', 'bulb', 'star'] as const;
+              const ico = ICON_NAMES[i % ICON_NAMES.length];
+              return (
+                <Animated.View
+                  key={insight.id}
+                  entering={FadeInDown.delay(200 + i * 80).duration(400)}>
+                  <TouchableOpacity
+                    activeOpacity={0.88}
                     style={{
-                      fontSize: 16,
-                      fontWeight: '900',
-                      color: '#FFFFFF',
-                      letterSpacing: -0.3,
+                      width: 230,
+                      backgroundColor: '#111111',
+                      borderRadius: 28,
+                      padding: 22,
+                      gap: 14,
+                      shadowColor: insight.dot,
+                      shadowOffset: { width: 0, height: 10 },
+                      shadowOpacity: 0.35,
+                      shadowRadius: 18,
+                      elevation: 10,
+                      overflow: 'hidden',
                     }}>
-                    {insight.title}
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      fontWeight: '500',
-                      color: 'rgba(255,255,255,0.55)',
-                      lineHeight: 18,
-                    }}>
-                    {insight.body}
-                  </Text>
-                </TouchableOpacity>
-              </Animated.View>
-            ))}
+                    {/* Glow blob top-right */}
+                    <View
+                      style={{
+                        position: 'absolute',
+                        top: -30,
+                        right: -30,
+                        width: 100,
+                        height: 100,
+                        borderRadius: 50,
+                        backgroundColor: insight.dot,
+                        opacity: 0.15,
+                      }}
+                    />
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}>
+                      <View
+                        style={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: 12,
+                          backgroundColor: `${insight.dot}28`,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}>
+                        <Ionicons name={ico} size={16} color={insight.dot} />
+                      </View>
+                      <View
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: 3,
+                          backgroundColor: insight.dot,
+                        }}
+                      />
+                    </View>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: '900',
+                        color: '#FFFFFF',
+                        letterSpacing: -0.3,
+                      }}>
+                      {insight.title}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: '500',
+                        color: 'rgba(255,255,255,0.55)',
+                        lineHeight: 18,
+                      }}>
+                      {insight.body}
+                    </Text>
+                  </TouchableOpacity>
+                </Animated.View>
+              );
+            })}
           </ScrollView>
         </Animated.View>
 
@@ -716,27 +788,27 @@ const Stats = () => {
           style={{ paddingHorizontal: 24, marginBottom: 8 }}>
           <View
             style={{
-              backgroundColor: '#111111',
+              backgroundColor: '#FFD600',
               borderRadius: 40,
               padding: 28,
               overflow: 'hidden',
-              shadowColor: '#000',
+              shadowColor: '#FFD600',
               shadowOffset: { width: 0, height: 20 },
-              shadowOpacity: 0.35,
+              shadowOpacity: 0.55,
               shadowRadius: 28,
               elevation: 18,
             }}>
-            {/* Decorative blob */}
+            {/* Decorative blobs */}
             <View
               style={{
                 position: 'absolute',
-                top: -40,
-                right: -40,
-                width: 160,
-                height: 160,
-                borderRadius: 80,
-                backgroundColor: '#003399',
-                opacity: 0.3,
+                top: -50,
+                right: -50,
+                width: 180,
+                height: 180,
+                borderRadius: 90,
+                backgroundColor: '#FFFFFF',
+                opacity: 0.28,
               }}
             />
             <View
@@ -744,11 +816,36 @@ const Stats = () => {
                 position: 'absolute',
                 bottom: -30,
                 left: -30,
-                width: 120,
-                height: 120,
-                borderRadius: 60,
-                backgroundColor: '#FFD600',
-                opacity: 0.1,
+                width: 130,
+                height: 130,
+                borderRadius: 65,
+                backgroundColor: '#003399',
+                opacity: 0.12,
+              }}
+            />
+            {/* Decorative shapes */}
+            <View
+              style={{
+                position: 'absolute',
+                top: 22,
+                right: 22,
+                width: 52,
+                height: 52,
+                borderRadius: 26,
+                backgroundColor: '#003399',
+                opacity: 0.18,
+              }}
+            />
+            <View
+              style={{
+                position: 'absolute',
+                top: 64,
+                right: 10,
+                width: 34,
+                height: 34,
+                borderRadius: 10,
+                backgroundColor: 'rgba(0,0,0,0.12)',
+                transform: [{ rotate: '18deg' }],
               }}
             />
 
@@ -761,71 +858,92 @@ const Stats = () => {
               }}>
               {/* Left text */}
               <View style={{ flex: 1, gap: 10 }}>
+                {/* Badge */}
                 <View
                   style={{
                     alignSelf: 'flex-start',
-                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    backgroundColor: 'rgba(0,0,0,0.12)',
                     paddingHorizontal: 12,
                     paddingVertical: 5,
                     borderRadius: 10,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 5,
                   }}>
+                  <Ionicons name="heart" size={10} color="#111111" />
                   <Text
                     style={{
                       fontSize: 9,
                       fontWeight: '900',
-                      color: 'rgba(255,255,255,0.6)',
+                      color: '#111111',
                       letterSpacing: 1.2,
                       textTransform: 'uppercase',
                     }}>
                     HEALTH SCORE
                   </Text>
                 </View>
+
                 <Text
                   style={{
                     fontSize: 28,
                     fontWeight: '900',
-                    color: '#FFFFFF',
+                    color: '#111111',
                     letterSpacing: -1,
                     lineHeight: 30,
                   }}>
-                  Looking{'\n'}Good!
+                  Looking{'\n'}Good! 🏆
                 </Text>
+
                 <Text
                   style={{
                     fontSize: 13,
-                    fontWeight: '500',
-                    color: 'rgba(255,255,255,0.5)',
+                    fontWeight: '600',
+                    color: 'rgba(0,0,0,0.5)',
                     lineHeight: 20,
                   }}>
-                  You're in the top 22% of iGo users this week.
+                  Top 22% of iGo users{'\n'}this week.
                 </Text>
+
                 {/* Badges */}
                 <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap', marginTop: 4 }}>
-                  {['Good', '+5 pts', 'Week Best'].map((tag) => (
+                  {[
+                    { label: 'Good', icon: 'thumbs-up' as const },
+                    { label: '+5 pts', icon: 'trending-up' as const },
+                    { label: 'Week Best', icon: 'star' as const },
+                  ].map((tag) => (
                     <View
-                      key={tag}
+                      key={tag.label}
                       style={{
-                        backgroundColor: 'rgba(255,255,255,0.1)',
+                        backgroundColor: 'rgba(0,0,0,0.1)',
                         borderRadius: 10,
-                        paddingHorizontal: 12,
+                        paddingHorizontal: 11,
                         paddingVertical: 6,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 4,
                       }}>
+                      <Ionicons name={tag.icon} size={10} color="#111111" />
                       <Text
                         style={{
                           fontSize: 11,
                           fontWeight: '800',
-                          color: 'rgba(255,255,255,0.7)',
+                          color: '#111111',
                           letterSpacing: 0.2,
                         }}>
-                        {tag}
+                        {tag.label}
                       </Text>
                     </View>
                   ))}
                 </View>
               </View>
 
-              {/* Right: SVG ring */}
-              <HealthRing score={HEALTH_SCORE} />
+              {/* Right: SVG ring — dark track on yellow background */}
+              <HealthRing
+                score={HEALTH_SCORE}
+                trackColor="rgba(0,0,0,0.12)"
+                scoreTextColor="#111111"
+                labelColor="rgba(0,0,0,0.45)"
+              />
             </View>
           </View>
         </Animated.View>
