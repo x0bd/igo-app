@@ -6,7 +6,7 @@
 
 **Snap a photo. Get your full nutritional breakdown in seconds.**
 
-_A full-stack mobile prototype built as part of my application to Cimas Health Group._
+_A full-stack mobile prototype built for the Cimas iGo program — because this should exist._
 
 ---
 
@@ -336,7 +336,7 @@ I built the prototype in React Native because it let me move fast and show somet
 
 ## About
 
-Built by **[Your Name]** as part of a job application to **Cimas Health Group**, February 2026.
+Built by **[Your Name]** for **Cimas Health Group**, February 2026.
 
 - **Prototype Mobile:** React Native + Expo SDK 54, NativeWind, react-native-reanimated
 - **Production Target:** Flutter (architecture designed for direct portability)
