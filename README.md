@@ -16,6 +16,10 @@ _A full-stack mobile prototype built for the Cimas iGo program — because this 
 ![AI](https://img.shields.io/badge/AI-Google%20Gemini%201.5%20Flash-FFB300?style=for-the-badge&logo=google&logoColor=white)
 ![Backend](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python-22C55E?style=for-the-badge&logo=fastapi&logoColor=white)
 
+<br/>
+
+<img src="screenshots/1.png" width="30%" /> <img src="screenshots/2.png" width="30%" /> <img src="screenshots/3.png" width="30%" />
+
 </div>
 
 ---
@@ -38,7 +42,15 @@ The project is split into two parts:
 
 ## Screenshots
 
-> _Screenshots coming soon — run the app locally to see the full experience._
+<div align="center">
+
+<img src="screenshots/1.png" width="22%" /> <img src="screenshots/2.png" width="22%" /> <img src="screenshots/3.png" width="22%" /> <img src="screenshots/4.png" width="22%" />
+
+<img src="screenshots/5.png" width="22%" /> <img src="screenshots/6.png" width="22%" /> <img src="screenshots/7.png" width="22%" /> <img src="screenshots/8.png" width="22%" />
+
+📁 [View all screenshots →](./screenshots/)
+
+</div>
 
 ---
 
