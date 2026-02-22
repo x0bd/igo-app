@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Platform, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import Animated, {
   FadeInDown,
   useAnimatedStyle,
@@ -34,6 +34,16 @@ const PREFERENCES = [
     label: 'Appearance',
     subtitle: 'Theme & display options',
   },
+];
+
+// ─── iGo Community Members ───────────────────────────────────────────────────
+
+const ZIM_COMMUNITY = [
+  { id: '1', name: 'Rudo Chikwanda',  initials: 'RC', color: '#7C3AED', streak: 21, city: 'Harare'   },
+  { id: '2', name: 'Farai Zimba',     initials: 'FZ', color: '#059669', streak: 8,  city: 'Bulawayo'  },
+  { id: '3', name: 'Simba Dube',      initials: 'SD', color: '#DC2626', streak: 34, city: 'Mutare'    },
+  { id: '4', name: 'Nyasha Mutasa',   initials: 'NM', color: '#D97706', streak: 15, city: 'Gweru'     },
+  { id: '5', name: 'Chiedza Banda',   initials: 'CB', color: '#0891B2', streak: 6,  city: 'Harare'    },
 ];
 
 const OTHER_SETTINGS = [
@@ -276,7 +286,7 @@ export default function Profile() {
             />
 
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              {/* Avatar photo */}
+              {/* Avatar — colored initials circle */}
               <View
                 style={{
                   width: 84,
@@ -284,18 +294,25 @@ export default function Profile() {
                   borderRadius: 42,
                   borderWidth: 3,
                   borderColor: '#FFD600',
-                  overflow: 'hidden',
-                  shadowColor: '#000',
-                  shadowOpacity: 0.3,
-                  shadowRadius: 12,
+                  backgroundColor: user.avatarColor ?? '#003399',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  shadowColor: user.avatarColor ?? '#003399',
+                  shadowOpacity: 0.5,
+                  shadowRadius: 14,
                   shadowOffset: { width: 0, height: 6 },
                   ...Platform.select({ android: { elevation: 10 } }),
                 }}>
-                <Image
-                  source={{ uri: user.avatar }}
-                  style={{ width: '100%', height: '100%' }}
-                  resizeMode="cover"
-                />
+                <Text
+                  style={{
+                    fontSize: 28,
+                    fontWeight: '900',
+                    color: '#FFFFFF',
+                    letterSpacing: -0.5,
+                    fontFamily: 'PlusJakartaSans_800ExtraBold',
+                  }}>
+                  {user.initials ?? user.name.slice(0, 2).toUpperCase()}
+                </Text>
               </View>
 
               {/* Name + email */}
@@ -395,6 +412,106 @@ export default function Profile() {
                   }}>
                   {stat.label}
                 </Text>
+              </View>
+            ))}
+          </View>
+        </Animated.View>
+
+        {/* ── iGo Community ─────────────────────────────────────────────── */}
+        <Animated.View entering={FadeInDown.delay(150).springify()}>
+          <SectionLabel label="iGo Community — Zimbabwe" />
+          <View
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: 24,
+              padding: 20,
+              shadowColor: '#000',
+              shadowOpacity: 0.06,
+              shadowRadius: 14,
+              shadowOffset: { width: 0, height: 4 },
+              ...Platform.select({ android: { elevation: 4 } }),
+            }}>
+            {ZIM_COMMUNITY.map((member, i) => (
+              <View
+                key={member.id}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingVertical: 10,
+                  borderBottomWidth: i < ZIM_COMMUNITY.length - 1 ? 1 : 0,
+                  borderBottomColor: '#F1F5F9',
+                }}>
+                {/* Colored avatar */}
+                <View
+                  style={{
+                    width: 46,
+                    height: 46,
+                    borderRadius: 23,
+                    backgroundColor: member.color,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    shadowColor: member.color,
+                    shadowOpacity: 0.4,
+                    shadowRadius: 8,
+                    shadowOffset: { width: 0, height: 3 },
+                    ...Platform.select({ android: { elevation: 4 } }),
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      fontWeight: '800',
+                      color: '#FFFFFF',
+                      fontFamily: 'PlusJakartaSans_800ExtraBold',
+                    }}>
+                    {member.initials}
+                  </Text>
+                </View>
+
+                {/* Name + city */}
+                <View style={{ flex: 1, marginLeft: 14 }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: '700',
+                      color: '#111111',
+                      letterSpacing: -0.3,
+                      fontFamily: 'PlusJakartaSans_700Bold',
+                    }}>
+                    {member.name}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: '#9CA3AF',
+                      marginTop: 1,
+                      fontFamily: 'PlusJakartaSans_400Regular',
+                    }}>
+                    {member.city}
+                  </Text>
+                </View>
+
+                {/* Streak badge */}
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    backgroundColor: '#FFF7ED',
+                    borderRadius: 20,
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    gap: 4,
+                  }}>
+                  <Text style={{ fontSize: 13 }}>🔥</Text>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontWeight: '800',
+                      color: '#D97706',
+                      fontFamily: 'PlusJakartaSans_800ExtraBold',
+                    }}>
+                    {member.streak}d
+                  </Text>
+                </View>
               </View>
             ))}
           </View>
