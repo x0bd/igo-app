@@ -102,11 +102,13 @@ const HealthRing = ({
   trackColor = '#F3F4F6',
   scoreTextColor = '#111827',
   labelColor = '#9CA3AF',
+  ringColor: ringColorProp,
 }: {
   score: number;
   trackColor?: string;
   scoreTextColor?: string;
   labelColor?: string;
+  ringColor?: string;
 }) => {
   const progress = useSharedValue(0);
 
@@ -115,7 +117,8 @@ const HealthRing = ({
   }, []);
 
   const dashOffset = CIRCUMF * (1 - score / 100);
-  const ringColor = score >= 80 ? '#16A34A' : score >= 60 ? '#D97706' : '#DC2626';
+  const ringColor =
+    ringColorProp ?? (score >= 80 ? '#16A34A' : score >= 60 ? '#D97706' : '#DC2626');
 
   return (
     <View
@@ -941,6 +944,7 @@ const Stats = () => {
               <HealthRing
                 score={HEALTH_SCORE}
                 trackColor="rgba(0,0,0,0.12)"
+                ringColor="#003399"
                 scoreTextColor="#111111"
                 labelColor="rgba(0,0,0,0.45)"
               />

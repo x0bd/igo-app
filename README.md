@@ -10,11 +10,11 @@ _A full-stack mobile prototype built for the Cimas iGo program — because this 
 
 ---
 
-![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android%20%7C%20Web-003399?style=for-the-badge)
-![React Native](https://img.shields.io/badge/React%20Native-Expo%20SDK%2054-003399?style=for-the-badge&logo=react)
-![Flutter](https://img.shields.io/badge/Production%20Target-Flutter-02569B?style=for-the-badge&logo=flutter)
-![AI](https://img.shields.io/badge/AI-Google%20Gemini%201.5%20Flash-FFD600?style=for-the-badge&logo=google)
-![Backend](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python-003399?style=for-the-badge&logo=fastapi)
+![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android%20%7C%20Web-E91E8C?style=for-the-badge)
+![React Native](https://img.shields.io/badge/React%20Native-Expo%20SDK%2054-00BCD4?style=for-the-badge&logo=react)
+![Flutter](https://img.shields.io/badge/Production%20Target-Flutter-027DFD?style=for-the-badge&logo=flutter)
+![AI](https://img.shields.io/badge/AI-Google%20Gemini%201.5%20Flash-FFB300?style=for-the-badge&logo=google&logoColor=white)
+![Backend](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python-22C55E?style=for-the-badge&logo=fastapi&logoColor=white)
 
 </div>
 
