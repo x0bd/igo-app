@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Platform, Image } from 'react-native';
 import Animated, {
   FadeInDown,
   useAnimatedStyle,
@@ -39,11 +39,11 @@ const PREFERENCES = [
 // ─── iGo Community Members ───────────────────────────────────────────────────
 
 const ZIM_COMMUNITY = [
-  { id: '1', name: 'Rudo Chikwanda',  initials: 'RC', color: '#7C3AED', streak: 21, city: 'Harare'   },
-  { id: '2', name: 'Farai Zimba',     initials: 'FZ', color: '#059669', streak: 8,  city: 'Bulawayo'  },
-  { id: '3', name: 'Simba Dube',      initials: 'SD', color: '#DC2626', streak: 34, city: 'Mutare'    },
-  { id: '4', name: 'Nyasha Mutasa',   initials: 'NM', color: '#D97706', streak: 15, city: 'Gweru'     },
-  { id: '5', name: 'Chiedza Banda',   initials: 'CB', color: '#0891B2', streak: 6,  city: 'Harare'    },
+  { id: '1', name: 'Rudo Chikwanda', initials: 'RC', color: '#7C3AED', streak: 21, city: 'Harare' },
+  { id: '2', name: 'Farai Zimba', initials: 'FZ', color: '#059669', streak: 8, city: 'Bulawayo' },
+  { id: '3', name: 'Simba Dube', initials: 'SD', color: '#DC2626', streak: 34, city: 'Mutare' },
+  { id: '4', name: 'Nyasha Mutasa', initials: 'NM', color: '#D97706', streak: 15, city: 'Gweru' },
+  { id: '5', name: 'Chiedza Banda', initials: 'CB', color: '#0891B2', streak: 6, city: 'Harare' },
 ];
 
 const OTHER_SETTINGS = [
@@ -286,7 +286,7 @@ export default function Profile() {
             />
 
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              {/* Avatar — colored initials circle */}
+              {/* Avatar — real photo */}
               <View
                 style={{
                   width: 84,
@@ -294,25 +294,18 @@ export default function Profile() {
                   borderRadius: 42,
                   borderWidth: 3,
                   borderColor: '#FFD600',
-                  backgroundColor: user.avatarColor ?? '#003399',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  shadowColor: user.avatarColor ?? '#003399',
-                  shadowOpacity: 0.5,
+                  overflow: 'hidden',
+                  shadowColor: '#000',
+                  shadowOpacity: 0.35,
                   shadowRadius: 14,
                   shadowOffset: { width: 0, height: 6 },
                   ...Platform.select({ android: { elevation: 10 } }),
                 }}>
-                <Text
-                  style={{
-                    fontSize: 28,
-                    fontWeight: '900',
-                    color: '#FFFFFF',
-                    letterSpacing: -0.5,
-                    fontFamily: 'PlusJakartaSans_800ExtraBold',
-                  }}>
-                  {user.initials ?? user.name.slice(0, 2).toUpperCase()}
-                </Text>
+                <Image
+                  source={{ uri: user.avatar }}
+                  style={{ width: '100%', height: '100%' }}
+                  resizeMode="cover"
+                />
               </View>
 
               {/* Name + email */}
